@@ -1,0 +1,98 @@
+.card .header-primary {
+  /*background: linear-gradient(60deg, #794626, #6a4120); */
+  background: linear-gradient(60deg, #4d2d17, #6a4120);
+  /*background: radial-gradient(circle, #794626, #6a4120)*/
+}
+.card .card-content {
+  position: relative !important;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.landing-page .header_product {
+  height: 40vh;
+}
+
+div.h2-separator {
+  text-align: center;
+  border-bottom: 2px solid #000;
+}
+
+h2.separator {
+  width: 70%;
+  margin: .7em auto;
+  overflow: hidden;
+  text-align: center;
+  font-weight:300;
+}
+h2.separator:before, h2.separator:after {
+  content: "";
+  display: inline-block;
+  width: 50%;
+  margin: 0 .5em 0 -55%;
+  vertical-align: middle;
+  border-bottom: 1px solid;
+}
+h2.separator:after {
+  margin: 0 -55% 0 .5em;
+}
+
+h2{
+  display: flex;
+}
+h2.heading:before, h2.heading:after{
+  content: '';
+  flex-grow: 1;
+  margin: 0px 4px;
+  background-size: 100% 2px;
+  background-position: 0% 50%;
+  background-repeat: repeat-x;
+}
+h2.heading:before, .heading-ie span.before{
+  background-image: linear-gradient(to right, transparent, #000000);
+}
+h2.heading:after, .heading-ie span.after{
+  background-image: linear-gradient(to left, transparent, #000000);
+}
+
+.profile-page .profile img {
+  max-width: 300px;
+  margin: -200px auto 0;
+}
+
+.nav-pills:not(.nav-pills-icons) > li > a {
+   border-radius: 4px;
+}
+
+.profile-page .profile-tabs {
+  margin-top: 30px;
+}
+
+.accordion .card2 {
+  border-bottom: 1px solid #eee;
+  box-shadow: none; }
+.accordion .card2 .card-header {
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border-bottom: 0; }
+.accordion .card2 .card-header a:not(.collapsed) .rotate-icon {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg); }
+.accordion .card2 .fa-angle-down {
+  float: right; }
+.accordion .card2 .card-block {
+  padding-top: .25rem; }
+
+.center {
+  text-align: center;
+  vertical-align: middle;
+}
+footer {
+  padding: 0;
+}
+footer .copyright {
+  padding: 50px 0;
+}
