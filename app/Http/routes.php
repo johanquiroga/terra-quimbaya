@@ -148,37 +148,39 @@ Route::group(['as' => 'admin::', 'middleware' => ['auth', 'admin:admin'], 'prefi
 |--------------------------------------------------------------------------
 |
  */
-Route::group(['as' => 'provider::', 'middleware' => ['auth'], 'prefix' => 'providers'], function() {
-    Route::group(['middleware' => 'admin:provider'], function () {
-        Route::get('', [
-            'as' => 'index',
-            'uses' => 'ProveedorController@index'
-        ]);
-        Route::get('provider', [
-            'as' => 'search',
-            'uses' => 'ProveedorController@anyData'
-        ]);
-        Route::get('create', [
-            'as' => 'create',
-            'uses' => 'ProveedorController@create'
-        ]);
-        Route::post('store', [
-            'as' => 'store',
-            'uses' => 'ProveedorController@store'
-        ]);
-        Route::get('edit/{id}', [
-            'as' => 'edit',
-            'uses' => 'ProveedorController@edit'
-        ]);
-        Route::post('update/{id}', [
-            'as' => 'update',
-            'uses' => 'ProveedorController@update'
-        ]);
-	    Route::post('destroy', [
-		    'as' => 'destroy',
-		    'uses' => 'ProveedorController@destroy'
-	    ]);
-    });
+Route::group(['as' => 'provider::', 'prefix' => 'providers'], function() {
+	Route::group(['middleware' => 'auth'], function () {
+		Route::group(['middleware' => 'admin:provider'], function () {
+			Route::get('', [
+				'as' => 'index',
+				'uses' => 'ProveedorController@index'
+			]);
+			Route::get('provider', [
+				'as' => 'search',
+				'uses' => 'ProveedorController@anyData'
+			]);
+			Route::get('create', [
+				'as' => 'create',
+				'uses' => 'ProveedorController@create'
+			]);
+			Route::post('store', [
+				'as' => 'store',
+				'uses' => 'ProveedorController@store'
+			]);
+			Route::get('edit/{id}', [
+				'as' => 'edit',
+				'uses' => 'ProveedorController@edit'
+			]);
+			Route::post('update/{id}', [
+				'as' => 'update',
+				'uses' => 'ProveedorController@update'
+			]);
+			Route::post('destroy', [
+				'as' => 'destroy',
+				'uses' => 'ProveedorController@destroy'
+			]);
+		});
+	});
 
     Route::get('show/{id}', [
         'as' => 'show',
@@ -192,43 +194,45 @@ Route::group(['as' => 'provider::', 'middleware' => ['auth'], 'prefix' => 'provi
 |--------------------------------------------------------------------------
 |
  */
-Route::group(['as' => 'product::', 'middleware' => ['auth'], 'prefix' => 'products'], function() {
-	Route::group(['middleware' => 'admin:product'], function () {
-		Route::get('', [
-			'as' => 'index',
-			'uses' => 'ProductoController@index'
-		]);
-		Route::get('provider', [
-			'as' => 'search',
-			'uses' => 'ProductoController@anyData'
-		]);
-		Route::get('create', [
-			'as' => 'create',
-			'uses' => 'ProductoController@create'
-		]);
-		Route::post('store', [
-			'as' => 'store',
-			'uses' => 'ProductoController@store'
-		]);
-		Route::get('edit/{id}', [
-			'as' => 'edit',
-			'uses' => 'ProductoController@edit'
-		]);
-		Route::post('update/{id}', [
-			'as' => 'update',
-			'uses' => 'ProductoController@update'
-		]);
-		Route::post('destroy', [
-			'as' => 'destroy',
-			'uses' => 'ProductoController@destroy'
-		]);
-    });
+Route::group(['as' => 'product::', 'prefix' => 'products'], function() {
+	Route::group(['middleware' => 'auth'], function () {
+		Route::group(['middleware' => 'admin:product'], function () {
+			Route::get('', [
+				'as' => 'index',
+				'uses' => 'ProductoController@index'
+			]);
+			Route::get('provider', [
+				'as' => 'search',
+				'uses' => 'ProductoController@anyData'
+			]);
+			Route::get('create', [
+				'as' => 'create',
+				'uses' => 'ProductoController@create'
+			]);
+			Route::post('store', [
+				'as' => 'store',
+				'uses' => 'ProductoController@store'
+			]);
+			Route::get('edit/{id}', [
+				'as' => 'edit',
+				'uses' => 'ProductoController@edit'
+			]);
+			Route::post('update/{id}', [
+				'as' => 'update',
+				'uses' => 'ProductoController@update'
+			]);
+			Route::post('destroy', [
+				'as' => 'destroy',
+				'uses' => 'ProductoController@destroy'
+			]);
+		});
 
-	Route::group(['middleware' => 'comprador'], function () {
-		Route::post('postQuestion/{id}', [
-			'as'   => 'postQuestion',
-			'uses' => 'ProductoController@postQuestion'
-		]);
+		Route::group(['middleware' => 'comprador'], function () {
+			Route::post('postQuestion/{id}', [
+				'as'   => 'postQuestion',
+				'uses' => 'ProductoController@postQuestion'
+			]);
+		});
 	});
 
 	Route::get('show/{id}', [
