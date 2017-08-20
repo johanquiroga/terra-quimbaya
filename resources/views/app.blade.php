@@ -7,6 +7,7 @@
     @yield('title','<title>Terra Quimbaya</title>')
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="{{ asset('img/icon.png') }}" >
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

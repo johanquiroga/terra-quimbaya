@@ -149,7 +149,7 @@
                         </div>
                         <!--Copyright-->
                         <p class="copyright pull-right">
-                            &copy; <script>document.write(new Date().getFullYear())</script> <a href="{{url('/')}}">Terra Quimbaya</a>
+                            &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
                         </p>
                         <!--/.Copyright-->
                     </div>
