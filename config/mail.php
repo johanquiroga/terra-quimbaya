@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'noreply@proyectocafe.com', 'name' => 'Proyecto Café'],
+    'from' => ['address' => 'noreply@terraquimbaya.com', 'name' => 'Terra Quimbaya'],
 
     /*
     |--------------------------------------------------------------------------
