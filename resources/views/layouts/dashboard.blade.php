@@ -36,12 +36,12 @@
         <div class="sidebar" data-color="@yield('ColorBoard', 'brown')" data-image="/assets-dashboard/img/sidebar-5.jpg">
             <div class="logo">
                 <a href="{{url('/')}}" class="simple-text">
-                    {{--<div class="logo-img">--}}
+                    <div class="logo-img">
                         <img style="display: inline-block;
                                  margin-left: 0px;
                                  margin-right: 10px;
                                  text-align: center;" src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive img-raised" width="60" height="auto" alt="Terra Quimbaya Logo"/>
-                    {{--</div>--}}
+                    </div>
                     {{--Terra Quimbaya--}}
                 </a>
             </div>
@@ -72,7 +72,7 @@
                                     <span class="notification" id="notifications" >
                                         {{$notifications->count()}}
                                     </span>
-                                    <p class="hidden-lg hidden-md">Notifications</p>
+                                    <p class="hidden-lg hidden-md">Notificaciones</p>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-dropdown">
                                     @forelse($notifications->slice(0, 5) as $solicitud)
@@ -96,7 +96,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="material-icons">person</i>
-                                    <p class="hidden-lg hidden-md">Profile</p>
+                                    <p class="hidden-lg hidden-md">Perfil</p>
                                 </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{{ route('profile::profile') }}"><i class="fa fa-fw fa-user"></i> {{$user->nombres}} {{$user->apellidos}}</a></li>

@@ -9,7 +9,7 @@
     {{--<link href="{{asset('assets-dashboard/css/nouislider.min.css')}}" rel="stylesheet"/>--}}
     <link href="{{asset('material-dashboard/material-dashboard.css')}}" rel="stylesheet">
     <link href="{{asset('material-kit/material-kit.css')}}" rel="stylesheet">
-    {{--<link href="{{asset('custom-assets/custom_material-kit.css')}}" rel="stylesheet"/>--}}
+    <link href="{{asset('custom-assets/custom_logo_style.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('body')
@@ -25,22 +25,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">
-                    <div class="logo">
-                        <img class="img-rounded img-responsive img-raised" src="{{ asset('img/logo.JPG') }}" width="60" height="auto" alt="Terra Quimbaya Logo">
-                    </div>
+                {{--<a class="navbar-brand" href="/">--}}
+                    {{--<div class="logo">--}}
+                        {{--<img class="img-rounded img-responsive img-raised" src="{{ asset('img/logo.JPG') }}" width="60" height="auto" alt="Terra Quimbaya Logo">--}}
+                    {{--</div>--}}
                     {{--<strong>Terra Quimbaya</strong>--}}
-                </a>
-                {{--<a href="/">--}}
-                    {{--<div class="logo-container">--}}
-                        {{--<div class="logo">--}}
-                            {{--<img src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive" width="60" height ="60" alt="Terra Quimbaya Logo">--}}
-                        {{--</div>--}}
+                {{--</a>--}}
+                <a href="{{url('/')}}">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive" width="60" height ="60" alt="Terra Quimbaya Logo">
+                        </div>
                         {{--<div class="brand">--}}
                             {{--<strong>Terra Quimbaya</strong>--}}
                         {{--</div>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
+                    </div>
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarNav1">
                 <ul class="nav navbar-nav navbar-right">
@@ -55,7 +55,8 @@
                         </div>
                     </form>
                     @if(!$checked)
-                        <li class=""><a href="{{route('login')}}"><i class="fa fa-fw fa-sign-in"></i>Iniciar Sesión</a></li>
+                        <li><a href="{{route('login')}}"><i class="fa fa-fw fa-sign-in"></i>Iniciar Sesión</a></li>
+                        <li><a href="{{route('register')}}"><i class="fa fa-fw fa-user-circle"></i>Registrarse</a></li>
                     @else
                         @if($notify)
                             <li class="dropdown">
@@ -64,7 +65,7 @@
                                     <span class="notification" id="notifications" >
                                         {{$notifications->count()}}
                                     </span>
-                                    <p class="hidden-lg hidden-md">Notifications</p>
+                                    <p class="hidden-lg hidden-md">Notificaciones</p>
                                 </a>
                                 <ul class="dropdown-menu" id="notifications-dropdown">
                                     @forelse($notifications->slice(0, 5) as $solicitud)
@@ -88,7 +89,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
                                 <i class="material-icons">person</i>
-                                <p class="hidden-lg hidden md">Perfil</p>
+                                <p class="hidden-lg hidden-md">Perfil</p>
                                 {{--<div class="ripple-container"></div>--}}
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
@@ -165,7 +166,7 @@
                         </div>
                         <!--Copyright-->
                         <p class="copyright pull-right">
-                            &copy; <script>document.write(new Date().getFullYear())</script> <a href="{{url('/')}}">Terra Quimbaya</a>
+                            &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
                         </p>
                         <!--/.Copyright-->
                     </div>
