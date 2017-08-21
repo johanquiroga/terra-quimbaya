@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="brown">
+                <div class="card-header" data-background-color="green">
                     <h4 class="title">Editar Perfil</h4>
                     <p class="category">Completa tu perfil</p>
                     @can('delete-account')

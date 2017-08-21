@@ -33,7 +33,7 @@
 @section('body')
 
     <div class="wrapper">
-        <div class="sidebar" data-color="@yield('ColorBoard', 'brown')" data-image="/assets-dashboard/img/sidebar-5.jpg">
+        <div class="sidebar" data-color="@yield('ColorBoard', 'green')" data-image="{{ asset('img/ImagenesTerra/DSCN7055.JPG') }}">
             <div class="logo">
                 <a href="{{url('/')}}" class="simple-text">
                     <div class="logo-img">
