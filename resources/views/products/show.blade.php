@@ -73,7 +73,7 @@
                             <h2><strong>{{ $product->nombre }} </strong></h2>
 		                    <?php setlocale(LC_MONETARY, 'es_CO.UTF-8'); ?>
                             <h6><input id="calificacion" name="calificacion" value="{{ $product->calificacion }}" class="rating kv-ltr-theme-fa-star rating-loading" data-theme="krajee-fa" data-display-only="true" data-size="xs"></h6>
-                            <h4><span class="green-text"><strong>{{money_format('%n', $product->precioEmpaque) }}</strong></span></h4> {{--<span class="grey-text"><small><s>$89</s></small></span></h4>--}}
+                            <h4><span><strong>{{money_format('%n', $product->precioEmpaque) }}</strong></span></h4> {{--<span class="grey-text"><small><s>$89</s></small></span></h4>--}}
 
                             <!--Accordion wrapper-->
                                 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">

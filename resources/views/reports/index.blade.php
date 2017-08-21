@@ -10,10 +10,10 @@
 
                 <div class="col-md-12">
                     <div class="card card-raised">
-                        <div class="card-header" data-background-color="brown">
+                        <div class="card-header" data-background-color="green">
                             <h3 class="title">Informes</h3>
                             <div class="text-right">
-                                <a class="btn btn-success btn-round" href="{{ route('report::create') }}">
+                                <a class="btn btn-primary btn-round" href="{{ route('report::create') }}">
                                     <i class="fa fa-fw fa-plus fa-lg" aria-hidden="true"></i>Generar Informe
                                 </a>
                             </div>

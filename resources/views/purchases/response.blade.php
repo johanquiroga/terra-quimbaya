@@ -13,7 +13,7 @@
         <div class="container">
             <div class="section">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header header-success">
                         <h4 class="title text-center">Resultado de tu pedido</h4>
                     </div>
                     <div class="content table-responsive">

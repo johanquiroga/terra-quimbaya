@@ -16,7 +16,7 @@
                 <div class="card card-signup">
                     <form role="form" method="POST" action="{{ route('login') }}" id="form-login">
                         {{ csrf_field() }}
-                        <div class="header header-primary text-center">
+                        <div class="header header-success text-center">
                             <h4><i class="material-icons">lock</i> Iniciar Sesión</h4>
                         </div>
                         <div class="content">

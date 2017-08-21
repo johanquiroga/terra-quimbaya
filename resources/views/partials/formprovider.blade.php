@@ -11,7 +11,7 @@
 <div class="col-sm-16 ">
     <!--      Wizard container        -->
     <div class="wizard-container">
-        <div class="wizard-card" data-color="brown" id="wizardProfile">
+        <div class="wizard-card" data-color="green" id="wizardProfile">
             @if ( ! empty($edit) and $edit)
                 <form role="form" action="{{ route($type.'::update', $data->id) }}" method="POST" enctype="multipart/form-data">
             @else

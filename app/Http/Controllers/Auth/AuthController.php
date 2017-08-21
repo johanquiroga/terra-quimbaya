@@ -121,6 +121,8 @@ class AuthController extends Controller
 		        'pais' => $data['pais']
 	        ]);
 
+	        $comprador->direccion()->save($direccion);
+
         } else {
             if($comprador->estado == 0) {
                 $comprador->estado = 1;
@@ -152,8 +154,6 @@ class AuthController extends Controller
         $comprador->frecuenciaCompraCafe()->associate($frecuencia);
 
         $comprador->save();
-
-        $comprador->direccion()->save($direccion);
 
         $attributes = Atributo::all(['id', 'nombreAtributo']);
         foreach($attributes as $attribute) {

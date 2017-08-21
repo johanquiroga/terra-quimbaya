@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
                     <div class="card card-signup"><!--Header-->
-                        <div class="header header-primary text-center">
+                        <div class="header header-success text-center">
                             <h4><i class="fa fa-user-circle"></i> Registrarse</h4>
                         </div>
                         <div class="content">

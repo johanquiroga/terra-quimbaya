@@ -99,6 +99,8 @@ class ProveedorController extends Controller
 			    'pais' => $request->pais
 		    ]);
 
+		    $provider->ubicacionFinca()->save($ubicacion);
+
 	    } else {
     		if($provider->estado == 0) {
     			$provider->estado = 1;
@@ -147,7 +149,6 @@ class ProveedorController extends Controller
 
 	    $provider->save();
 
-        $provider->ubicacionFinca()->save($ubicacion);
 	    //foreach ($request->idVariedadCafe as $idVariedadCafe) {
 		 //   $provider->variedadesCafe()->attach($idVariedadCafe);
 	    //}

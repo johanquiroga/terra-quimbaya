@@ -15,7 +15,7 @@
 @section('body')
 
     <!-- Start your project here-->
-    <nav class="navbar navbar-fixed-top navbar-success navbar-transparent navbar-color-on-scroll" role="navigation">
+    <nav class="navbar navbar-fixed-top navbar-success navbar-transparent navbar-color-on-scroll" role="navigation" style="align-content: center;">
         <div class="container">
             <div class="navbar-header">
                 {{--navbar-toggler-right--}}
@@ -34,11 +34,11 @@
                 <a href="{{url('/')}}">
                     <div class="logo-container">
                         <div class="logo">
-                            <img src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive" width="60" height ="60" alt="Terra Quimbaya Logo">
+                            <img src="{{ asset('img/logo.JPG') }}" class="img-raised img-responsive" alt="Terra Quimbaya Logo">
                         </div>
-                        {{--<div class="brand">--}}
-                            {{--<strong>Terra Quimbaya</strong>--}}
-                        {{--</div>--}}
+                        {{--<div class="brand">
+                            <strong>Terra Quimbaya</strong>
+                        </div>--}}
                     </div>
                 </a>
             </div>
@@ -82,7 +82,7 @@
                                     @empty
                                         <li><a><strong>¡No tienes nuevas Notificaciones!</strong></a></li>
                                     @endforelse
-                                    <li><a href="{{ route('request::index') }}" class="center"><small>Ver Notificaciones</small></a></li>
+                                    <li><a href="{{ route('request::index') }}" style="text-align: center;"><small>Ver Notificaciones</small></a></li>
                                 </ul>
                             </li>
                         @endif

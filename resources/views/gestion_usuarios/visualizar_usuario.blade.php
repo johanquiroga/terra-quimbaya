@@ -12,10 +12,10 @@
 
                 <div class="col-md-12">
                     <div class="card card-raised">
-                        <div class="card-header" data-background-color="brown">
+                        <div class="card-header" data-background-color="green">
                             <h3 class="title">{{ ($type == 'admin') ? "Administradores" : "Proveedores"}}</h3>
                             <div class="text-right">
-                                <a class="btn btn-success btn-round" href="{{ route($type.'::create') }}"> {{-- href="{{url('administradores/crearAdministrador')}}"> --}}
+                                <a class="btn btn-primary btn-round" href="{{ route($type.'::create') }}"> {{-- href="{{url('administradores/crearAdministrador')}}"> --}}
                                     <i class="fa fa-fw fa-plus fa-lg" aria-hidden="true"></i>Añadir usuarios
                                 </a>
                                 {{--<button class="btn btn-danger btn-round" data-toggle="modal" data-target="#delete" >--}}

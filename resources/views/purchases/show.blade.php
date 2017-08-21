@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-raised">
-                <div class="card-header" data-background-color="brown">
+                <div class="card-header" data-background-color="green">
                     <h3 class="title text-center">Detalle de la compra #{{ $compra->idOrden }} del {{ $compra->fechaDeCompra->format('d/m/Y H:i') }}</h3>
                 </div>
                 <div class="card-content">
@@ -52,7 +52,7 @@
                                             <h6 class="text-muted"></h6>
                                             <p>
 										        <?php setlocale(LC_MONETARY, 'es_CO.UTF-8'); ?>
-                                                {{money_format('%n', $compra->product->precioEmpaque) }} x {{ $compra->cantidad }} {{ ($compra->cantidad > 1) ? 'unidades' : 'unidad' }}.
+                                                {{money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad)) }} x {{ $compra->cantidad }} {{ ($compra->cantidad > 1) ? 'unidades' : 'unidad' }}.
                                                 <span class="text-muted">Publicación #{{ $compra->product->idPublicacion }}</span>
                                             </p>
                                         </div>
@@ -195,7 +195,7 @@
                                     {{--<div class="row">--}}
                                     <div class="">
                                         <table class="table table-responsive">
-                                            <tr><td>Producto ({{money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad)) }} x {{ $compra->cantidad }} u.)</td><td>{{ money_format('%n', $compra->product->precioEmpaque * $compra->cantidad) }}</td></tr>
+                                            <tr><td>Producto ({{money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad)) }} x {{ $compra->cantidad }} u.)</td><td>{{ money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad) * $compra->cantidad) }}</td></tr>
                                             <tr><td>IVA (19%) </td><td>{{ money_format('%n', ($compra->valorTotal / (1+0.19))*0.19) }}</td></tr>
                                             <tr><td><strong>Total pagado</strong></td><td><strong>{{ money_format('%n', $compra->valorTotal) }}</strong></td></tr>
                                         </table>

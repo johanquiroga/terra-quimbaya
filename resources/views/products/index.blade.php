@@ -12,7 +12,7 @@
                         <div class="card-header" data-background-color="green">
                             <h3 class="title">Productos</h3>
                             <div class="text-right">
-                                <a class="btn btn-success btn-round" style="background-color: lightseagreen;" href="{{ route('product::create') }}">
+                                <a class="btn btn-primary btn-round" href="{{ route('product::create') }}">
                                     <i class="fa fa-fw fa-plus fa-lg" aria-hidden="true"></i>Añadir producto
                                 </a>
                                 {{--<button class="btn btn-danger btn-round" data-toggle="modal" data-target="#delete" >--}}

@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" data-background-color="brown">
+                        <div class="card-header" data-background-color="green">
                             <h4 class="title">Crear {{($type == 'admin') ? "Administrador" : "Proveedor"}}</h4>
                             <p class="category">Complete los campos para el registro</p>
                         </div>

@@ -7,7 +7,7 @@
 
 <div class="col-sm-16">
     <div class="wizard-container">
-        <div class="wizard-card" data-color="brown" id="wizardProfile">
+        <div class="wizard-card" data-color="green" id="wizardProfile">
             @if(isset($edit) and $edit)
                 <form role="form" action="{{ route('profile::update', $user->id) }}" method="POST">
             @else
