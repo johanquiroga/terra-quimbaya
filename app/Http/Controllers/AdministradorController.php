@@ -136,14 +136,14 @@ class AdministradorController extends Controller
         }
 
 	    if($data->estado == 1) {
-		    $data->fill($request->all());
-		    $data->save();
-
 		    $usuario = Usuario::where('email', '=', $data['correoElectronico'])->firstOrFail();
 		    $usuario['idCC'] = $request['id'];
 		    $usuario['email'] = $request['correoElectronico'];
 		    $usuario['password'] = $request['contraseña'];
 		    $usuario->save();
+
+        	$data->fill($request->all());
+		    $data->save();
 	    } else {
 		    $data->fill($request->all());
 
