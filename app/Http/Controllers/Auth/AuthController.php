@@ -91,7 +91,14 @@ class AuthController extends Controller
         return Validator::make($data, $rules_attributes);
     }
 
-    private function storeNewBuyer(array $data)
+
+	/**
+	 * Store a completely new buyer.
+	 *
+	 * @param array $data
+	 * @return mixed
+	 */
+	private function storeNewBuyer(array $data)
     {
 	    $comprador = Comprador::firstOrNew([
 		    'id' => $data['id'],
@@ -124,7 +131,14 @@ class AuthController extends Controller
 	    return $comprador;
     }
 
-    private function storeDeletedBuyer(Comprador $comprador, array $data)
+	/**
+	 * Update and reactivate a previously deleted buyer.
+	 *
+	 * @param Comprador $comprador
+	 * @param array     $data
+	 * @return Comprador
+	 */
+	private function storeDeletedBuyer(Comprador $comprador, array $data)
     {
 	    if($comprador->estado == 0) {
 		    $comprador->estado = 1;
