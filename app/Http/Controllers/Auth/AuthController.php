@@ -91,6 +91,74 @@ class AuthController extends Controller
         return Validator::make($data, $rules_attributes);
     }
 
+    private function storeNewBuyer(array $data)
+    {
+	    $comprador = Comprador::firstOrNew([
+		    'id' => $data['id'],
+		    'nombres' => $data['nombres'],
+		    'apellidos' => $data['apellidos'],
+		    'correoElectronico' => $data['email'],
+		    'contraseña' => bcrypt($data['password']),
+		    'telefono' => $data['telefono'],
+	    ]);
+
+	    $direccion = new DireccionResidencia([
+		    'direccion' => $data['direccion'],
+		    'direccionAuxiliar' => $data['direccionAuxiliar'],
+		    'codigoPostal' => $data['codigoPostal'],
+		    'ciudad' => $data['ciudad'],
+		    'departamento' => $data['departamento'],
+		    'pais' => $data['pais']
+	    ]);
+
+	    $nivel = NivelEstudios::find($data['idNivelEstudios']);
+	    $comprador->nivelEstudios()->associate($nivel);
+
+	    $frecuencia = FrecuenciaCompraCafe::find($data['idFrecuenciaCompraCafe']);
+	    $comprador->frecuenciaCompraCafe()->associate($frecuencia);
+
+	    $comprador->save();
+
+	    $comprador->direccion()->save($direccion);
+
+	    return $comprador;
+    }
+
+    private function storeDeletedBuyer(Comprador $comprador, array $data)
+    {
+	    if($comprador->estado == 0) {
+		    $comprador->estado = 1;
+
+		    $comprador->fill([
+			    'id' => $data['id'],
+			    'nombres' => $data['nombres'],
+			    'apellidos' => $data['apellidos'],
+			    'correoElectronico' => $data['email'],
+			    'contraseña' => bcrypt($data['password']),
+			    'telefono' => $data['telefono'],
+		    ]);
+
+		    $comprador->direccion->fill([
+			    'direccion' => $data['direccion'],
+			    'direccionAuxiliar' => $data['direccionAuxiliar'],
+			    'codigoPostal' => $data['codigoPostal'],
+			    'ciudad' => $data['ciudad'],
+			    'departamento' => $data['departamento'],
+			    'pais' => $data['pais']
+		    ])->save();
+	    }
+
+	    $nivel = NivelEstudios::find($data['idNivelEstudios']);
+	    $comprador->nivelEstudios()->associate($nivel);
+
+	    $frecuencia = FrecuenciaCompraCafe::find($data['idFrecuenciaCompraCafe']);
+	    $comprador->frecuenciaCompraCafe()->associate($frecuencia);
+
+	    $comprador->save();
+
+	    return $comprador;
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -103,57 +171,10 @@ class AuthController extends Controller
         //Create Comprador and DireccionResidencia
         $comprador = Comprador::find($data['id']);
         if(is_null($comprador)) {
-            $comprador = Comprador::firstOrNew([
-                'id' => $data['id'],
-                'nombres' => $data['nombres'],
-                'apellidos' => $data['apellidos'],
-                'correoElectronico' => $data['email'],
-                'contraseña' => bcrypt($data['password']),
-                'telefono' => $data['telefono'],
-            ]);
-
-	        $direccion = new DireccionResidencia([
-		        'direccion' => $data['direccion'],
-		        'direccionAuxiliar' => $data['direccionAuxiliar'],
-		        'codigoPostal' => $data['codigoPostal'],
-		        'ciudad' => $data['ciudad'],
-		        'departamento' => $data['departamento'],
-		        'pais' => $data['pais']
-	        ]);
-
-	        $comprador->direccion()->save($direccion);
-
+        	$comprador = $this->storeNewBuyer($data);
         } else {
-            if($comprador->estado == 0) {
-                $comprador->estado = 1;
-
-	            $comprador->fill([
-		            'id' => $data['id'],
-		            'nombres' => $data['nombres'],
-		            'apellidos' => $data['apellidos'],
-		            'correoElectronico' => $data['email'],
-		            'contraseña' => bcrypt($data['password']),
-		            'telefono' => $data['telefono'],
-	            ]);
-
-	            $comprador->direccion->fill([
-		            'direccion' => $data['direccion'],
-		            'direccionAuxiliar' => $data['direccionAuxiliar'],
-		            'codigoPostal' => $data['codigoPostal'],
-		            'ciudad' => $data['ciudad'],
-		            'departamento' => $data['departamento'],
-		            'pais' => $data['pais']
-	            ])->save();
-            }
+        	$comprador = $this->storeDeletedBuyer($comprador, $data);
         }
-
-        $nivel = NivelEstudios::find($data['idNivelEstudios']);
-        $comprador->nivelEstudios()->associate($nivel);
-
-        $frecuencia = FrecuenciaCompraCafe::find($data['idFrecuenciaCompraCafe']);
-        $comprador->frecuenciaCompraCafe()->associate($frecuencia);
-
-        $comprador->save();
 
         $attributes = Atributo::all(['id', 'nombreAtributo']);
         foreach($attributes as $attribute) {

@@ -65,18 +65,74 @@ class ProveedorController extends Controller
                 'tipoBeneficio', 'ecotopo', 'nivelEstudios', 'tipos_cafe'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param CreateProviderRequest|Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(CreateProviderRequest $request)
+	/**
+	 * Store a completely new provider.
+	 *
+	 * @param Request $request
+	 * @return mixed
+	 */
+	private function storeNewProvider(Request $request)
     {
-    	$provider = Proveedor::find($request->id);
+	    $provider = Proveedor::firstOrNew([
+		    'id' => $request->id,
+		    'nombres' => $request->nombres,
+		    'apellidos' => $request->apellidos,
+		    'edadProveedor' => $request->edadProveedor,
+		    'telefono' => $request->telefono,
+		    'nombreFinca' => $request->nombreFinca,
+		    'alturaFinca' => $request->alturaFinca,
+		    'extensionFinca' => $request->extensionFinca,
+		    'extensionLotes' => $request->extensionLotes,
+		    'añosCafetal' => $request->añosCafetal,
+		    'nucleoFamiliar' => $request->nucleoFamiliar,
+		    'personasDependientesFinca' => $request->personasDependientesFinca,
+	    ]);
 
-    	if(is_null($provider)) {
-		    $provider = Proveedor::firstOrNew([
+	    $ubicacion = new UbicacionFinca([
+		    'vereda' => $request->vereda,
+		    'corregimiento' => $request->corregimiento,
+		    'ciudad' => $request->ciudad,
+		    'departamento' => $request->departamento,
+		    'pais' => $request->pais
+	    ]);
+
+	    $nivel = NivelEstudios::find($request->idNivelEstudios);
+	    $provider->nivelEstudios()->associate($nivel);
+
+	    $densidad = DensidadSiembra::find($request->idDensidadSiembra);
+	    $provider->densidadSiembra()->associate($densidad);
+
+	    $beneficio = TipoBeneficio::find($request->idTipoBeneficio);
+	    $provider->tipoBeneficio()->associate($beneficio);
+
+	    $zoca = EdadUltimaZoca::find($request->idEdadUltimaZoca);
+	    $provider->edadUltimaZoca()->associate($zoca);
+
+	    $ecotopos = Ecotopo::find($request->idEcotopo);
+	    $provider->ecotopo()->associate($ecotopos);
+
+	    $provider->admin()->associate(Auth::user()->idCC);
+
+	    $provider->save();
+
+	    $provider->ubicacionFinca()->save($ubicacion);
+
+	    return $provider;
+    }
+
+	/**
+	 * Update and reactivate a previously deleted provider.
+	 *
+	 * @param Proveedor $provider
+	 * @param Request   $request
+	 * @return Proveedor
+	 */
+	private function storeDeletedProvider(Proveedor $provider, Request $request)
+    {
+	    if($provider->estado == 0) {
+		    $provider->estado = 1;
+
+		    $provider->fill([
 			    'id' => $request->id,
 			    'nombres' => $request->nombres,
 			    'apellidos' => $request->apellidos,
@@ -91,63 +147,52 @@ class ProveedorController extends Controller
 			    'personasDependientesFinca' => $request->personasDependientesFinca,
 		    ]);
 
-		    $ubicacion = new UbicacionFinca([
+		    $provider->ubicacionFinca->fill([
 			    'vereda' => $request->vereda,
 			    'corregimiento' => $request->corregimiento,
 			    'ciudad' => $request->ciudad,
 			    'departamento' => $request->departamento,
 			    'pais' => $request->pais
-		    ]);
-
-		    $provider->ubicacionFinca()->save($ubicacion);
-
-	    } else {
-    		if($provider->estado == 0) {
-    			$provider->estado = 1;
-
-    			$provider->fill([
-				    'id' => $request->id,
-				    'nombres' => $request->nombres,
-				    'apellidos' => $request->apellidos,
-				    'edadProveedor' => $request->edadProveedor,
-				    'telefono' => $request->telefono,
-				    'nombreFinca' => $request->nombreFinca,
-				    'alturaFinca' => $request->alturaFinca,
-				    'extensionFinca' => $request->extensionFinca,
-				    'extensionLotes' => $request->extensionLotes,
-				    'añosCafetal' => $request->añosCafetal,
-				    'nucleoFamiliar' => $request->nucleoFamiliar,
-				    'personasDependientesFinca' => $request->personasDependientesFinca,
-			    ]);
-
-    			$provider->ubicacionFinca->fill([
-				    'vereda' => $request->vereda,
-				    'corregimiento' => $request->corregimiento,
-				    'ciudad' => $request->ciudad,
-				    'departamento' => $request->departamento,
-				    'pais' => $request->pais
-			    ])->save();
-		    }
+		    ])->save();
 	    }
 
-        $nivel = NivelEstudios::find($request->idNivelEstudios);
-        $provider->nivelEstudios()->associate($nivel);
+	    $nivel = NivelEstudios::find($request->idNivelEstudios);
+	    $provider->nivelEstudios()->associate($nivel);
 
-        $densidad = DensidadSiembra::find($request->idDensidadSiembra);
-        $provider->densidadSiembra()->associate($densidad);
+	    $densidad = DensidadSiembra::find($request->idDensidadSiembra);
+	    $provider->densidadSiembra()->associate($densidad);
 
-        $beneficio = TipoBeneficio::find($request->idTipoBeneficio);
-        $provider->tipoBeneficio()->associate($beneficio);
+	    $beneficio = TipoBeneficio::find($request->idTipoBeneficio);
+	    $provider->tipoBeneficio()->associate($beneficio);
 
-        $zoca = EdadUltimaZoca::find($request->idEdadUltimaZoca);
-        $provider->edadUltimaZoca()->associate($zoca);
+	    $zoca = EdadUltimaZoca::find($request->idEdadUltimaZoca);
+	    $provider->edadUltimaZoca()->associate($zoca);
 
-        $ecotopos = Ecotopo::find($request->idEcotopo);
-        $provider->ecotopo()->associate($ecotopos);
+	    $ecotopos = Ecotopo::find($request->idEcotopo);
+	    $provider->ecotopo()->associate($ecotopos);
 
 	    $provider->admin()->associate(Auth::user()->idCC);
 
 	    $provider->save();
+
+	    return $provider;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CreateProviderRequest|Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(CreateProviderRequest $request)
+    {
+    	$provider = Proveedor::find($request->id);
+
+    	if(is_null($provider)) {
+		    $provider = $this->storeNewProvider($request);
+	    } else {
+		    $provider = $this->storeDeletedProvider($provider, $request);
+	    }
 
 	    //foreach ($request->idVariedadCafe as $idVariedadCafe) {
 		 //   $provider->variedadesCafe()->attach($idVariedadCafe);
