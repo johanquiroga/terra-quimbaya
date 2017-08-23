@@ -15,7 +15,7 @@
 @section('body')
 
     <!-- Start your project here-->
-    <nav class="navbar navbar-fixed-top navbar-success navbar-transparent navbar-color-on-scroll" role="navigation" style="align-content: center;">
+    <nav class="navbar navbar-fixed-top navbar-success navbar-transparent navbar-color-on-scroll" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 {{--navbar-toggler-right--}}
