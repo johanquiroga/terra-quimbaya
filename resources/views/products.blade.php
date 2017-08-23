@@ -34,8 +34,9 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingOne">
                                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                            <h4 class="panel-title">Rango de Precio</h4>
-                                            <i class="material-icons">keyboard_arrow_down</i>
+                                            <h4 class="panel-title">Rango de Precio
+                                                <i class="material-icons" style="float:right">keyboard_arrow_down</i>
+                                            </h4>
                                         </a>
                                     </div>
                                     <div id="collapseOne" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingOne">
@@ -69,8 +70,9 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingTwo">
                                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            <h4 class="panel-title">Variedad de Café</h4>
-                                            <i class="material-icons">keyboard_arrow_down</i>
+                                            <h4 class="panel-title">Variedad de Café
+                                                <i class="material-icons" style="float:right">keyboard_arrow_down</i>
+                                            </h4>
                                         </a>
                                     </div>
                                     <div id="collapseTwo" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingTwo">
@@ -93,8 +95,9 @@
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="heading{{$index + 2}}">
                                             <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse{{$index + 2}}" aria-expanded="false" aria-controls="collapse{{$index + 2}}">
-                                                <h4 class="panel-title">{{  ucwords(preg_replace('/(?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]|[0-9]{1,}/', ' $0', $attribute->nombreAtributo)) }}</h4>
-                                                <i class="material-icons">keyboard_arrow_down</i>
+                                                <h4 class="panel-title">{{  ucwords(preg_replace('/(?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]|[0-9]{1,}/', ' $0', $attribute->nombreAtributo)) }}
+                                                    <i class="material-icons" style="float:right">keyboard_arrow_down</i>
+                                                </h4>
                                             </a>
                                         </div>
                                         <div id="collapse{{$index + 2}}" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="heading{{$index + 2}}">
@@ -117,8 +120,9 @@
                                 <div class="panel panel-default">
                                     <div class="panel-heading" role="tab" id="headingFour">
                                         <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                            <h4 class="panel-title">Ubicación</h4>
-                                            <i class="material-icons">keyboard_arrow_down</i>
+                                            <h4 class="panel-title">Ubicación
+                                                <i class="material-icons" style="float:right">keyboard_arrow_down</i>
+                                            </h4>
                                         </a>
                                     </div>
                                     <div id="collapseFour" class="panel-collapse collapse out" role="tabpanel" aria-labelledby="headingFour">

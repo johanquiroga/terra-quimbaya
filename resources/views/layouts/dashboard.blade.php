@@ -35,7 +35,7 @@
     <div class="wrapper">
         <div class="sidebar" data-color="@yield('ColorBoard', 'green')" data-image="{{ asset('img/ImagenesTerra/DSCN7055.JPG') }}">
             <div class="logo">
-                <a href="{{url('/')}}" class="simple-text">
+                <a href="{{url('/')}}" class="simple-text" style="padding: 0">
                     <div class="logo-img">
                         <img style="display: inline-block;
                                  margin-left: 0px;
