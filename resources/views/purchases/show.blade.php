@@ -52,7 +52,7 @@
                                             <h6 class="text-muted"></h6>
                                             <p>
 										        <?php setlocale(LC_MONETARY, 'es_CO.UTF-8'); ?>
-                                                {{money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad)) }} x {{ $compra->cantidad }} {{ ($compra->cantidad > 1) ? 'unidades' : 'unidad' }}.
+                                                {{money_format('%n', (($compra->valorTotal / (1+config('app.iva'))) / $compra->cantidad)) }} x {{ $compra->cantidad }} {{ ($compra->cantidad > 1) ? 'unidades' : 'unidad' }}.
                                                 <span class="text-muted">Publicación #{{ $compra->product->idPublicacion }}</span>
                                             </p>
                                         </div>
@@ -195,8 +195,8 @@
                                     {{--<div class="row">--}}
                                     <div class="">
                                         <table class="table table-responsive">
-                                            <tr><td>Producto ({{money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad)) }} x {{ $compra->cantidad }} u.)</td><td>{{ money_format('%n', (($compra->valorTotal / (1+0.19)) / $compra->cantidad) * $compra->cantidad) }}</td></tr>
-                                            <tr><td>IVA (19%) </td><td>{{ money_format('%n', ($compra->valorTotal / (1+0.19))*0.19) }}</td></tr>
+                                            <tr><td>Producto ({{money_format('%n', (($compra->valorTotal / (1+config('app.iva'))) / $compra->cantidad)) }} x {{ $compra->cantidad }} u.)</td><td>{{ money_format('%n', (($compra->valorTotal / (1+config('app.iva'))) / $compra->cantidad) * $compra->cantidad) }}</td></tr>
+                                            <tr><td>IVA ({{ config('app.iva')*100 }}%) </td><td>{{ money_format('%n', ($compra->valorTotal / (1+config('app.iva')))*config('app.iva')) }}</td></tr>
                                             <tr><td><strong>Total pagado</strong></td><td><strong>{{ money_format('%n', $compra->valorTotal) }}</strong></td></tr>
                                         </table>
                                     </div>
