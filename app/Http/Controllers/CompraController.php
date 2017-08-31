@@ -25,6 +25,24 @@ use Faker\Factory as Faker;
 
 class CompraController extends Controller
 {
+
+	/**
+	 * Tax percentage.
+	 *
+	 * @var float
+	 */
+	protected $iva = 0.05;
+
+	/**
+	 * Instantiate a new UserController instance.
+	 *
+	 * @return void
+	 */
+	public function __construct()
+	{
+		$this->iva = config('app.iva', 0.05);
+	}
+
     /**
      * Display a listing of the resource.
      *
@@ -373,7 +391,7 @@ class CompraController extends Controller
 	{
 		$cantidad = $request->cantidad;
 		$amount = $product->precioEmpaque * $cantidad;
-		$tax = $amount*0.19;
+		$tax = $amount * $this->iva;
 		$valorTotal = $amount + $tax;
 		$description = 'Compra de ' . $cantidad . ' unidad(es) del producto "' . $product->nombre .'" por parte del comprador ' . $comprador->nombres . ' ' . $comprador->apellidos . '.';
 
@@ -453,7 +471,7 @@ class CompraController extends Controller
 		$telephone = $comprador->telefono;
 		$currency = 'COP';
 		$algorithmSignature = 'SHA';
-		$tax = $amount*0.19;
+		$tax = $amount * $this->iva;
 		$taxReturnBase = $amount;
 		$valorTotal = $amount + $tax;
 		$amount = number_format($valorTotal, 2, '.', '');

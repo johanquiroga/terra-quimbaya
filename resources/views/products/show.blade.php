@@ -414,7 +414,7 @@
             $("#buy-modal").on('show.bs.modal', function () {
                 var cant = $(this).find('.modal-body tr input#cantidad').val();
                 var total = precio * cant;
-                var iva = total * 0.19;
+                var iva = total * {{ config('app.iva') }};
                 $(this).find('.modal-body table tbody tr:first td#total').text('$ '+total.formatMoney(2, ',', '.'));// tr:first td#total').text('$ '+total));
                 $(this).find('.modal-body tr#purchase-info td#total p#subtotal').text('$ '+total.formatMoney(2, ',', '.'));
                 $(this).find('.modal-body tr#purchase-info td#total p#iva').text('$ '+iva.formatMoney(2, ',', '.'));
@@ -425,7 +425,7 @@
                 var tr = $(this).closest('tr');
                 var cant = event.target.value;
                 var total = precio * cant;
-                var iva = total * 0.19;
+                var iva = total * {{ config('app.iva') }};
                 tr.find('#total').text('$ '+total.formatMoney(2, ',', '.'));
                 $(this).closest('table').find('tbody tr#purchase-info td#total p#subtotal').text('$ '+total.formatMoney(2, ',', '.'));
                 $(this).closest('table').find('tbody tr#purchase-info td#total p#iva').text('$ '+iva.formatMoney(2, ',', '.'));

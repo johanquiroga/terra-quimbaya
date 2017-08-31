@@ -68,8 +68,8 @@
                     }
 
                     var total = Number(compra.valorTotal);
-                    var subtotal = total /(1 + 0.19);
-                    var iva = subtotal * 0.19;
+                    var subtotal = total /(1 + {{ config('app.iva') }});
+                    var iva = subtotal * {{ config('app.iva') }};
                     var precioEmpaque = subtotal / compra.cantidad;
 
                     attributes += '<tr role="row"><td><b>Compra: </b></td><td><p><strong>Referencia:</strong><a href="{{ route("purchase::show", ':PID') }}"> :PID</a></p>'
