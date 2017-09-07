@@ -205,7 +205,7 @@ class AuthController extends Controller
 
     /**
      * Get the post register / login redirect path.
-     * @TODO: override to redirect depending on user type
+     *
      * @return string
      */
     public function redirectPath()
