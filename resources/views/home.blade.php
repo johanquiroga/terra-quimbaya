@@ -36,9 +36,9 @@
                         <div class="logo">
                             <img src="{{ asset('img/logo.JPG') }}" class="img-raised img-responsive" alt="Terra Quimbaya Logo">
                         </div>
-                        {{--<div class="brand">
-                            <strong>Terra Quimbaya</strong>
-                        </div>--}}
+                        {{--<div class="brand">--}}
+                            {{--<strong>Terra Quimbaya</strong>--}}
+                        {{--</div>--}}
                     </div>
                 </a>
             </div>
@@ -67,7 +67,7 @@
                                     </span>
                                     <p class="hidden-lg hidden-md">Notificaciones</p>
                                 </a>
-                                <ul class="dropdown-menu" id="notifications-dropdown">
+                                <ul class="dropdown-menu dropdown-menu-right" id="notifications-dropdown">
                                     @forelse($notifications->slice(0, 5) as $solicitud)
                                         <li>
                                             <a href="{{ ($user instanceof \App\Models\Administrador)?
@@ -89,12 +89,13 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
                                 <i class="material-icons">person</i>
+                                <b class="caret"></b>
                                 <p class="hidden-lg hidden-md">Perfil</p>
                                 {{--<div class="ripple-container"></div>--}}
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <li><a class="dropdown-item waves-effect waves-light" href="{{ route('profile::profile') }}"><i class="fa fa-fw fa-user"></i> {{$user->nombres}} {{$user->apellidos}}<div class="ripple-container"></div></a></li>
-                                <li><a class="dropdown-item waves-effect waves-light" href="{{route('logout')}}"><i class="fa fa-fw fa-sign-out"></i> Cerrar Sesión</a></li>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                <li><a href="{{ route('profile::profile') }}"><i class="fa fa-fw fa-user"></i> {{$user->nombres}} {{$user->apellidos}}<div class="ripple-container"></div></a></li>
+                                <li><a href="{{route('logout')}}"><i class="fa fa-fw fa-sign-out"></i> Cerrar Sesión</a></li>
                             </ul>
                         </li>
                     @endif
@@ -140,37 +141,26 @@
         <footer class="footer">
             <!--Footer Links-->
             <div class="container">
-                <div class="content">
-                    <div class="row">
+                <nav class="pull-left">
+                    <ul>
                         <!--First column-->
-                        <div class="col-md-4">
-                            <h5 class="title">Terra Quimbaya</h5>
-                            <p>Descripción del proyecto.</p>
-                        </div>
-                        <!--/.First column-->
-                        <div class="center col-md-6">
-                            <ul>
-                                {{--<li>--}}
-                                    {{--<a href="//www.utp.edu.co/" title="Universidad Tecnológica de Pereira">--}}
-                                        {{--<img src="{{asset('img/logo_utp.png')}}" height="62" alt="Escudo Universidad Tecnologica de Pereira">--}}
-                                    {{--</a>--}}
-                                    {{--<strong>Universidad Tecnológica de Pereira</strong>--}}
-                                {{--</li>--}}
-                                {{--<li>--}}
-                                    {{--<a href="//isc.utp.edu.co/" title="Ingeniería de Sistemas y Computación">--}}
-                                        {{--<img src="{{asset('img/logo_isc.png')}}" height="62" alt="Ingeniería de Sistemas y Computacion">--}}
-                                    {{--</a>--}}
-                                    {{--<strong>Ingeniería de Sistemas y Computación</strong>--}}
-                                {{--</li>--}}
+                        <li>
+                            <ul><h5 class="title">Contáctanos</h5>
+                                <li style="display: block;">
+                                    <a href="mailto:terraquimbaya@gmail.com" data-toggle="tooltip" data-placement="right" title="E-mail Terra Quimbaya"><i class="fa fa-fw fa-envelope"></i> terraquimbaya@gmail.com</a>
+                                </li>
+                                <li style="display: block;">
+                                    <a href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="Terra Quimbaya en Facebook"><i class="fa fa-fw fa-facebook-official"></i> Terra Quimbaya</a>
+                                </li>
                             </ul>
-                        </div>
-                        <!--Copyright-->
-                        <p class="copyright pull-right">
-                            &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
-                        </p>
-                        <!--/.Copyright-->
-                    </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!--Copyright-->
+                <div class="copyright pull-right">
+                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
                 </div>
+                <!--/.Copyright-->
             </div>
             <!--/.Footer Links-->
         </footer>
