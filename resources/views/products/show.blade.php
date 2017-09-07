@@ -334,7 +334,7 @@
                                 @foreach($metodos_pago as $metodo)
                                     <div class="col-sm-4 text-center">
                                         <div class="choice {{ $metodo->metodo == 'Contraentrega' ? 'active' : '' }}" data-toggle="wizard-radio" rel="tooltip" title="" data-original-title="{{ $metodo->metodo == 'Contraentrega' ? 'Selecciona esta opción para realizar pagos contraentrega. Solamente disponible para compradores en Pereira o Dosquebradas, Risaralda.' : 'Selecciona esta opción para realizar pagos con tarjetas o transferencias bancarias.' }}">
-                                            <input type="radio" name="metodoPago" value="{{ $metodo->id }}" required {{ ($metodo->metodo == 'Contraentrega') ? (($user->direccion->ciudad == 'PEREIRA' || $user->direccion->ciudad == 'DOSQUEBRADAS') ? '' : 'disabled') : '' }}>
+                                            <input type="radio" name="metodoPago" value="{{ $metodo->id }}" required {{ ($metodo->metodo == 'Contraentrega') ? (($user->direccion->ciudad == 'PEREIRA' || $user->direccion->ciudad == 'DOSQUEBRADAS') ? '' : 'disabled') : 'disabled' }}>
                                             <div class="icon">
                                                 @if($metodo->metodo == 'Contraentrega')
                                                     <i class="material-icons">attach_money</i>
