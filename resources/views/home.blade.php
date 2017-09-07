@@ -150,7 +150,7 @@
                                     <a href="mailto:terraquimbaya@gmail.com" data-toggle="tooltip" data-placement="right" title="E-mail Terra Quimbaya"><i class="fa fa-fw fa-envelope"></i> terraquimbaya@gmail.com</a>
                                 </li>
                                 <li style="display: block;">
-                                    <a href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="Terra Quimbaya en Facebook"><i class="fa fa-fw fa-facebook-official"></i> Terra Quimbaya</a>
+                                    <a target="_blank" href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="Terra Quimbaya en Facebook"><i class="fa fa-fw fa-facebook-official"></i> Terra Quimbaya</a>
                                 </li>
                             </ul>
                         </li>
