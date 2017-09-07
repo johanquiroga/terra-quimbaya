@@ -150,7 +150,7 @@
                                                             <div class="carousel-inner">
                                                                 @foreach($provider->fotos as $index => $foto)
                                                                     <div class="item{{ $index == 0 ? ' active' : '' }}">
-                                                                        <img src="{{route('storage::get', $foto->path . $foto->nombreArchivo) }}" alt="Imagen_{{$index}}">
+                                                                        <img style="margin-bottom: 0;" src="{{route('storage::get', $foto->path . $foto->nombreArchivo) }}" alt="Imagen_{{$index}}">
                                                                     </div>
                                                                 @endforeach
                                                             </div>
