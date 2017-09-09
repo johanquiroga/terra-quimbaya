@@ -10,7 +10,7 @@
 
                 <div class="col-md-12">
                     <div class="card card-raised">
-                        <div class="card-header" data-background-color="green">
+                        <div class="card-header" data-background-color="green-dark">
                             <h3 class="title">Solicitudes</h3>
                             {{--<div class="text-right">--}}
                                 {{--<a class="btn btn-success btn-round" href="{{ route('request::create') }}">--}}

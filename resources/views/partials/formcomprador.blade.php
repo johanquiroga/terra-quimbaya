@@ -1,13 +1,13 @@
 @section('styles')
     @parent
     <!-- CSS Files -->
-    <link href="{{ asset('custom-assets/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets-wizard/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
+    <link href="{{ asset('custom-assets/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />
 @endsection
 
 <div class="col-sm-16">
     <div class="wizard-container">
-        <div class="wizard-card" data-color="green" id="wizardProfile">
+        <div class="wizard-card" data-color="primary" id="wizardProfile">
             @if(isset($edit) and $edit)
                 <form role="form" action="{{ route('profile::update', $user->id) }}" method="POST">
             @else

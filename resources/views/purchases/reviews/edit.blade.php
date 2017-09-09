@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="green">
+                <div class="card-header" data-background-color="green-dark">
                     <h4 class="title">Modificar Calificación</h4>
                     <p class="category">Edite los campos los campos que desea actualizar</p>
                 </div>

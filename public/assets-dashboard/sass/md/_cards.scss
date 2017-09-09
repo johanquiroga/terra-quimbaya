@@ -59,7 +59,7 @@
         margin: -20px $margin-base 0;
         border-radius: $border-radius-base;
         padding: $padding-base;
-        background-color: $brown-color;
+        background-color: $green-color;
 
         .title{
             color: $white-color;
@@ -213,6 +213,11 @@
     [data-background-color="green"]{
         background: linear-gradient(60deg, $green-400, $green-600);
         @include shadow-big-color($brand-success);
+    }
+
+    [data-background-color="green-dark"]{
+        background: linear-gradient(60deg, #117A3F, #0F6D38);
+        @include shadow-big-color($green-color);
     }
 
     [data-background-color="orange"]{

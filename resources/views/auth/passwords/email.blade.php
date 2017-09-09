@@ -22,7 +22,7 @@
                     <form role="form" method="POST" action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
                         <!--Header-->
-                        <div class="header header-success text-center">
+                        <div class="header header-primary text-center">
                             <h4><i class="fa fa-key"></i> Restablecer Contraseña</h4>
                         </div>
                         <div class="content">

@@ -1,6 +1,6 @@
 .wizard-card{
-    min-height: 410px;
-    @include shadow-16dp();
+    //min-height: 410px;
+    //@include shadow-16dp();
 
     .picture-container{
         position: relative;
@@ -46,6 +46,10 @@
 
     &[data-color="green"]{
         @include set-wizard-color($brand-success);
+    }
+
+    &[data-color="primary"]{
+        @include set-wizard-color($green-color);
     }
 
     &[data-color="blue"]{

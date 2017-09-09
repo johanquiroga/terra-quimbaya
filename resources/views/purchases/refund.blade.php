@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="green">
+                <div class="card-header" data-background-color="green-dark">
                     <h4 class="title">Solicitar Devolución</h4>
                     <p class="category">Complete los campos que se le solicitan</p>
                 </div>
