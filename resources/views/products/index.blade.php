@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-raised">
-                        <div class="card-header" data-background-color="green">
+                        <div class="card-header" data-background-color="green-dark">
                             <h3 class="title">Productos</h3>
                             <div class="text-right">
-                                <a class="btn btn-primary btn-round" href="{{ route('product::create') }}">
+                                <a class="btn btn-success btn-round" href="{{ route('product::create') }}">
                                     <i class="fa fa-fw fa-plus fa-lg" aria-hidden="true"></i>Añadir producto
                                 </a>
                                 {{--<button class="btn btn-danger btn-round" data-toggle="modal" data-target="#delete" >--}}

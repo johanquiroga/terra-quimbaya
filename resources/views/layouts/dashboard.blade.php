@@ -33,7 +33,7 @@
 @section('body')
 
     <div class="wrapper">
-        <div class="sidebar" data-color="@yield('ColorBoard', 'green')" data-image="{{ asset('img/ImagenesTerra/DSCN7055.JPG') }}">
+        <div class="sidebar" data-color="@yield('ColorBoard', 'green-dark')" data-image="{{ asset('img/ImagenesTerra/DSCN7055.JPG') }}">
             <div class="logo">
                 <a href="{{url('/')}}" class="simple-text" style="padding: 0">
                     <div class="logo-img">
@@ -130,29 +130,20 @@
             <footer class="footer">
                 <!--Footer Links-->
                 <div class="container-fluid">
-                    <div class="content">
-                        <div class="col-md-8">
-                            <ul>
-                                {{--<li>--}}
-                                    {{--<a href="//www.utp.edu.co/" title="Universidad Tecnológica de Pereira">--}}
-                                        {{--<img src="{{asset('img/logo_utp.png')}}" height="62" alt="Escudo Universidad Tecnologica de Pereira">--}}
-                                        {{--Universidad Tecnológica de Pereira--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
-                                {{--<li>--}}
-                                    {{--<a href="//isc.utp.edu.co/" title="Ingeniería de Sistemas y Computación">--}}
-                                        {{--<img src="{{asset('img/logo_isc.png')}}" height="62" alt="Ingeniería de Sistemas y Computacion">--}}
-                                        {{--Ingeniería de Sistemas y Computación--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
-                            </ul>
-                        </div>
-                        <!--Copyright-->
-                        <p class="copyright pull-right">
-                            &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
-                        </p>
-                        <!--/.Copyright-->
-                    </div>
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="{{ url('/') }}">
+                                    Inicio
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!--Copyright-->
+                    <p class="copyright pull-right">
+                        &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
+                    </p>
+                    <!--/.Copyright-->
                 </div>
                 <!--/.Footer Links-->
             </footer>

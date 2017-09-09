@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" data-background-color="green">
+                        <div class="card-header" data-background-color="green-dark">
                             <h4 class="title">Generar Informe</h4>
                             <p class="category">Complete los campos para generar el Informe</p>
                         </div>

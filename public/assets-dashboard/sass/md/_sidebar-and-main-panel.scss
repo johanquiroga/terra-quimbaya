@@ -193,6 +193,9 @@
     &[data-color="green"]{
         @include set-background-color-button($brand-success);
     }
+    &[data-color="green-dark"]{
+        @include set-background-color-button($green-color);
+    }
     &[data-color="orange"]{
         @include set-background-color-button($brand-warning);
     }
