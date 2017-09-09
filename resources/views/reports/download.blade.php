@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">
                     <div class="card card-signup"><!--Header-->
-                        <div class="header header-success text-center">
+                        <div class="header header-primary text-center">
                             <h4><i class="fa fa-file-pdf-o"></i> Informe Generado</h4>
                         </div>
                         <div class="content">

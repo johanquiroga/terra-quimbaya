@@ -16,10 +16,6 @@
 
             </h4>
             <h4>
-                <strong>Teléfono: </strong>
-                {{ $provider->telefono }}
-            </h4>
-            <h4>
                 <strong>Edad: </strong>
                 {{ $provider->edadProveedor }}
             </h4>
