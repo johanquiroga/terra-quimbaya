@@ -4,6 +4,7 @@
     @parent
     <link href="{{asset('material-dashboard/material-dashboard.css')}}" rel="stylesheet">
     <link href="{{asset('material-kit/material-kit.css')}}" rel="stylesheet">
+    <link href="{{asset('css/custom/custom_logo.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('body')
@@ -19,25 +20,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home') }}">
-                    Your Coffee
-                </a>
                 {{--<a class="navbar-brand" href="/">--}}
                     {{--<div class="logo">--}}
                         {{--<img class="img-rounded img-responsive img-raised" src="{{ asset('img/logo.JPG') }}" width="60" height="auto" alt="Terra Quimbaya Logo">--}}
                     {{--</div>--}}
                     {{--<strong>Terra Quimbaya</strong>--}}
                 {{--</a>--}}
-                {{--<a href="/">--}}
-                    {{--<div class="logo-container">--}}
-                        {{--<div class="logo">--}}
-                            {{--<img src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive" width="60" height ="60" alt="Terra Quimbaya Logo">--}}
-                        {{--</div>--}}
+                <a href="{{ route('home') }}">
+                    <div class="logo-container">
+                        <div class="logo">
+                            <img src="{{ asset('img/logo.JPG') }}" class="img-raised img-responsive" alt="Terra Quimbaya Logo">
+                        </div>
                         {{--<div class="brand">--}}
                             {{--<strong>Terra Quimbaya</strong>--}}
                         {{--</div>--}}
-                    {{--</div>--}}
-                {{--</a>--}}
+                    </div>
+                </a>
             </div>
             <div class="collapse navbar-collapse" id="navbarNav1">
                 <ul class="nav navbar-nav navbar-right">
@@ -136,43 +134,6 @@
 
     <!--/.Navbar-->
 
-        {{--<footer class="footer">--}}
-            {{--<!--Footer Links-->--}}
-            {{--<div class="container">--}}
-                {{--<div class="content">--}}
-                    {{--<div class="row">--}}
-                        {{--<!--First column-->--}}
-                        {{--<div class="col-md-4">--}}
-                            {{--<h5 class="title">Terra Quimbaya</h5>--}}
-                            {{--<p>Descripción del proyecto.</p>--}}
-                        {{--</div>--}}
-                        {{--<!--/.First column-->--}}
-                        {{--<div class="center col-md-6">--}}
-                            {{--<ul>--}}
-                                {{--<li>--}}
-                                    {{--<a href="//www.utp.edu.co/" title="Universidad Tecnológica de Pereira">--}}
-                                        {{--<img src="{{asset('img/logo_utp.png')}}" height="62" alt="Escudo Universidad Tecnologica de Pereira">--}}
-                                    {{--</a>--}}
-                                    {{--<strong>Universidad Tecnológica de Pereira</strong>--}}
-                                {{--</li>--}}
-                                {{--<li>--}}
-                                    {{--<a href="//isc.utp.edu.co/" title="Ingeniería de Sistemas y Computación">--}}
-                                        {{--<img src="{{asset('img/logo_isc.png')}}" height="62" alt="Ingeniería de Sistemas y Computacion">--}}
-                                    {{--</a>--}}
-                                    {{--<strong>Ingeniería de Sistemas y Computación</strong>--}}
-                                {{--</li>--}}
-                            {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--<!--Copyright-->--}}
-                        {{--<p class="copyright pull-right">--}}
-                            {{--&copy; <script>document.write(new Date().getFullYear())</script> <a href="{{url('/')}}">Terra Quimbaya</a>--}}
-                        {{--</p>--}}
-                        {{--<!--/.Copyright-->--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<!--/.Footer Links-->--}}
-        {{--</footer>--}}
         <footer class="footer footer-big" style="text-align: center;">
             <div class="container">
                 <div class="content">
@@ -184,10 +145,10 @@
                                     <li><h5 class="title">Contáctanos</h5>
                                         <ul>
                                             <li style="display: block;">
-                                                <a target="_blank" href="https://www.facebook.com/YourCoffeeApp/" data-toggle="tooltip" data-placement="right" title="YourCoffee en Facebook"><i class="fa fa-fw fa-facebook-official"></i> YourCoffee</a>
+                                                <a href="mailto:terraquimbaya@gmail.com" data-toggle="tooltip" data-placement="right" title="E-mail Terra Quimbaya"><i class="fa fa-fw fa-envelope"></i> terraquimbaya@gmail.com</a>
                                             </li>
                                             <li style="display: block;">
-                                                <a target="_blank" href="https://twitter.com/YourCoffeeApp" data-toggle="tooltip" data-placement="right" title="YourCoffee en Twitter"><i class="fa fa-fw fa-twitter"></i> YourCoffee</a>
+                                                <a target="_blank" href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="Terra Quimbaya en Facebook"><i class="fa fa-fw fa-facebook-official"></i> Terra Quimbaya</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -197,25 +158,8 @@
                     </div>
                 </div>
                 <hr>
-                <!--<li>
-                    <a href="http://presentation.creative-tim.com">
-                       About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="http://blog.creative-tim.com">
-                       Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="http://www.creative-tim.com/license">
-                        Licenses
-                    </a>
-                </li>
-            </ul>
-        </nav> -->
                 <div class="copyright" style="display: inline-block; float: none;">
-                    &copy; 2017, por <a href="{{ url('/') }}">Your Coffee</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
                 </div>
             </div>
         </footer>
@@ -288,8 +232,4 @@
             });
         </script>
     @endif
-
-    {{--<script src="{{asset('assets-dashboard/js/material-kit/bootstrap-datepicker.js')}}" type="text/javascript"></script>--}}
-{{--    <script src="{{asset('assets-dashboard/js/material-kit/nouislider.min.js')}}" type="text/javascript"></script>--}}
-    {{--<script src="{{asset('assets-dashboard/js/material-dashboard/material-dashboard.js')}}"></script>--}}
 @endsection

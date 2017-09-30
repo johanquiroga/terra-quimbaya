@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-raised">
-                <div class="card-header" data-background-color="brown">
+                <div class="card-header" data-background-color="green-dark">
                     <h3 class="title text-center">Detalle de la compra #{{ $compra->idOrden }} del {{ $compra->fechaDeCompra->format('d/m/Y H:i') }}</h3>
                 </div>
                 <div class="card-content">

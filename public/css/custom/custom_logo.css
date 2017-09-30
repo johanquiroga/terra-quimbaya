@@ -1,0 +1,32 @@
+.logo-container .logo{
+    overflow: hidden;
+    border-radius: 10%;
+    border: 1px solid #333333;
+    width: 70px;
+    height: auto;
+    float: left;
+}
+
+.logo-container .brand{
+    font-size: 16px;
+    color: #FFFFFF;
+    line-height: 18px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 25px;
+    width: 70px;
+    height: 40px;
+    text-align: left;
+}
+.logo-container .brand-material{
+    font-size: 18px;
+    margin-top: 15px;
+    height: 25px;
+    width: auto;
+}
+.logo-container .logo img{
+    width: 100%;
+}
+.navbar-small .logo-container .brand{
+    color: #333333;
+}

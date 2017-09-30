@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" data-background-color="brown">
+                        <div class="card-header" data-background-color="green-dark">
                             <h4 class="title">Responder Solicitud</h4>
                             <p class="category">Llene los campos los campos necesarios</p>
                         </div>

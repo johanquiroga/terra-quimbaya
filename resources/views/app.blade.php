@@ -2,19 +2,19 @@
 <html lang="en">
 
 <head>
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106547709-2"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments)};
-        gtag('js', new Date());
+    {{--<!-- Global Site Tag (gtag.js) - Google Analytics -->--}}
+    {{--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106547709-2"></script>--}}
+    {{--<script>--}}
+        {{--window.dataLayer = window.dataLayer || [];--}}
+        {{--function gtag(){dataLayer.push(arguments)};--}}
+        {{--gtag('js', new Date());--}}
 
-        gtag('config', 'UA-106547709-2');
-    </script>
+        {{--gtag('config', 'UA-106547709-2');--}}
+    {{--</script>--}}
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="{{ asset('img/icon.png') }} ">
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
-    <title>@yield('title','YourCoffee')</title>
+    <title>@yield('title','Terra Quimbaya')</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <!-- Font Awesome -->

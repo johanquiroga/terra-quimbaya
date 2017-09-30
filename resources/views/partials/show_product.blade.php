@@ -13,7 +13,7 @@
     <!--Card content-->
     <div class="card-body">
         <!--Category & Title-->
-        <h5 class="small text-primary text-center"><i class="fa fa-fw fa-coffee"></i> Variedad de Café: {{$producto->variedadCafe->tipo}}</h5>
+        <h5 class="small text-center" style="color: #795548;"><i class="fa fa-fw fa-coffee"></i> Variedad de Café: {{$producto->variedadCafe->tipo}}</h5>
         <hr>
         <a href="{{ route('product::show',$producto->idPublicacion) }}">
             <h4 class="card-title text-center"><strong>{{$producto->nombre}}</strong></h4>

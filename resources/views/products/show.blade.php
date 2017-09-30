@@ -265,68 +265,70 @@
                 <div class="modal-body">
                     <form method="GET" action="{{ route('purchase::buy', $product->idPublicacion) }}">
                         <div class="row">
-                            <table id="purchase-table" class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="text-center">ID</th>
-                                    <th class="text-center">Producto</th>
-                                    <th class="text-center">Precio</th>
-                                    <th class="text-center">Cantidad</th>
-                                    <th class="text-center">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th class="text-center" id="id" scope="row">{{ $product->idPublicacion }}</th>
-                                    <td class="text-center" id="product">{{ $product->nombre }}</td>
-                                    <td class="text-center" id="price">{{money_format('%n', $product->precioEmpaque) }}</td>
-                                    <td class="text-center" id="cantidad">
-                                        <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="{{ $product->cantidad }}" class="form-control" required>
-                                    </td>
-                                    <td id="total" class="text-center"></td>
-                                </tr>
-                                <tr id="purchase-info">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-right">
-                                        <p>
-                                            <strong>Subtotal:</strong>
-                                        </p>
-                                        <p>
-                                            <strong>IVA:</strong>
-                                        </p>
-                                    </td>
-                                    <td id="total" class="text-center">
-                                        <p id="subtotal">
-
-                                        </p>
-                                        <p id="iva">
-
-                                        </p>
-                                    </td>
-                                </tr>
-                                <tr id="total-info">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td class="text-right">
-                                        <h4>
+                            <div class="table-responsive">
+                                <table id="purchase-table" class="table table-hover table-condensed">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Producto</th>
+                                        <th class="text-center">Precio</th>
+                                        <th class="text-center">Cantidad</th>
+                                        <th class="text-center">Total</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th class="text-center" id="id" scope="row">{{ $product->idPublicacion }}</th>
+                                        <td class="text-center" id="product">{{ $product->nombre }}</td>
+                                        <td class="text-center" id="price">{{money_format('%n', $product->precioEmpaque) }}</td>
+                                        <td class="text-center" id="cantidad">
+                                            <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="{{ $product->cantidad }}" class="form-control" required>
+                                        </td>
+                                        <td id="total" class="text-center"></td>
+                                    </tr>
+                                    <tr id="purchase-info">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">
                                             <p>
-                                                <strong>Total:</strong>
+                                                <strong>Subtotal:</strong>
                                             </p>
-                                        </h4>
-                                    </td>
-                                    <td id="total" class="text-center">
-                                        <h4>
-                                            <p id="total">
-                                                <strong> </strong>
+                                            <p>
+                                                <strong>IVA:</strong>
                                             </p>
-                                        </h4>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                        </td>
+                                        <td id="total" class="text-center">
+                                            <p id="subtotal">
+
+                                            </p>
+                                            <p id="iva">
+
+                                            </p>
+                                        </td>
+                                    </tr>
+                                    <tr id="total-info">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-right">
+                                            <h4>
+                                                <p>
+                                                    <strong>Total:</strong>
+                                                </p>
+                                            </h4>
+                                        </td>
+                                        <td id="total" class="text-center">
+                                            <h4>
+                                                <p id="total">
+                                                    <strong> </strong>
+                                                </p>
+                                            </h4>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="title">

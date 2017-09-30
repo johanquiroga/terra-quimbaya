@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="brown">
+                <div class="card-header" data-background-color="green-dark">
                     <h4 class="title">Modificar Calificación</h4>
                     <p class="category">Edite los campos los campos que desea actualizar</p>
                 </div>
@@ -24,7 +24,7 @@
                         @endif
                         <div class="footer text-center">
                             {{--<button type="button" class="btn btn-simple btn-primary btn-lg">Iniciar Sesión</button>--}}
-                            <button class="btn btn-round btn-primary pull-center">Actualizar calificación</button>
+                            <button class="btn btn-round btn-success pull-center">Actualizar calificación</button>
                             <a type="button" href="{{ route('purchase::show', $compra->idOrden) }}" class="btn btn-danger btn-round btn-wd pull-center">Cancelar</a>
                         </div>
                     </form>

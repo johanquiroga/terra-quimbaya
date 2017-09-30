@@ -9,7 +9,7 @@
 @endsection
 
 @section('main_content')
-    <div class="header header-filter" style="background-image: url('{{ asset('img/sidebar-5.jpg') }}'); background-size: cover; background-position: top center;">
+    <div class="header header-filter" style="background-image: url('{{asset("img/ImagenesTerra/DSCN7055.JPG")}}'); background-size: cover; background-position: top center;">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2 col-sm-6 col-sm-offset-3">

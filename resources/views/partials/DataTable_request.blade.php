@@ -112,7 +112,7 @@
                         render: function(data,type,set) {
                             var actions = '';
                             if(data === 'pregunta') {
-                                actions+= '<a href="{{ route('product::show',':ID') }}"><span class="label label-primary">Pregunta</span></a>';
+                                actions+= '<a href="{{ route('product::show',':ID') }}"><span class="label label-info">Pregunta</span></a>';
                                 actions = actions.replace(/:ID/g, set.requestable.product.idPublicacion);
                             } else if(data === 'devolucion') {
                                 actions += '<a href="{{ route('purchase::show',':ID') }}"><span class="label label-warning">Devolución</span></a>';

@@ -83,15 +83,15 @@
 <div class="container-fluid">
     <header>
         <div class="row" id="logo">
-            <img src="{{ asset('img/Logo_Cafe.svg') }}">
+            <img src="{{ asset('img/logo.JPG') }}" width="100" height="auto">
         </div>
         <div class="row">
             <h1>Informe #{{ isset($report) ? $report->id : ''}}</h1>
         </div>
         <div class="row">
             <div id="company" class="clearfix">
-                <div>Proyecto Café</div>
-                <div><a href="mailto:rootproyectocafe@gmail.com">rootproyectocafe@gmail.com</a></div>
+                <div>Terra Quimbaya</div>
+                <div><a href="mailto:terraquimbaya@gmail.com">terraquimbaya@gmail.com</a></div>
             </div>
             <div id="project" class="clearfix">
                 <div><span>ADMIN</span> {{ $user->nombres }} {{ $user->apellidos }}</div>

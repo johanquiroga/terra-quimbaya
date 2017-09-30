@@ -1,4 +1,4 @@
-<div class="header header-filter" style="background-image: url('{{asset("assets-dashboard/img/sidebar-5.jpg")}}');">
+<div class="header header-filter" style="background-image: url('{{asset("img/ImagenesTerra/DSCN7055.JPG")}}');">
     @if(isset($estado))
     <div class="container">
         <div class="row">

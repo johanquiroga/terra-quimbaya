@@ -33,7 +33,7 @@
 @section('body')
 
     <div class="wrapper">
-        <div class="sidebar" data-color="@yield('ColorBoard', 'brown')" data-image="{{ asset('img/sidebar-5.jpg') }}">
+        <div class="sidebar" data-color="@yield('ColorBoard', 'green-dark')" data-image="{{ asset('img/ImagenesTerra/DSCN7055.JPG') }}">
             <div class="sidebar-wrapper">
                 <div class="logo">
                     <a href="{{route('home')}}" class="simple-text" style="padding: 0">
@@ -42,7 +42,7 @@
                                  margin-left: 0px;
                                  margin-right: 10px;
                                  width: 50%;
-                                 text-align: center;" src="{{ asset('img/Logo_Cafe.svg') }}" class="img-rounded img-responsive img-raised" height="auto" alt="Your Coffee Logo"/>
+                                 text-align: center;" src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive img-raised" height="auto" alt="Your Coffee Logo"/>
                         </div>
                         {{--Terra Quimbaya--}}
                     </a>
@@ -62,7 +62,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href=""><strong>@yield('Page-title', 'Your Coffee')</strong></a>
+                        <a class="navbar-brand" href=""><strong>@yield('Page-title', 'Terra Quimbaya')</strong></a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -129,65 +129,25 @@
                 </div>
             </div>
 
-            {{--<footer class="footer">--}}
-                {{--<!--Footer Links-->--}}
-                {{--<div class="container-fluid">--}}
-                    {{--<div class="content">--}}
-                        {{--<div class="col-md-8">--}}
-                            {{--<ul>--}}
-                                {{--<li>--}}
-                                    {{--<a href="//www.utp.edu.co/" title="Universidad Tecnológica de Pereira">--}}
-                                        {{--<img src="{{asset('img/logo_utp.png')}}" height="62" alt="Escudo Universidad Tecnologica de Pereira">--}}
-                                        {{--Universidad Tecnológica de Pereira--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
-                                {{--<li>--}}
-                                    {{--<a href="//isc.utp.edu.co/" title="Ingeniería de Sistemas y Computación">--}}
-                                        {{--<img src="{{asset('img/logo_isc.png')}}" height="62" alt="Ingeniería de Sistemas y Computacion">--}}
-                                        {{--Ingeniería de Sistemas y Computación--}}
-                                    {{--</a>--}}
-                                {{--</li>--}}
-                            {{--</ul>--}}
-                        {{--</div>--}}
-                        {{--<!--Copyright-->--}}
-                        {{--<p class="copyright pull-right">--}}
-                            {{--&copy; <script>document.write(new Date().getFullYear())</script> <a href="{{url('/')}}">Your Coffee</a>--}}
-                        {{--</p>--}}
-                        {{--<!--/.Copyright-->--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<!--/.Footer Links-->--}}
-            {{--</footer>--}}
-
-            <footer class="footer" style="text-align: center;">
+            <footer class="footer">
+                <!--Footer Links-->
                 <div class="container-fluid">
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <nav class="pull-left">
-                                    <ul>
-                                        <!--First column-->
-                                        <li>
-                                            <ul class="list-inline">
-                                                <li>
-                                                    <a target="_blank" href="https://www.facebook.com/YourCoffeeApp/" data-toggle="tooltip" data-placement="top" title="YourCoffee en Facebook"><i class="fa fa-fw fa-facebook-official"></i> YourCoffee</a>
-                                                </li>
-                                                <li>
-                                                    <a target="_blank" href="https://twitter.com/YourCoffeeApp" data-toggle="tooltip" data-placement="top" title="YourCoffee en Twitter"><i class="fa fa-fw fa-twitter"></i> YourCoffee</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <div class="col-md-4 pull-right">
-                                <div class="copyrigh">
-                                    &copy; 2017, por <a href="{{ url('/') }}">Your Coffee</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {{--<nav class="pull-left">--}}
+                {{--<ul>--}}
+                {{--<li>--}}
+                {{--<a href="{{ url('/') }}">--}}
+                {{--Inicio--}}
+                {{--</a>--}}
+                {{--</li>--}}
+                {{--</ul>--}}
+                {{--</nav>--}}
+                <!--Copyright-->
+                    <p class="copyright pull-right">
+                        &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
+                    </p>
+                    <!--/.Copyright-->
                 </div>
+                <!--/.Footer Links-->
             </footer>
         </div>
     </div>

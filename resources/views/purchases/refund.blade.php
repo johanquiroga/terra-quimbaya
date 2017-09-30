@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header" data-background-color="brown">
+                <div class="card-header" data-background-color="green-dark">
                     <h4 class="title">Solicitar Devolución</h4>
                     <p class="category">Complete los campos que se le solicitan</p>
                 </div>
@@ -35,7 +35,7 @@
 
                         <div class="footer text-center">
                             {{--<button type="button" class="btn btn-simple btn-primary btn-lg">Iniciar Sesión</button>--}}
-                            <button class="btn btn-round btn-primary pull-center">Enviar</button>
+                            <button class="btn btn-round btn-success pull-center">Enviar</button>
                             <a href="{{ route('purchase::show', $compra->idOrden) }}" class="btn btn-danger btn-round btn-wd pull-center">Cancelar</a>
                         </div>
                     </form>

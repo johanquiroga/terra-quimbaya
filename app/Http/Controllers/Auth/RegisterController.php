@@ -45,7 +45,7 @@ class RegisterController extends Controller
 				$path = route('profile::profile');//'/administradores';
 				break;
 			case 'comprador':
-				$path = '/home';
+				$path = route('home');
 				break;
 			case 'admin':
 				$path = route('profile::profile');
