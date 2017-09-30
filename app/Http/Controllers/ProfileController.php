@@ -132,7 +132,7 @@ class ProfileController extends Controller
 	        $attributes = Atributo::all(['id', 'nombreAtributo']);
 
 	        foreach($attributes as $attribute) {
-		        $data->atributos()->updateExistingPivot($attribute->id, ['valorAtributo' => $request->input($attribute->nombreAtributo)]);
+		        $data->atributos()->updateExistingPivot($attribute->id, ['valorAtributo' => ($request->input($attribute->nombreAtributo) == "" ? null : $request->input($attribute->nombreAtributo))]);
 	        }
         }
 

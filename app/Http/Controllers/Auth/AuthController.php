@@ -54,9 +54,9 @@ class AuthController extends Controller
         $attrRules = array();
         $attributes = Atributo::all(['id', 'nombreAtributo', 'opciones']);
         foreach ($attributes as $attribute) {
-            $attrRules[$attribute->nombreAtributo] = 'required';
+            $attrRules[$attribute->nombreAtributo] = '';
             if(!is_null($attribute->opciones)) {
-                $attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . '|in:' . $attribute->opciones;
+                $attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . 'in:' . $attribute->opciones;
             }
         }
         return $attrRules;
@@ -192,7 +192,7 @@ class AuthController extends Controller
 
         $attributes = Atributo::all(['id', 'nombreAtributo']);
         foreach($attributes as $attribute) {
-            $comprador->atributos()->attach($attribute->id, ['valorAtributo' => $data[$attribute->nombreAtributo]]);
+            $comprador->atributos()->attach($attribute->id, ['valorAtributo' => ($data[$attribute->nombreAtributo == "" ? null : $data[$attribute->nombreAtributo]])]);
         }
 
         return Usuario::create([

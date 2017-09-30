@@ -65,6 +65,7 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ url('/') }}"><i class="fa fa-fw fa-home"></i>Inicio</a></li>
                             @if($notify)
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -98,9 +99,9 @@
                                     <i class="material-icons">person</i>
                                     <p class="hidden-lg hidden-md">Perfil</p>
                                 </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{{ route('profile::profile') }}"><i class="fa fa-fw fa-user"></i> {{$user->nombres}} {{$user->apellidos}}</a></li>
-                                <li><a href="{{route('logout')}}"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ route('profile::profile') }}"><i class="fa fa-fw fa-user"></i> {{$user->nombres}} {{$user->apellidos}}</a></li>
+                                    <li><a href="{{route('logout')}}"><i class="fa fa-fw fa-power-off"></i> Cerrar Sesión</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -130,15 +131,15 @@
             <footer class="footer">
                 <!--Footer Links-->
                 <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="{{ url('/') }}">
-                                    Inicio
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    {{--<nav class="pull-left">--}}
+                        {{--<ul>--}}
+                            {{--<li>--}}
+                                {{--<a href="{{ url('/') }}">--}}
+                                    {{--Inicio--}}
+                                {{--</a>--}}
+                            {{--</li>--}}
+                        {{--</ul>--}}
+                    {{--</nav>--}}
                     <!--Copyright-->
                     <p class="copyright pull-right">
                         &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>

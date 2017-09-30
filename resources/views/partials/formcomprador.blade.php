@@ -385,14 +385,14 @@
                                             <div class="form-group label-floating{{ $errors->has("'" . $attribute->nombreAtributo . "'") ? ' has-error' : '' }}">
                                                 <label class="control-label" id="{{ $attribute->nombreAtributo }}Label" for="{{ $attribute->nombreAtributo }}" data-error="Incorrecto">{{  ucwords(preg_replace('/(?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]|[0-9]{1,}/', ' $0', $attribute->nombreAtributo)) }}</label>
                                                 @if(!is_null($attribute->opciones))
-                                                    <select id="{{ $attribute->nombreAtributo }}" class="form-control validate" name="{{ $attribute->nombreAtributo }}" required aria-describedby="{{ $attribute->nombreAtributo }}Label">
+                                                    <select id="{{ $attribute->nombreAtributo }}" class="form-control validate" name="{{ $attribute->nombreAtributo }}" aria-describedby="{{ $attribute->nombreAtributo }}Label">
                                                         <option></option>
                                                         @foreach($attribute->opciones as $opcion)
                                                             <option value="{{ $opcion }}" {{(isset($usuario) ? $usuario->atributos[$attribute->id - 1]->pivot->valorAtributo : old($attribute->nombreAtributo)) == $opcion ? 'selected' : '' }}>{!! $opcion !!}</option>
                                                         @endforeach
                                                     </select>
                                                 @else
-                                                    <input id="{{ $attribute->nombreAtributo }}" type="text" class="form-control validate" name="{{ $attribute->nombreAtributo }}" value="{{ $usuario->atributos[$attribute->id - 1]->pivot->valorAtributo or old($attribute->nombreAtributo) }}" required aria-describedby="{{ $attribute->nombreAtributo }}Label" onkeypress="return soloLetras(event)">
+                                                    <input id="{{ $attribute->nombreAtributo }}" type="text" class="form-control validate" name="{{ $attribute->nombreAtributo }}" value="{{ $usuario->atributos[$attribute->id - 1]->pivot->valorAtributo or old($attribute->nombreAtributo) }}" aria-describedby="{{ $attribute->nombreAtributo }}Label" onkeypress="return soloLetras(event)">
                                                 @endif
                                                 {{--<input id="idTipoCafe" type="text" class="form-control validate" name="id" value="{{ $usuario->id or old("id") }}" required aria-describedby="idLabel" minlength="10" maxlength="10" onkeypress="return soloNumeros(event)">--}}
                                                 @if ($errors->has("'" . $attribute->nombreAtributo . "'"))

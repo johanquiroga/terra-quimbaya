@@ -62,9 +62,9 @@ class UpdateProfileRequest extends Request
 		$attrRules = array();
 		$attributes = Atributo::all(['id', 'nombreAtributo', 'opciones']);
 		foreach ($attributes as $attribute) {
-			$attrRules[$attribute->nombreAtributo] = 'required';
+			$attrRules[$attribute->nombreAtributo] = '';
 			if(!is_null($attribute->opciones)) {
-				$attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . '|in:' . $attribute->opciones;
+				$attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . 'in:' . $attribute->opciones;
 			}
 		}
 		//dd($attrRules);

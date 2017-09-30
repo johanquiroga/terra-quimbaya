@@ -54,6 +54,7 @@
                             {{--<button class="btn btn-white btn-round btn-just-icon" type="submit"><i class="material-icons">search</i></button>--}}
                         </div>
                     </form>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-fw fa-home"></i>Inicio</a></li>
                     @if(!$checked)
                         <li><a href="{{route('login')}}"><i class="fa fa-fw fa-sign-in"></i>Iniciar Sesión</a></li>
                         <li><a href="{{route('register')}}"><i class="fa fa-fw fa-user-circle"></i>Registrarse</a></li>
