@@ -14,7 +14,7 @@
         "barryvdh/laravel-snappy": "^0.3.3",
         "league/flysystem-aws-s3-v3": "~1.0",
         "fzaninotto/faker": "~1.4",
-        "doctrine/dbal": "^2.6"
+        "doctrine/dbal": "^2.5"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -51,6 +51,9 @@
         ]
     },
     "config": {
+        "platform": {
+            "php": "7.0"
+        },
         "preferred-install": "dist"
     }
 }
