@@ -11,17 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::post('/', 'LandingController@store');
-
-Route::get('/app', [
-	'uses' => 'LandingController@download',
-	'as' => 'app'
-]);
-
 /*
 |--------------------------------------------------------------------------
 | Home Routes
@@ -29,7 +18,7 @@ Route::get('/app', [
 |
  */
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Route::get('/search', 'HomeController@search');
 
 /*
