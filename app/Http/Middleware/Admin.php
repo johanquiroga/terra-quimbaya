@@ -43,8 +43,6 @@ class Admin
                     if ($request->ajax()) {
                         return response('Forbidden action.', 403);
                     } else {
-                        //Session::flash('message-error', 'Acción no autorizada');
-                        //return back()->with('error-message', 'Acción no autorizada');
                         abort('403', 'Forbidden action.');
                     }
                 }
@@ -52,8 +50,6 @@ class Admin
                 if ($request->ajax()) {
                     return response('Forbidden action.', 403);
                 } else {
-                    //Session::flash('message-error', 'Acción no autorizada');
-                    //return back()->with('error-message', 'Acción no autorizada');
                     abort('403', 'Forbidden action.');
                 }
             }

@@ -6,15 +6,12 @@ use App\Http\Requests\UpdateRequestRequest;
 use App\Models\Administrador;
 use App\Models\Comprador;
 use App\Models\EstadoCompra;
-use App\Models\Producto;
 use App\Models\Solicitud;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
-use Auth;
-use Pusher;
+use Pusher\Pusher as Pusher;
 use Yajra\Datatables\Facades\Datatables;
 
 class SolicitudController extends Controller
@@ -29,7 +26,7 @@ class SolicitudController extends Controller
         $board_user = Auth::user()->tipoUsuario;
         $type = 'request';
 
-        return view('solicitudes.index', compact('type', 'board_user'));
+        return view('requests.index', compact('type', 'board_user'));
     }
 
     /**
@@ -48,7 +45,7 @@ class SolicitudController extends Controller
 
         $type = 'request';
 
-        return view('solicitudes.index', compact('type', 'board_user'));
+        return view('requests.index', compact('type', 'board_user'));
     }
 
 
@@ -65,12 +62,12 @@ class SolicitudController extends Controller
         $solicitud->leidoAdmin = true;
         $solicitud->save();
 
-        $this->authorize($solicitud);
+        $this->authorize('answer', $solicitud);
 
         $board_user = Auth::user()->tipoUsuario;
         $type = 'request';
 
-        return view('solicitudes.answer', compact('type', 'board_user', 'solicitud'));
+        return view('requests.answer', compact('type', 'board_user', 'solicitud'));
     }
 
     /**
@@ -85,7 +82,7 @@ class SolicitudController extends Controller
     {
         $solicitud = Solicitud::findOrFail($id);
 
-        $this->authorize($solicitud);
+        $this->authorize('update', $solicitud);
 
         $solicitud->respuesta = $request->respuesta;
         $solicitud->estado = $request->estado;
@@ -193,16 +190,14 @@ class SolicitudController extends Controller
         );
         $channel = 'notifications_' . $question->comprador->id;
 
-        $options = array(
-            'cluster' => env("PUSHER_CLUSTER"),
-            'encrypted' => true
-        );
-        $pusher = new Pusher(
-            env("PUSHER_KEY"),
-            env("PUSHER_SECRET"),
-            env("PUSHER_APP_ID"),
-            $options
-        );
+	    $options = config('broadcasting.connections.pusher.options');
+
+	    $pusher = new Pusher(
+		    config('broadcasting.connections.pusher.key'),
+		    config('broadcasting.connections.pusher.secret'),
+		    config('broadcasting.connections.pusher.app_id'),
+		    $options
+	    );
         $pusher->trigger($channel, 'notifications', $notification);
     }
 }

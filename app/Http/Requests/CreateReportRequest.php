@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use Carbon\Carbon;
 
-class CreateReportRequest extends Request
+class CreateReportRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,12 +33,11 @@ class CreateReportRequest extends Request
 		    $tabla = "comprador";
 	    }
         return [
-        	//'type' => 'in:Preview,Submit',
 	        'fechaInicio' => 'required|date|before:tomorrow',
 	        'fechaCierre' => "required|date|before:tomorrow|after:$fechaInicio",
 	        'tipoUsuario' => 'required|in:Proveedores,Compradores',
 	        'usuarios' => 'required',
-	        'usuarios.*' => "exists:$tabla"
+	        'usuarios.*' => "exists:$tabla,id"
         ];
     }
 }

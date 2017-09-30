@@ -4,7 +4,7 @@
 @section('page', 'profile-page')
 
 @section('header')
-@include('headers.provider')
+@include('partials.headers.provider')
 @endsection
 
 @section('info-proveedor')
@@ -80,7 +80,9 @@
                     <div class="profile">
                         <div class="avatar">
                             <?php $foto = $provider->fotos->first(); ?>
-                            <img src="{{route('storage::get', $foto->path . $foto->nombreArchivo)}}" class="img-rounded img-responsive img-raised" alt="Circle Image">
+{{--                            <img src="{{route('storage::get', $foto->path . $foto->nombreArchivo)}}" class="img-rounded img-responsive img-raised" alt="Circle Image">--}}
+                                {{--<img src="{{ app()->isLocal() ? route('storage::get',"$foto->path/$foto->nombreArchivo") : \Storage::url("$foto->path/$foto->nombreArchivo") }}" class="img-rounded img-responsive img-raised" alt="{{ $provider->nombres }} Image">--}}
+                                <img src="{{ $foto->url }}" class="img-rounded img-responsive img-raised" alt="{{ $provider->nombres }} Image">
                         </div>
                         <div class="name">
                             <h3 class="title">{{ $provider->nombres }} {{ $provider->apellidos }}</h3>
@@ -146,7 +148,9 @@
                                                             <div class="carousel-inner">
                                                                 @foreach($provider->fotos as $index => $foto)
                                                                     <div class="item{{ $index == 0 ? ' active' : '' }}">
-                                                                        <img style="margin-bottom: 0;" src="{{route('storage::get', $foto->path . $foto->nombreArchivo) }}" alt="Imagen_{{$index}}">
+                                                                        {{--<img style="margin-bottom: 0;" src="{{ asset("storage/$foto->path/$foto->nombreArchivo") }}" alt="Imagen_{{$index}}">--}}
+                                                                        {{--<img style="margin-bottom: 0;" src="{{ app()->isLocal() ? route('storage::get',"$foto->path/$foto->nombreArchivo") : \Storage::url("$foto->path/$foto->nombreArchivo") }}" alt="Imagen_{{$index}}">--}}
+                                                                        <img style="margin-bottom: 0;" src="{{ $foto->url }}" alt="Imagen_{{$index}}">
                                                                     </div>
                                                                 @endforeach
                                                             </div>

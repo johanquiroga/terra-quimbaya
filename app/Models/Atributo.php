@@ -25,7 +25,7 @@ class Atributo extends Model
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['pivot'];
+	protected $hidden = ['created_at', 'updated_at', 'id', 'pivot.idProducto'];
 
     /**
      * Get the products that have the attribute.

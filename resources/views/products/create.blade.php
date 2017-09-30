@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+@extends('dashboard.dashboard')
 
-@include('layouts.' . $board_user . '.sidebar', [
+@include("dashboard.$board_user.sidebar", [
     'menuGestion'.ucfirst($type) => 'active',
 ])
 
@@ -21,7 +21,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header" data-background-color="green-dark">
+                        <div class="card-header" data-background-color="brown">
                             <h4 class="title">Crear Producto</h4>
                             <p class="category">Complete los campos para el registro</p>
                         </div>

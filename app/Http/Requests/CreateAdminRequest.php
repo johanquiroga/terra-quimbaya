@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAdminRequest extends Request
+class CreateAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,6 @@ class CreateAdminRequest extends Request
     public function rules()
     {
         return [
-//            ['id', 'nombres', 'apellidos', 'correoElectronico', 'contraseña', 'telefono', 'estado']
             'id' => ['required','min:8','max:10','unique:administrador,id,NULL,id,estado,1','regex:/^(\d{8}|\d{10})$/'],
             'nombres' => 'required|max:45|regex:/^[a-zA-ZÀ-ž][\sa-zA-ZÀ-ž]*$/',
             'apellidos' => 'required|max:45|regex:/^[a-zA-ZÀ-ž][\sa-zA-ZÀ-ž]*$/',

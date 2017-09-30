@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Atributo;
+use Illuminate\Support\Facades\Request;
 
-class UpdateProductRequest extends Request
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -47,7 +48,7 @@ class UpdateProductRequest extends Request
 	    $rules = [
 	    	'idProveedor' => 'required|exists:proveedor,id,estado,1',
 		    'idVariedadCafe' => 'required|exists:variedadCafe,id',
-		    'nombre' => 'required|unique:producto,nombre,'. $this->route('id') . ',idPublicacion,estado,1,idProveedor,'. \App\Http\Requests\Request::input('idProveedor'),
+		    'nombre' => 'required|unique:producto,nombre,'. $this->route('id') . ',idPublicacion,estado,1,idProveedor,'. Request::input('idProveedor'),
 		    'descripcion' => 'required|max:255',
 		    'cantidad' => 'required|integer|min:1',
 		    'precioEmpaque' => 'required|numeric|min:0',

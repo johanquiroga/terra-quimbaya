@@ -12,7 +12,6 @@ use App\Models\Usuario;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
@@ -33,9 +32,9 @@ class ProfileController extends Controller
 		        if(!is_null($attribute->opciones))
 			        $attribute->opciones = explode(",", $attribute->opciones);
 	        }
-	        return view('layouts.profile', compact('type', 'nivelEstudios', 'frecuenciaCompraCafe', 'attributes'));
+	        return view('dashboard.profile', compact('type', 'nivelEstudios', 'frecuenciaCompraCafe', 'attributes'));
         } else {
-	        return view('layouts.profile', compact('type'));
+	        return view('dashboard.profile', compact('type'));
         }
     }
 
@@ -132,7 +131,7 @@ class ProfileController extends Controller
 	        $attributes = Atributo::all(['id', 'nombreAtributo']);
 
 	        foreach($attributes as $attribute) {
-		        $data->atributos()->updateExistingPivot($attribute->id, ['valorAtributo' => ($request->input($attribute->nombreAtributo) == "" ? null : $request->input($attribute->nombreAtributo))]);
+		        $data->atributos()->updateExistingPivot($attribute->id, ['valorAtributo' => $request->input($attribute->nombreAtributo)]);
 	        }
         }
 

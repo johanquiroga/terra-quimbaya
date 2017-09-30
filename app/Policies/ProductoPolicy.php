@@ -54,7 +54,7 @@ class ProductoPolicy
 	 *
 	 * @return bool
 	 */
-	public function postQuestion(Usuario $user, Producto $product)
+	public function postQuestion(Usuario $user)
 	{
 		return $user->tipoUsuario === 'comprador';
 	}
@@ -67,7 +67,7 @@ class ProductoPolicy
 	 *
 	 * @return bool
 	 */
-	public function buy(Usuario $user, Producto $product)
+	public function buy(Usuario $user)
 	{
 		return $user->tipoUsuario === 'comprador';
 	}

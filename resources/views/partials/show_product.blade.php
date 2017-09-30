@@ -4,7 +4,8 @@
     <div class="card-image">
         <a href="{{ route('product::show',$producto->idPublicacion) }}">
             <?php $foto = $producto->fotos->first(); ?>
-            <img src="{{route('storage::get', $foto->path . $foto->nombreArchivo)}}" class="img-fluid img-responsive" alt="">
+            {{--<img src="{{ asset("storage/$foto->path/$foto->nombreArchivo") }}" class="img-fluid img-responsive" alt="">--}}
+                <img src="{{ $foto->url }}" class="img-fluid img-responsive" alt="">
         </a>
     </div>
     <!--/.Card image-->
@@ -12,7 +13,7 @@
     <!--Card content-->
     <div class="card-body">
         <!--Category & Title-->
-        <h5 class="small text-center" style="color: #795548;"><i class="fa fa-fw fa-coffee"></i> Variedad de Café: {{$producto->variedadCafe->tipo}}</h5>
+        <h5 class="small text-primary text-center"><i class="fa fa-fw fa-coffee"></i> Variedad de Café: {{$producto->variedadCafe->tipo}}</h5>
         <hr>
         <a href="{{ route('product::show',$producto->idPublicacion) }}">
             <h4 class="card-title text-center"><strong>{{$producto->nombre}}</strong></h4>

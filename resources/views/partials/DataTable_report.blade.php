@@ -22,7 +22,7 @@
                         data: 'admin',
                         name: 'admin.nombres',
                         render: function(data) {
-                            return data.nombres + ' ' + data.apellidos;
+                            return DOMPurify.sanitize(data.nombres + ' ' + data.apellidos);
                         }
                     },
                     {

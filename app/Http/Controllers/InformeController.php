@@ -8,16 +8,13 @@ use App\Models\Informe;
 use App\Models\Proveedor;
 use App\Models\Comprador;
 
-use PDF;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Facades\Datatables;
+use PDF;
 
 class InformeController extends Controller
 {
@@ -139,25 +136,6 @@ class InformeController extends Controller
 
         }
         else return redirect(route('report::index'));
-    }
-
-    /**
-     * Get the report and return the download.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function download($id)
-    {
-        $report = Informe::findOrFail($id);
-	    $file_name = "$report->id"."_".str_replace([":","-"," "],["","_","_"], $report->fechaGeneracion).".pdf";
-        //$path = storage_path('app/') . $report->path . $file_name;
-	    $path = Storage::files("reports/$file_name");
-	    dd($path);
-        $headers = array(
-	        'Content-Type' => 'application/pdf',
-        );
-        return response()->download($path, 'Informe'.$file_name, $headers);
     }
 
     /**

@@ -25,7 +25,7 @@ class Producto extends Model
 	 *
 	 * @var array
 	 */
-	protected $hidden = ['id'];
+	protected $hidden = ['id', 'idAdministrador', 'idProveedor'];
 
 	/**
 	 * Get the product's name.

@@ -2,67 +2,64 @@
 
 namespace App\Http\Controllers;
 
+use App\Miscelaneous;
 use App\Models\Atributo;
-use App\Models\Comprador;
 use App\Models\Producto;
 use App\Models\Proveedor;
 use App\Models\UbicacionFinca;
 use App\Models\VariedadCafe;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-
-use Auth;
-
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
-    {
-	    $min_price = Producto::estado()->min('precioEmpaque');
-	    $max_price = Producto::estado()->max('precioEmpaque');
+	use Miscelaneous;
 
-	    $variedad_cafe = VariedadCafe::all();
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index(Request $request)
+	{
+		$min_price = Producto::estado()->min('precioEmpaque');
+		$max_price = Producto::estado()->max('precioEmpaque');
 
-	    $ubicaciones = UbicacionFinca::all()->unique('departamento');
+		$variedad_cafe = VariedadCafe::all();
 
-	    $attributes = Atributo::all(['id', 'nombreAtributo', 'descripcionAtributo', 'opciones']);
-	    foreach ($attributes as $attribute) {
-		    if(!is_null($attribute->opciones))
-			    $attribute->opciones = explode(",", $attribute->opciones);
-	    }
+		$ubicaciones = UbicacionFinca::all()->unique('departamento');
 
-    	$products = Producto::estado();
+		$attributes = Atributo::all(['id', 'nombreAtributo', 'descripcionAtributo', 'opciones']);
+		foreach ($attributes as $attribute) {
+			if(!is_null($attribute->opciones))
+				$attribute->opciones = explode(",", $attribute->opciones);
+		}
 
-	    $queries = [];
-    	if(!empty($request->all())) {
+		$products = Producto::estado();
 
-    		if($request->has('variedadCafe')) {
-    			$queries['variedadCafe'] = $request->variedadCafe;
-    			$products->variedad($request->variedadCafe);
-		    }
+		$queries = [];
+		if(!empty($request->all())) {
 
-		    foreach ($attributes as $attribute) {
-    			if($request->has($attribute->nombreAtributo)) {
-				    $queries[$attribute->nombreAtributo] = $request->input($attribute->nombreAtributo);
-    				$products = $products->tieneAtributos($attribute->nombreAtributo, $request->input($attribute->nombreAtributo));
-			    }
-		    }
+			if($request->has('variedadCafe')) {
+				$queries['variedadCafe'] = $request->variedadCafe;
+				$products->variedad($request->variedadCafe);
+			}
 
-		    if($request->has('ubicacionFinca')) {
-			    $queries['ubicacionFinca'] = $request->ubicacionFinca;
-    			$products->ubicacion($request->ubicacionFinca);
-		    }
+			foreach ($attributes as $attribute) {
+				if($request->has($attribute->nombreAtributo)) {
+					$queries[$attribute->nombreAtributo] = $request->input($attribute->nombreAtributo);
+					$products = $products->tieneAtributos($attribute->nombreAtributo, $request->input($attribute->nombreAtributo));
+				}
+			}
 
-		    $products = $products->precio($request['price-left'], $request['price-right']);
-    		$queries['price-left'] = $request['price-left'];
-		    $queries['price-right'] = $request['price-right'];
-	    } /*else if(Auth::check()) {
+			if($request->has('ubicacionFinca')) {
+				$queries['ubicacionFinca'] = $request->ubicacionFinca;
+				$products->ubicacion($request->ubicacionFinca);
+			}
+
+			$products = $products->precio($request['price-left'], $request['price-right']);
+			$queries['price-left'] = $request['price-left'];
+			$queries['price-right'] = $request['price-right'];
+		} /*else if(Auth::check()) {
 		    $user = Auth::user();
     		if($user->tipoUsuario == 'comprador') {
     			$comprador = Comprador::find($user->idCC);
@@ -78,10 +75,17 @@ class HomeController extends Controller
 		    }
 	    }*/
 
-	    $products = $products->with('fotos', 'variedadCafe')->paginate(15, ['*'], 'page')->appends($queries);
+		$products = $products->with('fotos', 'variedadCafe')->paginate(15, ['*'], 'page')->appends($queries);
 
-	    return view('products', compact('products', 'min_price', 'max_price', 'variedad_cafe', 'attributes', 'ubicaciones'));
-    }
+		if(!$request->expectsJson()) {
+			return view('store',
+				compact('products', 'min_price', 'max_price', 'variedad_cafe', 'attributes', 'ubicaciones'));
+		} else {
+			$products = $products->toArray();
+			$products["data"] = $this->cleanArray($products["data"], ['idVariedadCafe', 'variedad_cafe.id', 'cantidad', 'estado', 'created_at', 'updated_at']);
+			return response()->json(compact('products', 'min_price', 'max_price', 'variedad_cafe', 'attributes', 'ubicaciones'));
+		}
+	}
 
 	/**
 	 * Display or return a listing of the resources that matches with the user query.
@@ -92,13 +96,15 @@ class HomeController extends Controller
 	{
 		$query = e($request->keyword);
 
-		if($request->ajax()) {
+		if($request->ajax() || $request->expectsJson()) {
 			if(!$query && $query == '')
 				return response()->json([], 400);
 
 			$products = Producto::estado()->nombre($query)->take(5)->with('fotos', 'proveedor')->get()->toArray();
+			$products = $this->cleanArray($products, ['proveedor.telefono', 'proveedor.idAdministrador', 'idVariedadCafe', 'descripcion', 'cantidad', 'precioEmpaque', 'calificacion', 'estado', 'created_at', 'updated_at', 'proveedor.estado', 'proveedor.created_at', 'proveedor.updated_at', 'proveedor.nombreFinca', 'proveedor.edadProveedor', 'proveedor.alturaFinca', 'proveedor.extensionFinca', 'proveedor.extensionLotes', 'proveedor.idDensidadSiembra', 'proveedor.añosCafetal', 'proveedor.idEdadUltimaZoca', 'proveedor.idTipoBeneficio', 'proveedor.idEcotopo', 'proveedor.nucleoFamiliar', 'proveedor.idNivelEstudios', 'proveedor.personasDependientesFinca']);
 
 			$providers = Proveedor::estado()->nombre($query)->take(5)->with('fotos')->get()->toArray();
+			$providers = $this->cleanArray($providers, ['telefono', 'idAdministrador', 'estado', 'created_at', 'updated_at','edadProveedor', 'alturaFinca', 'extensionFinca', 'extensionLotes', 'idDensidadSiembra', 'añosCafetal', 'idEdadUltimaZoca', 'idTipoBeneficio', 'idEcotopo', 'nucleoFamiliar', 'idNivelEstudios', 'personasDependientesFinca']);
 
 			$products = $this->appendValue($products, 'product', 'class');
 			$providers = $this->appendValue($providers, 'provider', 'class');
@@ -133,104 +139,5 @@ class HomeController extends Controller
 			return view('products', compact('products', 'min_price', 'max_price', 'variedad_cafe', 'attributes', 'ubicaciones'));
 		}
 
-    }
-
-	/**
-	 * Append the given type on element position in data.
-	 *
-	 * @param $data
-	 * @param $type
-	 * @param $element
-	 * @return mixed
-	 */
-	public function appendValue($data, $type, $element)
-	{
-		// operate on the item passed by reference, adding the element and type
-		foreach ($data as $key => & $item) {
-			$item[$element] = $type;
-		}
-		return $data;
 	}
-
-	/**
-	 * Append the 'url' information in data.
-	 *
-	 * @param $data
-	 * @param $prefix
-	 * @return mixed
-	 */
-	public function appendURL($data, $prefix)
-	{
-		// operate on the item passed by reference, adding the url based on id
-		foreach ($data as $key => & $item) {
-			$item['url'] = route($prefix, $item[($item['class'] == 'product') ? 'idPublicacion' : 'id']);
-		}
-		return $data;
-	}
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

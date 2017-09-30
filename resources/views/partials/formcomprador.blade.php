@@ -1,13 +1,13 @@
 @section('styles')
     @parent
     <!-- CSS Files -->
-    <link href="{{ asset('assets-wizard/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
-    <link href="{{ asset('custom-assets/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />
+    <link href="{{ asset('css/custom/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />
+    <link href="{{ asset('material-wizard/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
 @endsection
 
 <div class="col-sm-16">
     <div class="wizard-container">
-        <div class="wizard-card" data-color="primary" id="wizardProfile">
+        <div class="wizard-card" data-color="brown" id="wizardProfile">
             @if(isset($edit) and $edit)
                 <form role="form" action="{{ route('profile::update', $user->id) }}" method="POST">
             @else
@@ -451,13 +451,13 @@
     @parent
 
     <!--   Core JS Files   -->
-    <script src="{{ asset('assets-wizard/js/jquery.bootstrap.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('material-wizard/js/jquery.bootstrap.js')}}" type="text/javascript"></script>
 
     <!--  Plugin for the Wizard -->
-    <script src="{{ asset('assets-wizard/js/material-bootstrap-wizard.js')}}"></script>
+    <script src="{{ asset('material-wizard/js/material-bootstrap-wizard.js')}}"></script>
 
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-    <script src="{{ asset('assets-wizard/js/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('material-wizard/js/jquery.validate.min.js')}}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {

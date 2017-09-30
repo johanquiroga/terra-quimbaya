@@ -35,7 +35,7 @@
                     '<table class="table table-hover table-responsive no-footer">' +
                     '<tbody>';
 
-                attributes += '<tr role="row"><td><b>Descripción: </b></td><td>' + d.descripcion + '</td></tr>';
+                attributes += '<tr role="row"><td><b>Descripción: </b></td><td>' + DOMPurify.sanitize(d.descripcion) + '</td></tr>';
                 attributes += '<tr role="row"><td><b>Calificación: </b></td><td>' + d.calificacion + '</td></tr>';
                 attributes += '<tr role="row"><td colspan="2" align="center"><b>ATRIBUTOS</b></td></tr>';
 

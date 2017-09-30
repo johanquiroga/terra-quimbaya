@@ -27,6 +27,13 @@ class UbicacionFinca extends Model
      */
     public $timestamps = false;
 
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = ['id', 'idProveedor'];
+
     /**
      * Get the Provider's farm location.
      */

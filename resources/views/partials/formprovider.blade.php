@@ -4,14 +4,14 @@
     {{--<link href="{{ asset('assets-wizard/css/bootstrap.min.css')}}" rel="stylesheet" />--}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-theme/0.1.0-beta.10/select2-bootstrap.min.css" />
-    <link href="{{ asset('custom-assets/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />
-    <link href="{{ asset('assets-wizard/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
+    <link href="{{ asset('css/custom/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />
+    <link href="{{ asset('material-wizard/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />
 @endsection
 
 <div class="col-sm-16 ">
     <!--      Wizard container        -->
     <div class="wizard-container">
-        <div class="wizard-card" data-color="primary" id="wizardProfile">
+        <div class="wizard-card" data-color="brown" id="wizardProfile">
             @if ( ! empty($edit) and $edit)
                 <form role="form" action="{{ route($type.'::update', $data->id) }}" method="POST" enctype="multipart/form-data">
             @else
@@ -317,7 +317,7 @@
                                         <select id="idVariedadCafe" class="form-control validate" name="idVariedadCafe[]" required aria-describedby="idVariedadCafeLabel" multiple="multiple" style="width: 100%">
                                             <option></option>
                                             @foreach($tipos_cafe as $tipo)
-                                                <option value="{{ $tipo->id }}" {{ in_array($tipo->id, (isset($usuario) ? $usuario->variedadesCafe()->lists('id')->toArray() : (old('idVariedadCafe') ? old('idVariedadCafe'): []))) ? 'selected' : '' }}>{{ studly_case(strtolower($tipo->tipo)) }}</option>
+                                                <option value="{{ $tipo->id }}" {{ in_array($tipo->id, (isset($usuario) ? $usuario->variedadesCafe()->pluck('id')->toArray() : (old('idVariedadCafe') ? old('idVariedadCafe'): []))) ? 'selected' : '' }}>{{ studly_case(strtolower($tipo->tipo)) }}</option>
                                             @endforeach
                                         </select>
                                         @if ($errors->has('idVariedadCafe'))
@@ -563,13 +563,13 @@
     <!--   Core JS Files   -->
     {{--<script src="{{ asset('assets-wizard/js/jquery-2.2.4.min.js')}}" type="text/javascript"></script>--}}
     {{--<script src="{{ asset('assets-wizard/js/bootstrap.min.js')}}" type="text/javascript"></script>--}}
-    <script src="{{ asset('assets-wizard/js/jquery.bootstrap.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('material-wizard/js/jquery.bootstrap.js')}}" type="text/javascript"></script>
 
     <!--  Plugin for the Wizard -->
-    <script src="{{ asset('assets-wizard/js/material-bootstrap-wizard.js')}}"></script>
+    <script src="{{ asset('material-wizard/js/material-bootstrap-wizard.js')}}"></script>
 
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-    <script src="{{ asset('assets-wizard/js/jquery.validate.min.js')}}"></script>
+    <script src="{{ asset('material-wizard/js/jquery.validate.min.js')}}"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script type="text/javascript">

@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Informe #{{ isset($report) ? $report->id : ''}}</title>
-    <link href="{{asset('assets-dashboard/css/material-dashboard/bootstrap.min.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('fonts/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{ asset('css/style-report.css') }}" media="all" />
 	<?php setlocale(LC_TIME, 'es_CO.UTF-8'); ?>
 	<?php setlocale(LC_MONETARY, 'es_CO.UTF-8'); ?>
@@ -83,15 +83,15 @@
 <div class="container-fluid">
     <header>
         <div class="row" id="logo">
-            <img src="{{ asset('img/logo.JPG') }}" width="100" height="auto">
+            <img src="{{ asset('img/Logo_Cafe.svg') }}">
         </div>
         <div class="row">
             <h1>Informe #{{ isset($report) ? $report->id : ''}}</h1>
         </div>
         <div class="row">
             <div id="company" class="clearfix">
-                <div>Terra Quimbaya</div>
-                <div><a href="mailto:terraquimbaya@gmail.com">terraquimbaya@gmail.com</a></div>
+                <div>Proyecto Café</div>
+                <div><a href="mailto:rootproyectocafe@gmail.com">rootproyectocafe@gmail.com</a></div>
             </div>
             <div id="project" class="clearfix">
                 <div><span>ADMIN</span> {{ $user->nombres }} {{ $user->apellidos }}</div>
@@ -111,7 +111,10 @@
                         <a class="pull-left">
                             @if($usuario instanceof \App\Models\Proveedor)
                             <div class="avatar">
-                                <img height="120" width="120" class="media-object img-raised img-rounded" src="{{ route('storage::get', $usuario->fotos[0]->path . $usuario->fotos[0]->nombreArchivo) }}">
+	                            <?php $foto = $usuario->fotos->first(); ?>
+                                {{--<img height="120" width="120" class="media-object img-raised img-rounded img-responsive" src="{{ asset("storage/$foto->path/$foto->nombreArchivo") }}">--}}
+                                {{--<img height="120" width="120" class="media-object img-raised img-rounded img-responsive" src="{{ app()->isLocal() ? route('storage::get',"$foto->path/$foto->nombreArchivo") : \Storage::url("$foto->path/$foto->nombreArchivo") }}">--}}
+                                <img height="120" width="120" class="media-object img-raised img-rounded img-responsive" src="{{ $foto->url }}">
                             </div>
                             @else
                             <i class="fa fa-user fa-3x"></i>
@@ -262,8 +265,8 @@
     {{--</footer>--}}
 </div>
 </body>
-<script type="text/javascript" src="{{asset('assets-dashboard/js/jquery-3.1.0.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets-dashboard/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
 <script>
     Number.prototype.formatMoney = function(c, d, t){
         var n = this,

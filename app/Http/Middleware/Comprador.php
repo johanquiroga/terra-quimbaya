@@ -34,7 +34,7 @@ class Comprador
     public function handle($request, Closure $next)
     {
     	if($this->auth->user()->tipoUsuario != 'comprador') {
-		    if ($request->ajax()) {
+		    if ($request->ajax() || $request->expectsJson()) {
 			    return response('Forbidden action.', 403);
 		    } else {
 			    //Session::flash('message-error', 'Acción no autorizada');

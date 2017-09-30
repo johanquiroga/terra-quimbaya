@@ -4,14 +4,14 @@
 @section('page', 'landing-page')
 
 @section('header')
-@include('headers.product')
+@include('partials.headers.product')
 @endsection
 
 @section('styles')
     @parent
     {{--<link href="{{ asset('custom-assets/custom_material-bootstrap-wizard.css')}}" rel="stylesheet" />--}}
     {{--<link href="{{ asset('assets-wizard/css/material-bootstrap-wizard.css')}}" rel="stylesheet" />--}}
-    <link href="{{asset('custom-assets/custom_material-kit.css')}}" rel="stylesheet"/>
+    <link href="{{asset('css/custom/custom_material-kit.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('main_content')
@@ -43,7 +43,9 @@
                                         <div class="carousel-inner">
                                             @foreach($product->fotos as $index => $foto)
                                                 <div class="item{{ $index == 0 ? ' active' : '' }}">
-                                                    <img src="{{route('storage::get', $foto->path . $foto->nombreArchivo) }}" alt="Imagen_{{$index}}">
+                                                    {{--<img src="{{ asset("storage/$foto->path/$foto->nombreArchivo") }}" alt="Imagen_{{$index}}">--}}
+                                                    {{--<img src="{{ app()->isLocal() ? route('storage::get',"$foto->path/$foto->nombreArchivo") : \Storage::url("$foto->path/$foto->nombreArchivo") }}" alt="Imagen_{{$index}}">--}}
+                                                    <img src="{{ $foto->url }}" alt="Imagen_{{$index}}">
                                                 </div>
                                             @endforeach
                                         </div>
@@ -73,7 +75,7 @@
                             <h2><strong>{{ $product->nombre }} </strong></h2>
 		                    <?php setlocale(LC_MONETARY, 'es_CO.UTF-8'); ?>
                             <h6><input id="calificacion" name="calificacion" value="{{ $product->calificacion }}" class="rating kv-ltr-theme-fa-star rating-loading" data-theme="krajee-fa" data-display-only="true" data-size="xs"></h6>
-                            <h4><span><strong>{{money_format('%n', $product->precioEmpaque) }}</strong></span></h4> {{--<span class="grey-text"><small><s>$89</s></small></span></h4>--}}
+                            <h4><span class="green-text"><strong>{{money_format('%n', $product->precioEmpaque) }}</strong></span></h4> {{--<span class="grey-text"><small><s>$89</s></small></span></h4>--}}
 
                             <!--Accordion wrapper-->
                                 <div class="accordion" id="accordion" role="tablist" aria-multiselectable="true">
@@ -120,7 +122,7 @@
                                 </div>
                                 <!--/.Accordion wrapper-->
                                 <br>
-                                @can('buy', $product)
+                                @can('buy', App\Models\Producto::class)
                                 <!-- Add to Cart -->
                                 <div class="card-block">
                                     <div class="row">
@@ -172,8 +174,9 @@
                                     </div>
                                 </div>
                             @endforelse
-                            {!! $questions->render() !!}
-                            @can('postQuestion', $product)
+                            {{--{!! $questions->render() !!}--}}
+                                {{ $questions->links() }}
+                            @can('postQuestion', App\Models\Producto::class)
                             @if($product->estado)
                             <!-- The Current User Can Update The Post -->
                             <h3 class="title text-center">Haz tu pregunta</h3>
@@ -227,7 +230,8 @@
                                     </div>
                                 </div>
                         @endforelse
-                        {!! $reviews->render() !!}
+                        {{--{!! $reviews->render() !!}--}}
+                            {{ $reviews->links() }}
                         </div>
                     </div>
                 </section>
@@ -244,7 +248,7 @@
     @parent
     <!-- Cart Modal -->
 
-    @can('buy', $product)
+    @can('buy', App\Models\Producto::class)
     @if($product->cantidad > 0)
     <div class="modal fade cart-modal" id="buy-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -261,70 +265,68 @@
                 <div class="modal-body">
                     <form method="GET" action="{{ route('purchase::buy', $product->idPublicacion) }}">
                         <div class="row">
-                            <div class="table-responsive">
-                                <table id="purchase-table" class="table table-hover table-condensed">
-                                    <thead>
-                                    <tr>
-                                        <th class="text-center">ID</th>
-                                        <th class="text-center">Producto</th>
-                                        <th class="text-center">Precio</th>
-                                        <th class="text-center">Cantidad</th>
-                                        <th class="text-center">Total</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <th class="text-center" id="id" scope="row">{{ $product->idPublicacion }}</th>
-                                        <td class="text-center" id="product">{{ $product->nombre }}</td>
-                                        <td class="text-center" id="price">{{money_format('%n', $product->precioEmpaque) }}</td>
-                                        <td class="text-center" id="cantidad">
-                                            <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="{{ $product->cantidad }}" class="form-control" required>
-                                        </td>
-                                        <td id="total" class="text-center"></td>
-                                    </tr>
-                                    <tr id="purchase-info">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-right">
-                                            <p>
-                                                <strong>Subtotal:</strong>
-                                            </p>
-                                            <p>
-                                                <strong>IVA:</strong>
-                                            </p>
-                                        </td>
-                                        <td id="total" class="text-center">
-                                            <p id="subtotal">
+                            <table id="purchase-table" class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">ID</th>
+                                    <th class="text-center">Producto</th>
+                                    <th class="text-center">Precio</th>
+                                    <th class="text-center">Cantidad</th>
+                                    <th class="text-center">Total</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th class="text-center" id="id" scope="row">{{ $product->idPublicacion }}</th>
+                                    <td class="text-center" id="product">{{ $product->nombre }}</td>
+                                    <td class="text-center" id="price">{{money_format('%n', $product->precioEmpaque) }}</td>
+                                    <td class="text-center" id="cantidad">
+                                        <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="{{ $product->cantidad }}" class="form-control" required>
+                                    </td>
+                                    <td id="total" class="text-center"></td>
+                                </tr>
+                                <tr id="purchase-info">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right">
+                                        <p>
+                                            <strong>Subtotal:</strong>
+                                        </p>
+                                        <p>
+                                            <strong>IVA:</strong>
+                                        </p>
+                                    </td>
+                                    <td id="total" class="text-center">
+                                        <p id="subtotal">
 
-                                            </p>
-                                            <p id="iva">
+                                        </p>
+                                        <p id="iva">
 
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr id="total-info">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="text-right">
+                                        <h4>
+                                            <p>
+                                                <strong>Total:</strong>
                                             </p>
-                                        </td>
-                                    </tr>
-                                    <tr id="total-info">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td class="text-right">
-                                            <h4>
-                                                <p>
-                                                    <strong>Total:</strong>
-                                                </p>
-                                            </h4>
-                                        </td>
-                                        <td id="total" class="text-center">
-                                            <h4>
-                                                <p id="total">
-                                                    <strong> </strong>
-                                                </p>
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                        </h4>
+                                    </td>
+                                    <td id="total" class="text-center">
+                                        <h4>
+                                            <p id="total">
+                                                <strong> </strong>
+                                            </p>
+                                        </h4>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div class="row">
                             <div class="title">
@@ -333,8 +335,8 @@
                             <div class="col-sm-10 col-sm-offset-1">
                                 @foreach($metodos_pago as $metodo)
                                     <div class="col-sm-4 text-center">
-                                        <div class="choice {{ $metodo->metodo == 'Contraentrega' ? 'active' : '' }}" data-toggle="wizard-radio" rel="tooltip" title="" data-original-title="{{ $metodo->metodo == 'Contraentrega' ? 'Selecciona esta opción para realizar pagos contraentrega. Solamente disponible para compradores en Pereira o Dosquebradas, Risaralda.' : 'Selecciona esta opción para realizar pagos con tarjetas o transferencias bancarias.' }}">
-                                            <input type="radio" name="metodoPago" value="{{ $metodo->id }}" required {{ ($metodo->metodo == 'Contraentrega') ? (($user->direccion->ciudad == 'PEREIRA' || $user->direccion->ciudad == 'DOSQUEBRADAS') ? '' : 'disabled') : 'disabled' }}>
+                                        <div class="choice {{ $metodo->metodo == 'Contraentrega' ? 'active' : '' }}" data-toggle="wizard-radio" rel="tooltip" title="" data-original-title="{{ $metodo->metodo == 'Contraentrega' ? 'Selecciona esta opción para realizar pagos contraentrega. Solamente disponible para compradores en Pereira o Dosquebradas, Risaralda.' : 'Selecciona esta opción para realizar pagos con tarjetas o transferencias bancarias. Disponible pronto!' }}">
+                                            <input type="radio" name="metodoPago" value="{{ $metodo->id }}" required {{ ($metodo->metodo == 'Contraentrega') ? (($user->direccion->ciudad == 'PEREIRA' || $user->direccion->ciudad == 'DOSQUEBRADAS') ? 'checked' : 'disabled') : 'disabled' }}>
                                             <div class="icon">
                                                 @if($metodo->metodo == 'Contraentrega')
                                                     <i class="material-icons">attach_money</i>
@@ -374,9 +376,6 @@
 
 @section('scripts')
     @parent
-
-    <!--  Notifications Plugin    -->
-    <script src="{{ asset('assets-dashboard/js/material-dashboard/bootstrap-notify.js') }}"></script>
 
     {{--<script src="{{ asset('assets-wizard/js/jquery.bootstrap.js')}}" type="text/javascript"></script>--}}
 
@@ -432,7 +431,5 @@
                 $(this).closest('table').find('tbody tr#total-info td#total h4 p#total strong').text('$ '+(total + iva).formatMoney(2, ',', '.'));
             });
         });
-    </script>
-    <script>
     </script>
 @endsection

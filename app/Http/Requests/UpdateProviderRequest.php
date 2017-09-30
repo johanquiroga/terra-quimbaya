@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProviderRequest extends Request
+class UpdateProviderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,8 +31,8 @@ class UpdateProviderRequest extends Request
             'edadProveedor' => 'required|greater_equal:18|less_equal:150|regex:/^\d{1,3}$/',
             'telefono' => 'required|min:7|max:10|regex:/^\d{7,10}$/',
             'alturaFinca' => 'required|greater_equal:1000|less_equal:4000|regex:/^\d{4,4}$/',
-            'extensionFinca' => 'required|numeric|digits_between:1,10',
-            'extensionLotes' => 'required|numeric|digits_between:1,10',
+            'extensionFinca' => 'required|numeric|between:1,10',
+            'extensionLotes' => 'required|numeric|between:1,10',
             'idDensidadSiembra' => 'required|exists:densidadSiembra,id',
             'añosCafetal' => 'required|integer|greater_equal:1|less_equal:80',
             'idEdadUltimaZoca' => 'required|exists:edadUltimaZoca,id',
@@ -43,7 +43,7 @@ class UpdateProviderRequest extends Request
             'personasDependientesFinca' => 'required|integer|digits_between:1,3',
             'idVariedadCafe' => 'required',
             'idVariedadCafe.*' => 'exists:variedadCafe,id',
-            'fotos' => 'required',
+            //'fotos' => 'required',
             'fotos.*' => 'image',
             'vereda' => 'required|max:45',
             'corregimiento' => 'required|max:45',

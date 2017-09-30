@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+@extends('dashboard.dashboard')
 
-@include('layouts.' . $board_user . '.sidebar', [
+@include("dashboard.$board_user.sidebar", [
     'menuGestion'.ucfirst($type) => 'active',
 ])
 
@@ -10,7 +10,7 @@
 
                 <div class="col-md-12">
                     <div class="card card-raised">
-                        <div class="card-header" data-background-color="green-dark">
+                        <div class="card-header" data-background-color="brown">
                             <h3 class="title">Informes</h3>
                             <div class="text-right">
                                 <a class="btn btn-success btn-round" href="{{ route('report::create') }}">

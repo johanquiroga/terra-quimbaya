@@ -33,20 +33,20 @@
         $(function() {
             function format ( d ) {
 
-                console.log(d);
+//                console.log(d);
                 var attributes =
                     '<table class="table table-hover table-responsive no-footer">' +
                     '<tbody>';
 
                 @if($user instanceof App\Models\Administrador)
-                attributes += '<tr role="row"><td><b>Comprador: </b></td><td><p><strong>Nombre Completo:</strong> ' + d.comprador.nombres + ' ' + d.comprador.apellidos + '</p>'
+                attributes += '<tr role="row"><td><b>Comprador: </b></td><td><p><strong>Nombre Completo:</strong> ' + DOMPurify.sanitize(d.comprador.nombres) + ' ' + DOMPurify.sanitize(d.comprador.apellidos) + '</p>'
                     + '<p><strong>Cédula:</strong> ' + d.comprador.id + '</p>'
                     + '<p><strong>Correo Electrónico:</strong> ' + d.comprador.correoElectronico + '</p>'
                     + '<p><strong>Telefono:</strong> ' + d.comprador.telefono + '</p>'
                     + '</td></tr>';
 
                 @elseif($user instanceof App\Models\Comprador)
-                    attributes += '<tr role="row"><td><b>Administrador encargado: </b></td><td><p><strong>Nombre Completo:</strong> ' + d.admin.nombres + ' ' + d.admin.apellidos + '</p>'
+                    attributes += '<tr role="row"><td><b>Administrador encargado: </b></td><td><p><strong>Nombre Completo:</strong> ' + DOMPurify.sanitize(d.admin.nombres) + ' ' + DOMPurify.sanitize(d.admin.apellidos) + '</p>'
                     + '<p><strong>Correo Electrónico:</strong> ' + d.admin.correoElectronico + '</p>'
                     + '<p><strong>Telefono:</strong> ' + d.admin.telefono + '</p>'
                     + '</td></tr>';
@@ -56,8 +56,8 @@
                     attributes += '<tr role="row"><td><b>Dirección comprador: </b></td><td>' + "<strong>Pais:</strong> " + d.comprador.direccion.pais + "<p>"
                         + "<p><strong>Departamento:</strong> " + d.comprador.direccion.departamento + "</p>"
                         + "<p><strong>Municipio:</strong> " + d.comprador.direccion.ciudad + "</p>"
-                        + "<p><strong>Dirección:</strong> " + d.comprador.direccion.direccion + "</p>"
-                        + "<p><strong>Dirección Auxiliar:</strong> " + d.comprador.direccion.direccionAuxiliar + "</p>"
+                        + "<p><strong>Dirección:</strong> " + DOMPurify.sanitize(d.comprador.direccion.direccion) + "</p>"
+                        + "<p><strong>Dirección Auxiliar:</strong> " + DOMPurify.sanitize(d.comprador.direccion.direccionAuxiliar) + "</p>"
                     '</td></tr>';
 
                     var compra;
@@ -112,7 +112,7 @@
                         render: function(data,type,set) {
                             var actions = '';
                             if(data === 'pregunta') {
-                                actions+= '<a href="{{ route('product::show',':ID') }}"><span class="label label-info">Pregunta</span></a>';
+                                actions+= '<a href="{{ route('product::show',':ID') }}"><span class="label label-primary">Pregunta</span></a>';
                                 actions = actions.replace(/:ID/g, set.requestable.product.idPublicacion);
                             } else if(data === 'devolucion') {
                                 actions += '<a href="{{ route('purchase::show',':ID') }}"><span class="label label-warning">Devolución</span></a>';
@@ -131,7 +131,7 @@
                         data: 'comprador',
                         name: 'comprador.nombres',
                         render: function(data) {
-                            return data.nombres + ' ' + data.apellidos;
+                            return DOMPurify.sanitize(data.nombres + ' ' + data.apellidos);
                         }
                     },
                     @elseif($user instanceof App\Models\Comprador)
@@ -139,12 +139,24 @@
                         data: 'admin',
                         name: 'admin.nombres',
                         render: function(data) {
-                            return data.nombres + ' ' + data.apellidos;
+                            return DOMPurify.sanitize(data.nombres + ' ' + data.apellidos);
                         }
                     },
                     @endif
-                    { data: 'mensaje', name: 'mensaje' },
-                    { data: 'respuesta', name: 'respuesta' },
+                    {
+                        data: 'mensaje',
+                        name: 'mensaje',
+                        render: function (data) {
+                            return DOMPurify.sanitize(data);
+                        }
+                    },
+                    {
+                        data: 'respuesta',
+                        name: 'respuesta',
+                        render: function (data) {
+                            return DOMPurify.sanitize(data);
+                        }
+                    },
                     { data: 'estado', name: 'estado' },
                     { data: 'created_at', name: 'created_at'},
                     @can('answerIndex', App\Models\Solicitud::class)

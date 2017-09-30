@@ -6,12 +6,8 @@ use App\Http\Requests\CreateAdminRequest;
 use App\Http\Requests\DestroyAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 use App\Models\Administrador;
-use App\Models\Root;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
-use Gate;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -31,7 +27,7 @@ class AdministradorController extends Controller
 
         $admins = Administrador::estado()->get(['nombres', 'apellidos', 'id']);
 
-        return view('gestion_usuarios.visualizar_usuario', compact('type','board_user', 'admins'));
+        return view('users.index', compact('type','board_user', 'admins'));
     }
 
     /**
@@ -44,7 +40,7 @@ class AdministradorController extends Controller
         $board_user = Auth::user()->tipoUsuario;
         $type = 'admin';
 
-        return view('gestion_usuarios.crear_usuario', compact('type','board_user'));
+        return view('users.create', compact('type','board_user'));
     }
 
     /**
@@ -78,7 +74,7 @@ class AdministradorController extends Controller
             'tipoUsuario' => 'admin'
         ]);
 
-        return Redirect::to('admins')
+        return Redirect::to(route('admin::index'))
             ->with('message-success', 'Usuario creado satisfactoriamente');
     }
 
@@ -107,12 +103,12 @@ class AdministradorController extends Controller
             return Redirect::route('admin::index');
         }
 
-	    $this->authorize($data);
+	    $this->authorize('edit', $data);
 
         $board_user = Auth::user()->tipoUsuario;
         $type = 'admin';
 
-        return view('gestion_usuarios.editar_usuario', compact('type','board_user', 'data'));
+        return view('users.edit', compact('type','board_user', 'data'));
     }
 
     /**
@@ -126,7 +122,7 @@ class AdministradorController extends Controller
     {
         $data = Administrador::findOrFail($id);
 
-	    $this->authorize($data);
+	    $this->authorize('update', $data);
 
         if (empty($request['contraseña'])){
             $request['contraseña'] = $data['contraseña'];
@@ -142,7 +138,7 @@ class AdministradorController extends Controller
 		    $usuario['password'] = $request['contraseña'];
 		    $usuario->save();
 
-        	$data->fill($request->all());
+		    $data->fill($request->all());
 		    $data->save();
 	    } else {
 		    $data->fill($request->all());
@@ -183,7 +179,7 @@ class AdministradorController extends Controller
 	    $n_admin = Administrador::findOrFail($request->n_admin);
 	    $usuario = Usuario::where('email', $admin->correoElectronico)->firstOrFail();
 
-	    $this->authorize($admin);
+	    $this->authorize('destroy', $admin);
 
 	    $admin->estado = 0;
 

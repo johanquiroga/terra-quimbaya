@@ -1,6 +1,6 @@
-@extends('layouts.dashboard')
+@extends('dashboard.dashboard')
 
-@include('layouts.' . $board_user . '.sidebar', [
+@include("dashboard.$board_user.sidebar", [
     'menuGestion'.ucfirst($type) => 'active',
 ])
 
@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-raised">
-                <div class="card-header" data-background-color="green-dark">
+                <div class="card-header" data-background-color="brown">
                     <h3 class="title text-center">Detalle de la compra #{{ $compra->idOrden }} del {{ $compra->fechaDeCompra->format('d/m/Y H:i') }}</h3>
                 </div>
                 <div class="card-content">
@@ -42,7 +42,10 @@
                                     <div class="media">
                                         <a class="pull-left" href="{{ route('product::show', $compra->product->idPublicacion) }}">
                                             <div class="avatar">
-                                                <img height="60" width="60" class="media-object img-raised img-rounded" src="{{ route('storage::get', $compra->product->fotos[0]->path . $compra->product->fotos[0]->nombreArchivo) }}">
+	                                            <?php $foto = $compra->product->fotos->first(); ?>
+                                                {{--<img height="60" width="60" class="media-object img-raised img-rounded img-responsive" src="{{ asset("storage/$foto->path/$foto->nombreArchivo") }}">--}}
+                                                {{--<img height="60" width="60" class="media-object img-raised img-rounded img-responsive" src="{{ route('storage::get',"$foto->path/$foto->nombreArchivo") }}">--}}
+                                                <img height="60" width="60" class="media-object img-raised img-rounded img-responsive" src="{{ $foto->url }}">
                                             </div>
                                         </a>
                                         <div class="media-body">
@@ -66,7 +69,10 @@
                                     <div class="media">
                                         <a class="pull-left" href="{{ route('provider::show', $compra->product->proveedor->id) }}">
                                             <div class="avatar">
-                                                <img height="60" width="60" class="media-object img-raised img-rounded" src="{{ route('storage::get', $compra->product->proveedor->fotos[0]->path . $compra->product->proveedor->fotos[0]->nombreArchivo) }}">
+	                                            <?php $foto = $compra->product->proveedor->fotos->first(); ?>
+                                                {{--<img height="60" width="60" class="media-object img-raised img-rounded img-responsive" src="{{ asset("storage/$foto->path/$foto->nombreArchivo") }}">--}}
+                                                {{--<img height="60" width="60" class="media-object img-raised img-rounded img-responsive" src="{{ route('storage::get',"$foto->path/$foto->nombreArchivo") }}">--}}
+                                                <img height="60" width="60" class="media-object img-raised img-rounded img-responsive" src="{{ $foto->url }}">
                                             </div>
                                         </a>
                                         <div class="media-body">

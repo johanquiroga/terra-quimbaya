@@ -25,7 +25,7 @@ class Comprador extends Model
      *
      * @var array
      */
-    protected $hidden = ['contraseña'];
+    protected $hidden = ['contraseña', 'created_at', 'updated_at'];
 
     /**
      * Indicates if the IDs are auto-incrementing.

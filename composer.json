@@ -5,55 +5,62 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-        "laravel/framework": "5.1.*",
-        "yajra/laravel-datatables-oracle": "^6.0",
-        "pusher/pusher-php-server": "^2.6",
-        "h4cc/wkhtmltopdf-amd64": "0.12.x",
-        "h4cc/wkhtmltoimage-amd64": "0.12.x",
-        "barryvdh/laravel-snappy": "^0.3.3",
-        "league/flysystem-aws-s3-v3": "~1.0",
+        "php": ">=7.0.0",
+        "barryvdh/laravel-snappy": "^0.4.0",
+        "doctrine/dbal": "^2.5",
+        "fideloper/proxy": "~3.3",
         "fzaninotto/faker": "~1.4",
-        "doctrine/dbal": "^2.5"
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "league/flysystem-aws-s3-v3": "~1.0",
+        "pusher/pusher-php-server": "~3.0",
+        "yajra/laravel-datatables-oracle": "^6.0"
     },
     "require-dev": {
+        "filp/whoops": "~2.0",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1"
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database/seeds",
+            "database/factories"
         ],
         "psr-4": {
             "App\\": "app/"
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "php artisan key:generate"
+            "@php artisan key:generate"
         ],
-        "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
-        ],
-        "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover"
         ]
     },
     "config": {
         "platform": {
             "php": "7.0"
         },
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateProviderRequest;
 use App\Http\Requests\DestroyProviderRequest;
 use App\Http\Requests\UpdateProviderRequest;
+use App\Miscelaneous;
 use App\Models\Administrador;
 use App\Models\DensidadSiembra;
 use App\Models\Ecotopo;
@@ -15,20 +16,20 @@ use App\Models\Proveedor;
 use App\Models\TipoBeneficio;
 use App\Models\UbicacionFinca;
 use App\Models\VariedadCafe;
-use function foo\func;
-use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+
 use Carbon\Carbon;
 use Yajra\Datatables\Facades\Datatables;
 
 class ProveedorController extends Controller
 {
+	use Miscelaneous;
+
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +40,7 @@ class ProveedorController extends Controller
         $board_user = Auth::user()->tipoUsuario;
         $type = 'provider';
 
-        return view('gestion_usuarios.visualizar_usuario', compact('type','board_user'));
+        return view('users.index', compact('type','board_user'));
     }
 
     /**
@@ -60,7 +61,7 @@ class ProveedorController extends Controller
 	    $tipos_cafe = VariedadCafe::all();
 	    $pais = 'COLOMBIA';
 
-        return view('gestion_usuarios.crear_usuario', compact(
+        return view('users.create', compact(
             'type','board_user', 'pais', 'densidadSiembra', 'edadUltimaZoca',
                 'tipoBeneficio', 'ecotopo', 'nivelEstudios', 'tipos_cafe'));
     }
@@ -211,17 +212,35 @@ class ProveedorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $provider = Proveedor::findOrFail($id);
         $provider->load([
             'fotos',
 	        'productos' => function($query) {
         	    $query->estado();
+        	    $query->with(['variedadCafe', 'fotos']);
 	        },
-        ])->get();
+	        'variedadesCafe',
+	        'densidadSiembra',
+	        'edadUltimaZoca',
+	        'tipoBeneficio',
+	        'ecotopo',
+        ]);
 
-        return view('providers.show', compact('provider'));
+	    if(!$request->expectsJson()) {
+	    	return view('providers.show', compact('provider'));
+	    } else {
+		    $provider = $provider->toArray();
+		    $provider = $this->cleanArray(array($provider), ['telefono', 'created_at', 'updated_at', 'estado',
+			    'idDensidadSiembra', 'idEdadUltimaZoca', 'idTipoBeneficio', 'idEcotopo', 'nucleoFamiliar',
+			    'idNivelEstudios', 'personasDependientesFinca', 'idAdministrador', 'densidad_siembra.id',
+			    'edad_ultima_zoca.id', 'tipo_beneficio.id', 'ecotopo.id']);
+		    $provider = $provider[0];
+		    $provider["productos"] = $this->cleanArray($provider["productos"], ['estado', 'created_at', 'updated_at', 'idVariedadCafe']);
+		    $provider["fotos"] = $this->cleanArray($provider["fotos"], ['id']);
+		    return response()->json(compact('provider'));
+	    }
     }
 
     /**
@@ -234,13 +253,13 @@ class ProveedorController extends Controller
     {
         $data = Proveedor::find($id);
 
-	    //dd($data->variedadesCafe()->lists('id')->toArray());
+        //dd($data->variedadesCafe()->pluck('id')->toArray());
 
         if(is_null($data)){
-            return Redirect::route('provider::index');
+            return redirect(route('provider::index'));
         }
 
-	    $this->authorize($data);
+	    $this->authorize('edit', $data);
 
         $board_user = Auth::user()->tipoUsuario;
         $type = 'provider';
@@ -253,7 +272,7 @@ class ProveedorController extends Controller
 	    $tipos_cafe = VariedadCafe::all();
 	    $pais = 'COLOMBIA';
 
-        return view('gestion_usuarios/editar_usuario', compact(
+        return view('users.edit', compact(
             'type','board_user', 'data', 'densidadSiembra',
                 'edadUltimaZoca','tipoBeneficio', 'ecotopo', 'nivelEstudios', 'tipos_cafe', 'pais'));
     }
@@ -269,7 +288,7 @@ class ProveedorController extends Controller
     {
         $provider = Proveedor::findOrFail($id);
 
-	    $this->authorize($provider);
+	    $this->authorize('update', $provider);
 
 	    $provider->update([
             'id' => $request->id,
@@ -317,12 +336,14 @@ class ProveedorController extends Controller
 
         $provider->variedadesCafe()->sync($request->idVariedadCafe);
 
-	    if(!(count($request->fotos) == 1 && is_null($request->fotos[0]))) {
-	    	$this->deletePhotos($provider);
-		    $this->savePhotos($provider, $request->fotos);
+	    if($request->hasFile('fotos')) {
+	    	if(!(count($request->fotos) == 1 && is_null($request->fotos[0]))) {
+			    $this->deletePhotos($provider);
+			    $this->savePhotos($provider, $request->fotos);
+		    }
 	    }
 
-        return Redirect::to(route('provider::index'))
+        return redirect(route('provider::index'))
             ->with('message-success', 'Modificación realizada con éxito');
     }
 
@@ -334,13 +355,13 @@ class ProveedorController extends Controller
 	 */
 	private function savePhotos(Proveedor $provider, array $fotos)
 	{
-		$path = 'img/providers/'.$provider->id.'/';
+		$path = 'providers/'.$provider->id;
 		foreach ($fotos as $index => $foto) {
 			if($foto->isValid()) {
 				$file_name = $provider->id."_".str_replace([":","-"," "],["","_","_"], Carbon::now()->toDateTimeString()).'_'.$index.'.'.$foto->guessExtension();
 				//dd($file_name);
 				//$foto->move(public_path() . "/" . $path, $file_name);
-				Storage::put("$path/$file_name", File::get($foto));
+				Storage::put("$path/$file_name", File::get($foto), 'public');
 				$provider->fotos()->save(
 					new FotoProveedor([
 						'nombreArchivo' => $file_name,
@@ -379,7 +400,7 @@ class ProveedorController extends Controller
 	{
 		$provider = Proveedor::findOrFail($request->id);
 
-		$this->authorize($provider);
+		$this->authorize('destroy', $provider);
 
 		$provider->estado = 0;
 

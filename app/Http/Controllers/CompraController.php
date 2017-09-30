@@ -16,11 +16,9 @@ use App\Models\Solicitud;
 use App\Models\TipoSolicitud;
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Pusher;
+use Pusher\Pusher as Pusher;
 use Faker\Factory as Faker;
 
 class CompraController extends Controller
@@ -62,7 +60,6 @@ class CompraController extends Controller
 	 */
 	public function buy(CreatePurchaseRequest $request, $id)
 	{
-		//$cantidad = $request->cantidad;
 		$metodo_pago = MetodoPago::findOrFail($request->metodoPago);
 		$product = Producto::estado()->where('idPublicacion', $id)->firstOrFail();
 		if($product->cantidad == 0) {
@@ -88,7 +85,7 @@ class CompraController extends Controller
     public function review(CreateReviewRequest $request, $id)
     {
 	    $compra = Compra::where('idOrden', $id)->firstOrFail();
-	    $this->authorize($compra);
+	    $this->authorize('review', $compra);
 
 	    $calificacion = new CalificacionProducto([
 	    	'calificacion' => floatval($request->calificacion),
@@ -115,7 +112,7 @@ class CompraController extends Controller
 	public function editReview($id)
 	{
 		$compra = Compra::where('idOrden', $id)->firstOrFail();
-		$this->authorize($compra);
+		$this->authorize('editReview', $compra);
 
 		$board_user = Auth::user()->tipoUsuario;
 		$type = 'request';
@@ -135,7 +132,7 @@ class CompraController extends Controller
 	public function updateReview(CreateReviewRequest $request, $id)
 	{
 		$compra = Compra::where('idOrden', $id)->firstOrFail();
-		$this->authorize($compra);
+		$this->authorize('updateReview', $compra);
 
 		$calificacion = $compra->calificacion;
 		$calificacion->calificacion = floatval($request->calificacion);
@@ -179,7 +176,7 @@ class CompraController extends Controller
 	        'calificacion',
         ]);
 
-        $this->authorize($compra);
+        $this->authorize('show', $compra);
 
 	    $board_user = Auth::user()->tipoUsuario;
 	    $type = 'request';
@@ -191,7 +188,7 @@ class CompraController extends Controller
 	public function refund($id)
 	{
 		$compra = Compra::where('idOrden', $id)->firstOrFail()->load('estadoCompra');
-		$this->authorize($compra);
+		$this->authorize('refund', $compra);
 
 		$board_user = Auth::user()->tipoUsuario;
 		$type = 'request';
@@ -202,7 +199,7 @@ class CompraController extends Controller
 	public function sendRefund(CreateRefundRequest $request, $id)
 	{
 		$compra = Compra::where('idOrden', $id)->firstOrFail()->load('estadoCompra');
-		$this->authorize($compra);
+		$this->authorize('sendRefund', $compra);
 
 		$devolucion = new Devolucion([
 			'mensaje' => $request->mensaje,
@@ -245,7 +242,7 @@ class CompraController extends Controller
 			'metodoPago'
 		]);
 
-		$this->authorize($compra);
+		$this->authorize('response', $compra);
 
 		$estadoTx = null;
 		$TX_VALUE = null;
@@ -254,7 +251,7 @@ class CompraController extends Controller
 
 		if(!empty($request->all())) {
 			//$data = $request->all();
-			$ApiKey = env("PAYU_KEY", '4Vj8eK4rloUd272L48hsrarnUA');
+			$ApiKey = config('services.payu.key');
 			$merchant_id = $request->merchantId;
 			$referenceCode = $request->referenceCode;
 			$reference_pol = $request->reference_pol;
@@ -312,7 +309,7 @@ class CompraController extends Controller
         log::info('New post request to ' . $id. ' with state_pol '.$request->state_pol);
 		$compra = Compra::where('idOrden', $id)->firstOrFail();
 
-		$ApiKey = env("PAYU_KEY", '4Vj8eK4rloUd272L48hsrarnUA');
+		$ApiKey = config('services.payu.key');
 		$merchant_id = $request->merchant_id;
 		$reference_sale = $request->reference_sale;
 		$reference_pol = $request->reference_pol;
@@ -420,7 +417,6 @@ class CompraController extends Controller
 		$solicitud->tipoSolicitud()->associate($tipo_solicitud);
 		$solicitud->comprador()->associate($comprador);
 		$solicitud->admin()->associate($product->admin);
-		$solicitud->save();
 
 		$compra->requests()->save($solicitud);
 
@@ -459,8 +455,8 @@ class CompraController extends Controller
 	public function buyExterno(Request $request, Producto $product, Comprador $comprador, MetodoPago $metodoPago)
 	{
 		$cantidad = $request->cantidad;
-		$ApiKey = env("PAYU_KEY", '4Vj8eK4rloUd272L48hsrarnUA');
-		$merchantId = env("PAYU_MERCHANT_ID", '508029');
+		$ApiKey = config('services.payu.key');
+		$merchantId = config('services.payu.merchant');
 		$amount = $product->precioEmpaque * $cantidad;
 		$description = 'Compra de ' . $cantidad . ' unidad(es) del producto "' . $product->nombre .'" por parte del comprador ' . $comprador->nombres . ' ' . $comprador->apellidos . '.';
 		$buyerFullName = $comprador->nombres . ' ' . $comprador->apellidos;
@@ -501,7 +497,6 @@ class CompraController extends Controller
 		$solicitud->tipoSolicitud()->associate($tipo_solicitud);
 		$solicitud->comprador()->associate($comprador);
 		$solicitud->admin()->associate($product->admin);
-		$solicitud->save();
 
 		$compra->requests()->save($solicitud);
 
@@ -536,14 +531,12 @@ class CompraController extends Controller
         );
         $channel = 'notifications_' . $question->admin->id;
 
-        $options = array(
-            'cluster' => env("PUSHER_CLUSTER"),
-            'encrypted' => true
-        );
+        $options = config('broadcasting.connections.pusher.options');
+
         $pusher = new Pusher(
-            env("PUSHER_KEY"),
-            env("PUSHER_SECRET"),
-            env("PUSHER_APP_ID"),
+            config('broadcasting.connections.pusher.key'),
+            config('broadcasting.connections.pusher.secret'),
+            config('broadcasting.connections.pusher.app_id'),
             $options
         );
         $pusher->trigger($channel, 'notifications', $notification);
@@ -567,14 +560,12 @@ class CompraController extends Controller
 		);
 		$channel = 'notifications_' . $request->admin->id;
 
-		$options = array(
-			'cluster' => env("PUSHER_CLUSTER"),
-			'encrypted' => true
-		);
+		$options = config('broadcasting.connections.pusher.options');
+
 		$pusher = new Pusher(
-			env("PUSHER_KEY"),
-			env("PUSHER_SECRET"),
-			env("PUSHER_APP_ID"),
+			config('broadcasting.connections.pusher.key'),
+			config('broadcasting.connections.pusher.secret'),
+			config('broadcasting.connections.pusher.app_id'),
 			$options
 		);
 		$pusher->trigger($channel, 'notifications', $notification);

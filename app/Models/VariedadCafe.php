@@ -21,6 +21,13 @@ class VariedadCafe extends Model
 	protected $fillable = ['tipo'];
 
 	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = ['id', 'pivot'];
+
+	/**
 	 * Indicates if the model should be timestamped.
 	 *
 	 * @var bool

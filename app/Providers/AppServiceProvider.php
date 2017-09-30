@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Validator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+use Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,9 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+	    Schema::defaultStringLength(191);
+
 	    Validator::extend('greater_equal', function($attribute, $value, $parameters, $validator) {
 		    $min = $parameters[0];
-	    	return $value >= $min;
+		    return $value >= $min;
 	    });
 	    Validator::extend('less_equal', function($attribute, $value, $parameters, $validator) {
 		    $min = $parameters[0];

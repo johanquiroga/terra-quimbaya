@@ -27,6 +27,13 @@ class DireccionResidencia extends Model
      */
     public $timestamps = false;
 
+	/**
+	 * The attributes excluded from the model's JSON form.
+	 *
+	 * @var array
+	 */
+	protected $hidden = ['id', 'idComprador'];
+
     /**
      * Get the user that owns the address.
      */

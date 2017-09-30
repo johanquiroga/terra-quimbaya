@@ -70,7 +70,7 @@
                     <small class="text-danger"><strong>{{ $errors->first('contraseña') }}</strong></small>
                 @endif
             </div>
-            <small id="passwordHelp" class="text-muted">Tu contraseña debe ser de por lo menos de 8 caracteres, incluyendo mayúsculas y números.</small>
+            <small id="passwordHelp" class="text-muted"><strong>Tu contraseña debe ser de por lo menos de 8 caracteres, incluyendo mayúsculas y números.</strong></small>
         </div>
     </div>
     @if(isset($edit))

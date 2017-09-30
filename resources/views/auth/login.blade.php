@@ -4,11 +4,11 @@
 
 @section('styles')
     @parent
-    <link href="{{asset('custom-assets/custom_material-kit.css')}}" rel="stylesheet"/>
+    <link href="{{asset('css/custom/custom_material-kit.css')}}" rel="stylesheet"/>
 @endsection
 
     @section('main_content')
-    <div class="header header-filter" style="background-image: url('{{asset("img/ImagenesTerra/DSCN7055.JPG")}}'); background-size: cover; background-position: center center;">
+    <div class="header header-filter" style="background-image: url('{{ asset('img/sidebar-5.jpg') }}'); background-size: cover; background-position: top center;">
     <!--Form with header-->
     <div class="container">
         <div class="row">
@@ -47,7 +47,7 @@
                                         <small class="text-danger"><strong>{{ $errors->first('password') }}</strong></small>
                                     @endif
                                 </div>
-                                <small class=text-muted"><a href="{{  url('/password/email') }}">¿Olvidaste tu contraseña?</a></small>
+                                <small class=text-muted"><a href="{{  url('/password/reset') }}">¿Olvidaste tu contraseña?</a></small>
                             </div>
 
                             <div class="checkbox">

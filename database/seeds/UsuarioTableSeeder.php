@@ -20,15 +20,15 @@ class UsuarioTableSeeder extends Seeder
                 'tipoUsuario' => 'root'
             ]);
         }
-        /*if (\App\Models\Administrador::all()->isEmpty()) {
-            factory(\App\Models\Administrador::class, 100)->create()->each(function(\App\Models\Administrador $admin) {
-                \App\Models\Usuario::create([
-                    'idCC'        => $admin->id,
-                    'email'       => $admin->correoElectronico,
-                    'password'    => $admin->contraseña,
-                    'tipoUsuario' => 'admin'
-                ]);
-            });
-        }*/
+        //if (\App\Models\Administrador::all()->isEmpty()) {
+        //    factory(\App\Models\Administrador::class, 100)->create()->each(function(\App\Models\Administrador $admin) {
+        //        \App\Models\Usuario::create([
+        //            'idCC'        => $admin->id,
+        //            'email'       => $admin->correoElectronico,
+        //            'password'    => $admin->contraseña,
+        //            'tipoUsuario' => 'admin'
+        //        ]);
+        //    });
+        //}
     }
 }

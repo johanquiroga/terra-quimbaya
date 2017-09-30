@@ -3,7 +3,7 @@
 @section('page', 'landing-page')
 
 @section('header')
-    @include('headers.generic', ['estado' => $compra->estadoCompra->estado])
+    @include('partials.headers.generic', ['estado' => $compra->estadoCompra->estado])
 @endsection
 
 <?php setlocale(LC_MONETARY, 'es_CO.UTF-8'); ?>

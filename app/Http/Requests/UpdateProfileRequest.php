@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Atributo;
 use Illuminate\Support\Facades\Auth;
 
-class UpdateProfileRequest extends Request
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +31,7 @@ class UpdateProfileRequest extends Request
             'apellidos' => 'required|max:45|regex:/^[a-zA-ZÀ-ž][\sa-zA-ZÀ-ž]*$/',
             'correoElectronico' => 'required|email|max:45|unique:usuario,email,' . $this->route('id') . ',idCC|' .
                 'unique:root,correoElectronico,'. $this->route('id'),
-            'contraseña' => 'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'
+            'contraseña' => 'nullable|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/'
         ];
     }
 
@@ -48,7 +48,7 @@ class UpdateProfileRequest extends Request
             'apellidos' => 'required|max:45|regex:/^[a-zA-ZÀ-ž][\sa-zA-ZÀ-ž]*$/',
             'correoElectronico' => 'required|email|max:45|unique:usuario,email,' . $this->route('id') . ',idCC|' .
                 'unique:administrador,correoElectronico,'. $this->route('id'),
-            'contraseña' => 'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            'contraseña' => 'nullable|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             'telefono' => 'required|min:7|max:10|regex:/^\d{7,10}$/'
         ];
     }
@@ -62,9 +62,9 @@ class UpdateProfileRequest extends Request
 		$attrRules = array();
 		$attributes = Atributo::all(['id', 'nombreAtributo', 'opciones']);
 		foreach ($attributes as $attribute) {
-			$attrRules[$attribute->nombreAtributo] = '';
+			$attrRules[$attribute->nombreAtributo] = 'nullable';
 			if(!is_null($attribute->opciones)) {
-				$attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . 'in:' . $attribute->opciones;
+				$attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . '|in:' . $attribute->opciones;
 			}
 		}
 		//dd($attrRules);
@@ -84,7 +84,7 @@ class UpdateProfileRequest extends Request
             'apellidos' => 'required|max:45|regex:/^[a-zA-ZÀ-ž][\sa-zA-ZÀ-ž]*$/',
             'correoElectronico' => 'required|email|max:45|unique:usuario,email,' . $this->route('id') . ',idCC|' .
                 'unique:comprador,correoElectronico,'. $this->route('id'),
-            'contraseña' => 'confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            'contraseña' => 'nullable|confirmed|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             'telefono' => 'required|min:7|max:10|regex:/^\d{7,10}$/',
             'idFrecuenciaCompraCafe' => 'required|exists:frecuenciaCompraCafe,id',
             'idNivelEstudios' => 'required|exists:nivelEstudios,id',

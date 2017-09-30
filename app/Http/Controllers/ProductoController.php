@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateQuestionRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Miscelaneous;
 use App\Models\Administrador;
 use App\Models\FotoProducto;
 use App\Models\MetodoPago;
@@ -16,19 +17,19 @@ use App\Models\Solicitud;
 use App\Models\TipoSolicitud;
 use App\Models\VariedadCafe;
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-use Pusher;
+use Pusher\Pusher as Pusher;
 use Yajra\Datatables\Facades\Datatables;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
 
 class ProductoController extends Controller
 {
+	use Miscelaneous;
+
     /**
      * Display a listing of the resource.
      *
@@ -128,7 +129,7 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
     	$product = Producto::where('idPublicacion', $id)->firstOrFail();
 
@@ -142,7 +143,23 @@ class ProductoController extends Controller
 	    $reviews = $product->calificaciones()->with(['compra.comprador'])->paginate(5, ['*'], 'calificaciones');
     	$metodos_pago = MetodoPago::all();
 
-        return view('products.show', compact('product', 'questions', 'metodos_pago', 'reviews'));
+	    if(!$request->expectsJson()) {
+		    return view('products.show', compact('product', 'questions', 'metodos_pago', 'reviews'));
+	    } else {
+	    	$product->load('admin');
+		    $product = $product->toArray();
+		    $product = $this->cleanArray(array($product), ['estado', 'created_at', 'updated_at', 'idVariedadCafe', 'variedad_cafe.id', 'proveedor.telefono', 'proveedor.idAdministrador', 'proveedor.estado', 'proveedor.created_at', 'proveedor.updated_at', 'proveedor.nombreFinca', 'proveedor.edadProveedor', 'proveedor.alturaFinca', 'proveedor.extensionFinca', 'proveedor.extensionLotes', 'proveedor.idDensidadSiembra', 'proveedor.añosCafetal', 'proveedor.idEdadUltimaZoca', 'proveedor.idTipoBeneficio', 'proveedor.idEcotopo', 'proveedor.nucleoFamiliar', 'proveedor.idNivelEstudios', 'proveedor.personasDependientesFinca', 'admin.id', 'admin.telefono', 'admin.estado']);
+		    $product = $product[0];
+		    $product["atributos"] = $this->cleanArray($product["atributos"], ['descripcionAtributo', 'opciones', 'pivot.idProducto', 'pivot.idAtributo']);
+		    $product["fotos"] = $this->cleanArray($product["fotos"], ['id']);
+
+		    $questions = $questions->toArray();
+		    $questions["data"] = $this->cleanArray($questions["data"], ['id', 'idComprador', 'buyer.id', 'buyer.correoElectronico', 'buyer.telefono', 'buyer.estado', 'buyer.idFrecuenciaCompraCafe', 'buyer.idNivelEstudios']);
+
+		    $reviews = $reviews->toArray();
+		    $reviews["data"] = $this->cleanArray($reviews["data"], ['id', 'idProducto', 'updated_at', 'compra.idComprador', 'compra.cantidad', 'compra.valorTotal', 'compra.idOrden', 'compra.fechaDeCompra', 'compra.idMetodoPago', 'compra.idEstadoCompra', 'compra.comprador.id', 'compra.comprador.correoElectronico', 'compra.comprador.telefono', 'compra.comprador.idFrecuenciaCompraCafe', 'compra.comprador.idNivelEstudios', 'compra.comprador.estado']);
+		    return response()->json(compact('product', 'questions', 'metodos_pago', 'reviews'));
+	    }
     }
 
     /**
@@ -159,7 +176,7 @@ class ProductoController extends Controller
 		    return redirect(route('product::index'));
 	    }
 
-	    $this->authorize($data);
+	    $this->authorize('edit', $data);
 
 	    $board_user = Auth::user()->tipoUsuario;
 	    $type = 'product';
@@ -189,7 +206,7 @@ class ProductoController extends Controller
     {
 	    $product = Producto::where('idPublicacion', $id)->firstOrFail();
 
-	    $this->authorize($product);
+	    $this->authorize('update', $product);
 
 	    $product->update([
 		    'nombre' => $request->nombre,
@@ -220,9 +237,11 @@ class ProductoController extends Controller
 
 	    $product->save();
 
-	    if(!(count($request->fotos) == 1 && is_null($request->fotos[0]))) {
-		    $this->deletePhotos($product);
-		    $this->savePhotos($product, $request->fotos);
+	    if($request->hasFile('fotos')) {
+	    	if(!(count($request->fotos) == 1 && is_null($request->fotos[0]))) {
+			    $this->deletePhotos($product);
+			    $this->savePhotos($product, $request->fotos);
+		    }
 	    }
 
 	    return redirect(route('product::index'))->with('message-success', 'Modificación realizada con éxito');
@@ -236,13 +255,13 @@ class ProductoController extends Controller
 	 */
 	private function savePhotos(Producto $product, array $fotos)
 	{
-		$path = 'img/products/'.$product->idPublicacion.'/';
+		$path = 'products/'.$product->idPublicacion;
 		foreach ($fotos as $index => $foto) {
 			if($foto->isValid()) {
 				$file_name = $product->idPublicacion."_".str_replace([":","-"," "],["","_","_"], Carbon::now()->toDateTimeString()).'_'.$index.'.'.$foto->guessExtension();
 				//dd($file_name);
 				//$foto->move(public_path() . "/" . $path, $file_name);
-				Storage::put("$path/$file_name", File::get($foto));
+				Storage::put("$path/$file_name", File::get($foto), 'public');
 				$product->fotos()->save(
 					new FotoProducto([
 						'nombreArchivo' => $file_name,
@@ -281,7 +300,7 @@ class ProductoController extends Controller
 	{
 		$product = Producto::where('idPublicacion', $request->id)->firstOrFail();
 
-		$this->authorize($product);
+		$this->authorize('destroy', $product);
 
 		$product->estado = 0;
 
@@ -368,16 +387,14 @@ class ProductoController extends Controller
         );
         $channel = 'notifications_' . $question->admin->id;
 
-        $options = array(
-            'cluster' => env("PUSHER_CLUSTER"),
-            'encrypted' => true
-        );
-        $pusher = new Pusher(
-            env("PUSHER_KEY"),
-            env("PUSHER_SECRET"),
-            env("PUSHER_APP_ID"),
-            $options
-        );
+	    $options = config('broadcasting.connections.pusher.options');
+
+	    $pusher = new Pusher(
+		    config('broadcasting.connections.pusher.key'),
+		    config('broadcasting.connections.pusher.secret'),
+		    config('broadcasting.connections.pusher.app_id'),
+		    $options
+	    );
         $pusher->trigger($channel, 'notifications', $notification);
     }
 }
