@@ -67,6 +67,6 @@ class LoginController extends Controller
 
 		$request->session()->invalidate();
 
-		return redirect('/home');
+		return redirect(route('home'));
 	}
 }
