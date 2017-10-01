@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <img style="max-width: 50%; height: auto; filter: brightness(100); overflow: hidden; margin: 0 auto;" src="{{ asset('img/icon.png') }}" class="img img-responsive">
+                <img style="max-width: 75%; height: auto; filter: brightness(100); overflow: hidden; margin: 0 auto;" src="{{ asset('img/icon.png') }}" class="img img-responsive">
                 {{--<div class="embed-responsive embed-responsive-4by3">--}}
                 {{--<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/qDUwsxlTlbI" allowfullscreen></iframe>--}}
                 {{--</div>--}}

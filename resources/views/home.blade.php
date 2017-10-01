@@ -145,7 +145,7 @@
                                     <li><h5 class="title">Contáctanos</h5>
                                         <ul>
                                             <li style="display: block;">
-                                                <a href="mailto:terraquimbaya@gmail.com" data-toggle="tooltip" data-placement="right" title="E-mail Terra Quimbaya"><i class="fa fa-fw fa-envelope"></i> terraquimbaya@gmail.com</a>
+                                                <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail Terra Quimbaya"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
                                             </li>
                                             <li style="display: block;">
                                                 <a target="_blank" href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="Terra Quimbaya en Facebook"><i class="fa fa-fw fa-facebook-official"></i> Terra Quimbaya</a>

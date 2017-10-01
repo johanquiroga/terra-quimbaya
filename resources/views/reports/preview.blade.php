@@ -91,7 +91,7 @@
         <div class="row">
             <div id="company" class="clearfix">
                 <div>Terra Quimbaya</div>
-                <div><a href="mailto:terraquimbaya@gmail.com">terraquimbaya@gmail.com</a></div>
+                <div><a href="mailto:{{ config('mail.username') }}">{{ config('mail.username') }}</a></div>
             </div>
             <div id="project" class="clearfix">
                 <div><span>ADMIN</span> {{ $user->nombres }} {{ $user->apellidos }}</div>
