@@ -16,6 +16,7 @@
         "laravel/tinker": "~1.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "pusher/pusher-php-server": "~3.0",
+        "tymon/jwt-auth": "dev-develop",
         "yajra/laravel-datatables-oracle": "^6.0"
     },
     "require-dev": {
