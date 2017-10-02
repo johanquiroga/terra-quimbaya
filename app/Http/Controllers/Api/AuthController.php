@@ -45,15 +45,15 @@ class AuthController extends Controller
 		try {
 			// attempt to verify the credentials and create a token for the user
 			if (! $token = JWTAuth::attempt($credentials)) {
-				return response()->json(['error' => 'invalid_credentials', 'message' => trans('auth.failed')], 401);
+				return response()->json(['status' => 'failed', 'error' => 'invalid_credentials', 'message' => trans('auth.failed')], 401);
 			}
 		} catch (JWTException $e) {
 			// something went wrong whilst attempting to encode the token
-			return response()->json(['error' => 'could_not_create_token'], 500);
+			return response()->json(['status' => 'failed', 'error' => 'could_not_create_token'], 500);
 		}
 
 		// all good so return the token
-		return response()->json(compact('token'));
+		return response()->json(array_merge(['status' => 'success'], compact('token')));
     }
 
 	/**
@@ -66,7 +66,7 @@ class AuthController extends Controller
 	{
 		Auth::guard('api')->logout();
 
-		return response()->json(['status' => 200, 'message' => 'User logged out']);
+		return response()->json(['status' => 'success', 'message' => 'User logged out']);
 	}
 
 
@@ -87,6 +87,6 @@ class AuthController extends Controller
 				break;
 		}
 
-		return response()->json(array_merge(['status' => 200], compact('data')));
+		return response()->json(array_merge(['status' => 'success'], compact('data')));
 	}
 }
