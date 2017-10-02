@@ -63,8 +63,27 @@ Route::group(['as' => 'provider::', 'prefix' => 'provider'], function() {
 	]);
 });
 
+/*
+|--------------------------------------------------------------------------
+| Authentication routes
+|--------------------------------------------------------------------------
+|
+ */
+
 Route::post('/login', 'Api\AuthController@login');
 Route::group(['middleware' => ['auth:api']], function () {
 	Route::get('/user', 'Api\AuthController@details');
 	Route::get('/logout', 'Api\AuthController@logout');
 });
+
+Route::post('/register', 'Auth\RegisterController@register');
+
+/*
+|--------------------------------------------------------------------------
+| Miscellaneous Routes
+|--------------------------------------------------------------------------
+|
+ */
+Route::get('country', 'Auth\RegisterController@getCountry')->name('country');
+Route::get('departments/{country}', 'Auth\RegisterController@getDepartment')->name('departments');
+Route::get('cities/{department}', 'Auth\RegisterController@getCity')->name('cities');

@@ -44,16 +44,6 @@ Route::group(['as' => 'profile::', 'middleware' => 'auth', 'prefix' => 'profile'
 
 /*
 |--------------------------------------------------------------------------
-| Miscellaneous Routes
-|--------------------------------------------------------------------------
-|
- */
-Route::get('country', 'Auth\RegisterController@getCountry');
-Route::get('departments/{country}', 'Auth\RegisterController@getDepartment');
-Route::get('cities/{department}', 'Auth\RegisterController@getCity');
-
-/*
-|--------------------------------------------------------------------------
 | Authentication routes
 |--------------------------------------------------------------------------
 |
