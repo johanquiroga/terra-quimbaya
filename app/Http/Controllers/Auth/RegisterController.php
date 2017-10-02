@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use Illuminate\Auth\Events\Registered;
+
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 
 class RegisterController extends Controller
 {
@@ -98,7 +103,7 @@ class RegisterController extends Controller
 			'idFrecuenciaCompraCafe' => 'required|exists:frecuenciaCompraCafe,id',
 			'idNivelEstudios' => 'required|exists:nivelEstudios,id',
 			'direccion' => 'required|max:60',
-			'direccionAuxiliar' => 'max:60',
+			'direccionAuxiliar' => 'nullable|max:60',
 			'codigoPostal' => 'required|max:10|regex:/^\d{0,10}$/',
 			'ciudad' => 'required|max:45',
 			'departamento' => 'required|max:45',
@@ -221,6 +226,55 @@ class RegisterController extends Controller
 	}
 
 	/**
+	 * Handle a registration request for the application.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function register(Request $request)
+	{
+		$this->validator($request->all())->validate();
+
+		event(new Registered($user = $this->create($request->all())));
+
+		$token = null;
+
+		if(!$request->expectsJson()) {
+			$this->guard()->login($user);
+		} else {
+			$credentials = $request->only('email', 'password');
+			try {
+				// attempt to verify the credentials and create a token for the user
+				if (! $token = JWTAuth::attempt($credentials)) {
+					return response()->json(['status' => 'failed', 'error' => 'invalid_credentials', 'message' => trans('auth.failed')], 401);
+				}
+			} catch (JWTException $e) {
+				// something went wrong whilst attempting to encode the token
+				return response()->json(['status' => 'failed', 'error' => 'could_not_create_token'], 500);
+			}
+		}
+
+		return $this->registered($request, $user, $token)
+			?: redirect($this->redirectPath());
+	}
+
+	/**
+	 * The user has been registered.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  mixed  $user
+	 * @return mixed
+	 */
+	protected function registered(Request $request, $user, $token)
+	{
+		if($request->expectsJson()) {
+			return response()->json(array_merge(['status' => 'success'], compact('token', 'user')));
+		} else {
+			return redirect($this->redirectPath());
+		}
+	}
+
+	/**
 	 * Show the application registration form.
 	 *
 	 * @return \Illuminate\Http\Response
@@ -246,7 +300,7 @@ class RegisterController extends Controller
 	 */
 	public function getCountry(Request $request)
 	{
-		if($request->ajax()) {
+		if($request->ajax()||$request->expectsJson()) {
 			$countries = config('registration_address.countries');
 			return response()->json($countries);
 		}
@@ -262,7 +316,7 @@ class RegisterController extends Controller
 	 */
 	public function getDepartment(Request $request, $country)
 	{
-		if($request->ajax()) {
+		if($request->ajax()||$request->expectsJson()) {
 			$departments = config('registration_address.departments.' . $country);
 			return response()->json($departments);
 		}
@@ -278,7 +332,7 @@ class RegisterController extends Controller
 	 */
 	public function getCity(Request $request, $department)
 	{
-		if($request->ajax()) {
+		if($request->ajax()||$request->expectsJson()) {
 			$cities = config('registration_address.cities.' . $department);
 			return response()->json($cities);
 		}
