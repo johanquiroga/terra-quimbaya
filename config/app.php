@@ -181,6 +181,10 @@ return [
 	    Yajra\Datatables\DatatablesServiceProvider::class,
 	    Barryvdh\Snappy\ServiceProvider::class,
 
+	    //Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+	    Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+
     ],
 
     /*
@@ -233,6 +237,8 @@ return [
         'Datatables' => Yajra\Datatables\Facades\Datatables::class,
         'PDF'       => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
+
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
 
     ],
 
