@@ -40,7 +40,7 @@ class AuthController extends Controller
 
 	public function login(Request $request)
 	{
-		$credentials = $request->only($this->username(), 'password');
+		$credentials = array_merge($request->only($this->username(), 'password'), ['tipoUsuario' => 'comprador']);
 
 		try {
 			// attempt to verify the credentials and create a token for the user

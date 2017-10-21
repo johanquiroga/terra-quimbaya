@@ -70,6 +70,16 @@ class RegisterController extends Controller
     }
 
 	/**
+	 * Get the login username to be used by the controller.
+	 *
+	 * @return string
+	 */
+	public function username()
+	{
+		return 'email';
+	}
+
+	/**
 	 *
 	 */
 	private function atributos()
@@ -242,7 +252,7 @@ class RegisterController extends Controller
 		if(!$request->expectsJson()) {
 			$this->guard()->login($user);
 		} else {
-			$credentials = $request->only('email', 'password');
+			$credentials = array_merge($request->only($this->username(), 'password'), ['tipoUsuario' => 'comprador']);
 			try {
 				// attempt to verify the credentials and create a token for the user
 				if (! $token = JWTAuth::attempt($credentials)) {
@@ -254,7 +264,7 @@ class RegisterController extends Controller
 			}
 		}
 
-		return $this->registered($request, $user, $token)
+		return $this->registered($request, $token)
 			?: redirect($this->redirectPath());
 	}
 
@@ -262,13 +272,13 @@ class RegisterController extends Controller
 	 * The user has been registered.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
-	 * @param  mixed  $user
+	 * @param  mixed  $token
 	 * @return mixed
 	 */
-	protected function registered(Request $request, $user, $token)
+	protected function registered(Request $request, $token)
 	{
 		if($request->expectsJson()) {
-			return response()->json(array_merge(['status' => 'success'], compact('token', 'user')));
+			return response()->json(array_merge(['status' => 'success'], compact('token')));
 		} else {
 			return redirect($this->redirectPath());
 		}
@@ -279,7 +289,7 @@ class RegisterController extends Controller
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function showRegistrationForm()
+	public function showRegistrationForm(Request $request)
 	{
 		$nivelEstudios = NivelEstudios::all();
 		$frecuenciaCompraCafe = FrecuenciaCompraCafe::all();
@@ -288,7 +298,11 @@ class RegisterController extends Controller
 			if(!is_null($attribute->opciones))
 				$attribute->opciones = explode(",", $attribute->opciones);
 		}
-		return view('auth.register', compact('nivelEstudios', 'frecuenciaCompraCafe', 'attributes'));
+		if(!$request->expectsJson()) {
+			return view('auth.register', compact('nivelEstudios', 'frecuenciaCompraCafe', 'attributes'));
+		} else {
+			return response()->json(compact('nivelEstudios', 'frecuenciaCompraCafe', 'attributes'));
+		}
 	}
 
 	/**

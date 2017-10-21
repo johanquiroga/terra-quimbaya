@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 	Route::get('/logout', 'Api\AuthController@logout');
 });
 
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'Auth\RegisterController@register');
 
 /*
