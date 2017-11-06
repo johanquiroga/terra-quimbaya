@@ -238,4 +238,8 @@ return [
 
     'iva' => env('APP_IVA', 0.05),
 
+	'provider_form' => env('PROVIDER_FORM', ''),
+
+	'android' => env('APP_ANDROID', ''),
+
 ];
