@@ -45,22 +45,27 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    {{ config('app.name') }}
+                    <strong>{{ config('app.name') }}</strong>
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="navigation-example" style="text-align: center;">
                 <ul class="nav navbar-nav" style="display: inline-block; float: none;">
                     <li>
-                        <a href="#contact-form">
-                            <strong>Contáctanos</strong>
+                        <a href="#registration">
+                            <strong>Regístrate</strong>
                         </a>
                     </li>
                     <li>
+                        <a href="#contact-us">
+                            <strong>Contáctanos</strong>
+                        </a>
+                    </li>
+                    {{--<li>
                         <a href="{{ route('home') }}">
                             Ver Tienda
                         </a>
-                    </li>
+                    </li>--}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -73,6 +78,11 @@
                         {{-- @TODO: change twitter page address --}}
                         <a href="https://twitter.com/YourCoffeeApp" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Follow us on Twitter">
                             <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('app', ['platform' => 'web']) }}" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Ver tienda en línea">
+                            <i class="fa fa-home"></i>
                         </a>
                     </li>
                 </ul>
@@ -88,8 +98,8 @@
                         <img style="max-width: 100%; height: auto; filter: brightness(100); overflow: hidden; margin: 0 auto;" src="{{ asset('img/Logo_TerraQuimbaya.svg') }}" class="img img-responsive">
                     </div>
                     <div class="col-md-6">
-                        <h2 class="title">Empieza a comprar cafés especiales de la manera más fácil y cómoda</h2>
-                        <h4>Your coffee es la aplicación móvil que promueve la sustentabilidad y el desarrollo de la economía local a través de la comercialización de productos de la biodiversidad de alto valor agregado.</h4>
+                        <h2 class="title">Regístrate y empieza a comprar cafés especiales de la manera más fácil y cómoda</h2>
+                        <h4>Somos una plataforma que promueve la sustentabilidad y el desarrollo de la economía local a través de la comercialización de productos de la biodiversidad de alto valor agregado.</h4>
                         <h5>Ahora puedes visitarnos desde:</h5>
                         {{--<br />--}}
                         <div align="center">
@@ -118,7 +128,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2 class="title">Hablemos del producto</h2>
-                            <h4>Con esta aplicación móvil se busca acercar a productores y compradores, permitiendo el reconocimiento de las características de cada producto especial para aquellas personas que buscan los más altos estándares de calidad.</h4>
+                            <h4>Con esta plataforma se busca acercar a productores y compradores, permitiendo el reconocimiento de las características de cada producto especial para aquellas personas que buscan los más altos estándares de calidad.</h4>
                         </div>
                     </div>
 
@@ -142,18 +152,6 @@
 
                                         <!-- Wrapper for slides -->
                                         <div class="carousel-inner">
-                                            <div class="item active">
-                                                <img class="mask" src="{{ asset('img/typica.jpg') }}" alt="Typica">
-                                                <div class="carousel-caption">
-                                                    <h3>Typica</h3>
-                                                    <strong>
-                                                        <p class="hidden-xs">Es la “columna vertebral” genética de muchas de las especies de cafés especiales de la actualidad.</p>
-                                                        <p class="hidden-xs">Las primeras plantaciones de café que crecieron en América y en Asia, fueron de la variedad Typica y muchas de la gran variedad cultivada de clase arábica en la actualidad son descendientes directos de dicha planta.</p>
-                                                        <p class="hidden-xs">En apariencia, es muy parecida a la planta Bourbon, aunque es generalmente identificable por sus puntas de hoja de bronce.</p>
-                                                        <p>Este se caracteriza por ser de excelente calidad, con buen cuerpo y gran dulzura.</p>
-                                                    </strong>
-                                                </div>
-                                            </div>
 
                                             <div class="item">
                                                 <img class="mask" src="{{ asset('img/caturra.jpg') }}" alt="Caturra">
@@ -193,6 +191,19 @@
                                                 </div>
                                             </div>
 
+                                            <div class="item active">
+                                                <img class="mask" src="{{ asset('img/typica.jpg') }}" alt="Typica">
+                                                <div class="carousel-caption">
+                                                    <h3>Typica</h3>
+                                                    <strong>
+                                                        <p class="hidden-xs">Es la “columna vertebral” genética de muchas de las especies de cafés especiales de la actualidad.</p>
+                                                        <p class="hidden-xs">Las primeras plantaciones de café que crecieron en América y en Asia, fueron de la variedad Typica y muchas de la gran variedad cultivada de clase arábica en la actualidad son descendientes directos de dicha planta.</p>
+                                                        <p class="hidden-xs">En apariencia, es muy parecida a la planta Bourbon, aunque es generalmente identificable por sus puntas de hoja de bronce.</p>
+                                                        <p>Este se caracteriza por ser de excelente calidad, con buen cuerpo y gran dulzura.</p>
+                                                    </strong>
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <!-- Left and right controls-->
@@ -221,8 +232,8 @@
                                   <li class="list-group">Tendrás a tu disposición un amplio catálogo de cafés especiales, todos de pequeños/medianos caficultores que estarás apoyando directamente.</li>
                                   <li class="list-group">Podrás visualizar la información acerca de estos caficultores, así los podrás conocer mejor y podrás saber verdaderamente quién está cultivando tu café favorito.</li>
                                   <li class="list-group">Cada producto que veas tendrá una descripción detallada de sus características, incluyendo datos del perfil de taza proporcionados por el caficultor y verificados por nosotros.</li>
-                                  <li class="list-group">Podrás realizar las preguntas que desees acerca de los producto que te interesen. Estas serán respondidas, a través de nosotros, por los caficultores.</li>
-                                  <li class="list-group">Un vez realices una compra podrás dejar una calificación y comentario acerca de tu experiencia con dicho producto. Esta podrá ser visualizada por los demás usuarios y será de gran ayuda saber qué piensan los demás.</li>
+                                  <li class="list-group">Podrás realizar las preguntas que desees acerca de los productos que te interesen. Estas serán respondidas, a través de nosotros, por los caficultores.</li>
+                                  <li class="list-group">Una vez realices una compra podrás dejar una calificación y comentario acerca de tu experiencia con dicho producto. Esta podrá ser visualizada por los demás usuarios y será de gran ayuda saber qué piensan los demás.</li>
                                 </ul>
                             </div>
                         </div>
@@ -258,7 +269,7 @@
                                         {{--<i class="fa fa-bed"></i>--}}
                                     </div>
                                     <h4 class="info-title">Comodidad</h4>
-                                    <p style="font-size: 1.2em; color: #000;">Consulta y adquiere productos de calidad desde tu dispositivo móvil cuando y donde quieras, sin estar limitado a tu ordenador.</p>
+                                    <p style="font-size: 1.2em; color: #000;">Consulta y adquiere productos de calidad desde tu dispositivo móvil, tablet o computadora, cuando y donde quieras.</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -267,7 +278,7 @@
                                         <i class="material-icons">autorenew</i>
                                     </div>
                                     <h4 class="info-title">Variedad de marcas</h4>
-                                    <p style="font-size: 1.2em; color: #000;">Con nuestra aplicación móvil, tendrás cuando lo desees en la palma de tu mano, una variedad de cafés especiales con características únicas, que no podrás encontrar en otro lado.</p>
+                                    <p style="font-size: 1.2em; color: #000;">Con nosotros, tendrás a unos pocos clics de distancia una variedad de cafés especiales con características únicas, que no podrás encontrar en otro lado.</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -276,7 +287,7 @@
                                         <i class="material-icons">access_time</i>
                                     </div>
                                     <h4 class="info-title">Rapidez en la compra de productos</h4>
-                                    <p style="font-size: 1.2em; color: #000;">Olvídate de tener que esperar meses para poder obtener un café de calidad, con nuestra aplicación es tan fácil como sacar tu celular, seleccionar el café que quieras y esperar unos días a que te llegue a tu casa.</p>
+                                    <p style="font-size: 1.2em; color: #000;">Olvídate de tener que esperar meses para poder obtener un café de calidad, con nuestra plataforma es tan fácil como ingresar con tu usuario, seleccionar el café que quieras y disfrutarlo cuando llegue a tu casa.</p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -285,7 +296,7 @@
                                         <i class="material-icons">favorite</i>
                                     </div>
                                     <h4 class="info-title">Vive la experiencia</h4>
-                                    <p style="font-size: 1.2em; color: #000;">En cada publicación de producto podrás encontrar información detallada de dónde viene el café, quién lo cultiva, qué características posee y consejos de preparación por parte del mismo caficultor para exaltar sus propiedades.</p>
+                                    <p style="font-size: 1.2em; color: #000;">En cada producto publicado podrás encontrar información detallada acerca de dónde proviene el café, quién lo cultiva, qué características posee y consejos de preparación por parte del mismo caficultor para exaltar sus propiedades.</p>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +314,7 @@
                                     <h4 class="title">Johan Camilo Quiroga<br />
                                         <small class="text-muted">Desarrollador</small>
                                     </h4>
-                                    <p>El desarrollo de esta aplicación representó un gran desafío que dio como resultado un lugar donde comprar los mejores cafés especiales y conectar con el paisaje cultural cafetero.</p>
+                                    <p>El desarrollo de esta plataforma representa un gran desafío que da como resultado un lugar donde comprar los mejores cafés especiales y conectar con el paisaje cultural cafetero.</p>
                                     <a href="mailto:quirogacj@utp.edu.co" class="btn btn-simple btn-just-icon"><i class="fa fa-fw fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -313,7 +324,7 @@
                                     <h4 class="title">William Andrés Salazar<br />
                                         <small class="text-muted">Comercial</small>
                                     </h4>
-                                    <p>La principal meta de esta aplicación es promover los cafés especiales del paisaje cultural cafetero a compradores de todo el mundo.</p>
+                                    <p>La principal meta de esta plataforma es promover los cafés especiales del paisaje cultural cafetero a compradores de todo el mundo.</p>
                                     <a href="mailto:w.as.g@utp.edu.co" class="btn btn-simple btn-just-icon"><i class="fa fa-fw fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -323,7 +334,7 @@
                                     <h4 class="title">Jimy Andrés Alzate<br />
                                         <small class="text-muted">Diseñador</small>
                                     </h4>
-                                    <p>Te presentamos una aplicación elegante y cómoda que te abrirá las puertas hacia un mundo de nuevos sabores</p>
+                                    <p>Te presentamos una plataforma elegante y cómoda que te abrirá las puertas hacia un mundo de nuevos sabores.</p>
                                     <a href="mailto:jimyandres@utp.edu.co" class="btn btn-simple btn-just-icon"><i class="fa fa-fw fa-envelope"></i></a>
                                 </div>
                             </div>
@@ -332,11 +343,19 @@
 
                 </div>
 
-
-                <div class="section landing-section">
+                <div class="section landing-section" id="registration">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2 class="text-center title">¡Se uno de los primeros en tener acceso a nuestra app!</h2>
+                            <h2 class="text-center title">¡Regístrate!</h2>
+                            <h4 class="text-center">Si estás interesado en comprar con nosotros regístrate <a href="{{ route('register') }}" target="_blank" style="text-decoration: underline">aquí</a>, o si eres un caficultor y deseas ofrecer tus productos en nuestra plataforma, regístrate <a href="{{ config('app.provider_form') }}" target="_blank" style="text-decoration: underline">aquí</a>.</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section landing-section" id="contact-us">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h2 class="text-center title">¡Dinos tu opinión!</h2>
                             <h4 class="text-center">¿Tienes alguna duda o sugerencia? O simplemente cuéntanos qué piensas acerca del proyecto!</h4>
                             <form class="contact-form" action="{{ url('/') }}" method="POST" id="contact-form">
                                 {!! csrf_field() !!}
@@ -387,7 +406,7 @@
                 <div class="section landing-section">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2 class="text-center title">Gracias por apoyarnos!</h2>
+                            <h2 class="text-center title">¡Gracias por apoyarnos!</h2>
                             <div class="row sharing-area text-center">
                                 <button id="twitter" class="btn btn-raised btn-twitter">
                                     <i class="fa fa-twitter"></i>
@@ -422,6 +441,9 @@
                                             <li style="display: block;">
                                                 {{-- @TODO: change twitter page address --}}
                                                 <a target="_blank" href="https://twitter.com/YourCoffeeApp" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Twitter"><i class="fa fa-fw fa-twitter"></i> {{ config('app.name') }}</a>
+                                            </li>
+                                            <li style="display: block;">
+                                                <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail {{ config('app.name') }}"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
                                             </li>
                                         </ul>
                                     </li>
