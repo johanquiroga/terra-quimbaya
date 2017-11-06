@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home') }}">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <strong>{{ config('app.name') }}</strong>
                 </a>
             </div>
@@ -72,17 +72,20 @@
                         {{-- @TODO: change facebook page address --}}
                         <a href="https://www.facebook.com/YourCoffeeApp/" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Like us on Facebook">
                             <i class="fa fa-facebook-square"></i>
+                            <p class="hidden-lg hidden-md">Like us on Facebook</p>
                         </a>
                     </li>
                     <li>
                         {{-- @TODO: change twitter page address --}}
                         <a href="https://twitter.com/YourCoffeeApp" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Follow us on Twitter">
                             <i class="fa fa-twitter"></i>
+                            <p class="hidden-lg hidden-md">Follow us on Twitter</p>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('app', ['platform' => 'web']) }}" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Ver tienda en línea">
                             <i class="fa fa-home"></i>
+                            <p class="hidden-lg hidden-md">Ver tienda en línea</p>
                         </a>
                     </li>
                 </ul>
