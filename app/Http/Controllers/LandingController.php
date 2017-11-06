@@ -37,7 +37,7 @@ class LandingController extends Controller
 			$download->save();
 
 			/* @TODO: put apk address on env or config and update here */
-			return redirect('https://s3-us-west-2.amazonaws.com/yourcoffee-mobile-apps/android/your-coffee.apk');
+			return redirect(config('app.android'));
 		} else if ($request->platform == 'web') {
 			$download = new Download;
 
