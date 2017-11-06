@@ -26,7 +26,7 @@
                     {{--</div>--}}
                     {{--<strong>Terra Quimbaya</strong>--}}
                 {{--</a>--}}
-                <a href="{{ route('home') }}">
+                <a href="{{ url('/') }}">
                     <div class="logo-container">
                         <div class="logo">
                             <img src="{{ asset('img/logo.JPG') }}" class="img-raised img-responsive" alt="{{ config('app.name') }} Logo">
