@@ -240,4 +240,6 @@ return [
 
 	'provider_form' => env('PROVIDER_FORM', ''),
 
+	'android' => env('APP_ANDROID', ''),
+
 ];
