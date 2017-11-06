@@ -42,7 +42,9 @@
                                  margin-left: 0px;
                                  margin-right: 10px;
                                  width: 50%;
-                                 text-align: center;" src="{{ asset('img/logo.JPG') }}" class="img-rounded img-responsive img-raised" height="auto" alt="Your Coffee Logo"/>
+                                 background-color: white;
+                                 padding: 5px;
+                                 text-align: center;" src="{{ asset('img/Logo_TerraQuimbaya.svg') }}" class="img-rounded img-responsive img-raised" height="auto" alt="Your Coffee Logo"/>
                         </div>
                         {{--Terra Quimbaya--}}
                     </a>
@@ -62,7 +64,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href=""><strong>@yield('Page-title', 'Terra Quimbaya')</strong></a>
+                        <a class="navbar-brand" href=""><strong>@yield('Page-title', config('app.name'))</strong></a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-right">
@@ -143,7 +145,7 @@
                 {{--</nav>--}}
                 <!--Copyright-->
                     <p class="copyright pull-right">
-                        &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
+                        &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">{{ config('app.name') }}</a>
                     </p>
                     <!--/.Copyright-->
                 </div>

@@ -29,7 +29,7 @@
                 <a href="{{ route('home') }}">
                     <div class="logo-container">
                         <div class="logo">
-                            <img src="{{ asset('img/logo.JPG') }}" class="img-raised img-responsive" alt="Terra Quimbaya Logo">
+                            <img src="{{ asset('img/logo.JPG') }}" class="img-raised img-responsive" alt="{{ config('app.name') }} Logo">
                         </div>
                         {{--<div class="brand">--}}
                             {{--<strong>Terra Quimbaya</strong>--}}
@@ -145,10 +145,10 @@
                                     <li><h5 class="title">Contáctanos</h5>
                                         <ul>
                                             <li style="display: block;">
-                                                <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail Terra Quimbaya"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
+                                                <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail {{ config('app.name') }}"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
                                             </li>
                                             <li style="display: block;">
-                                                <a target="_blank" href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="Terra Quimbaya en Facebook"><i class="fa fa-fw fa-facebook-official"></i> Terra Quimbaya</a>
+                                                <a target="_blank" href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Facebook"><i class="fa fa-fw fa-facebook-official"></i> {{ config('app.name') }}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -159,7 +159,7 @@
                 </div>
                 <hr>
                 <div class="copyright" style="display: inline-block; float: none;">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">Terra Quimbaya</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, por {{--hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para--}}<a href="{{url('/')}}">{{ config('app.name') }}</a>
                 </div>
             </div>
         </footer>

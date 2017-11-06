@@ -14,9 +14,10 @@
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="{{ asset('img/icon.png') }} ">
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
-    <title>@yield('title','Terra Quimbaya')</title>
+    <title>@yield('title', config('app.name'))</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
+    @yield('metas')
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('fonts/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
