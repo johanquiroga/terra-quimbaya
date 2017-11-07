@@ -11,53 +11,53 @@ class AtributoTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Atributo::firstOrCreate([
-            'nombreAtributo' => 'tipoBeneficio',
-            'descripcionAtributo' => 'Escoger una de las opciones',
-	        'opciones' => 'Húmedo,Seco,Semiseco'
-        ]);
-	    \App\Models\Atributo::firstOrCreate([
-		    'nombreAtributo' => 'fragancia',
-		    'descripcionAtributo' => 'Escoger una de las opciones para fragancia/aroma',
-		    'opciones' => "Muy pronunciado,Medianamente pronunciado,Poco pronunciado"
-	    ]);
-	    \App\Models\Atributo::firstOrCreate([
-		    'nombreAtributo' => 'acidez',
-		    'descripcionAtributo' => 'Escoger una de las opciones que describa el sabor del producto',
-		    'opciones' => "Pronunciada,Poco pronunciada"
-	    ]);
-	    \App\Models\Atributo::firstOrCreate([
-		    'nombreAtributo' => 'dulce',
-		    'descripcionAtributo' => 'Escoger una de las opciones que describa el sabor del producto',
-		    'opciones' => "Acentuado, Poco acentuado"
-	    ]);
-        \App\Models\Atributo::firstOrCreate([
-            'nombreAtributo' => 'tipoEmpaque',
-            'descripcionAtributo' => "Presentacion: 1 kilo, &half; kilo ( 1 libra) o &half; libra",
-            'opciones' => "1 Kilo,&half; Kilo (1 Libra),&half; Libra"
-        ]);
-        \App\Models\Atributo::firstOrCreate([
-            'nombreAtributo' => 'trilla',
-            'descripcionAtributo' => 'Escoger molido o en grano',
-            'opciones' => "Molido,Grano"
-        ]);
-        \App\Models\Atributo::firstOrCreate([
-            'nombreAtributo' => 'tostion',
-            'descripcionAtributo' => 'Escoger claro, medio u oscuro',
-            'opciones' => "Claro,Medio,Oscuro"
-        ]);
-	    \App\Models\Atributo::firstOrCreate([
-		    'nombreAtributo' => 'molienda',
-		    'descripcionAtributo' => 'Escoger una de las opciones',
-		    'opciones' => "Fina,Media,Gruesa"
-	    ]);
-	    \App\Models\Atributo::firstOrCreate([
-		    'nombreAtributo' => 'sabor',
-		    'descripcionAtributo' => 'Indicar el sabor del café',
-	    ]);
-	    \App\Models\Atributo::firstOrCreate([
-		    'nombreAtributo' => 'saborResidual',
-		    'descripcionAtributo' => '',
-	    ]);
+        \App\Models\Atributo::updateOrCreate(
+        	['nombreAtributo' => 'tipoBeneficio'],
+            ['descripcionAtributo' => 'Escoger una de las opciones',
+	        'opciones' => 'Húmedo,Seco,Semiseco,No sabe/Ninguna']
+        );
+	    \App\Models\Atributo::updateOrCreate(
+	    	['nombreAtributo' => 'fragancia'],
+		    ['descripcionAtributo' => 'Escoger una de las opciones para fragancia/aroma',
+		    'opciones' => "Muy pronunciado,Medianamente pronunciado,Poco pronunciado,No sabe/Ninguna"]
+	    );
+	    \App\Models\Atributo::updateOrCreate(
+	    	['nombreAtributo' => 'acidez'],
+		    ['descripcionAtributo' => 'Escoger una de las opciones que describa el sabor del producto',
+		    'opciones' => "Pronunciada,Poco pronunciada,No sabe/Ninguna"]
+	    );
+	    \App\Models\Atributo::updateOrCreate(
+	    	['nombreAtributo' => 'dulce'],
+		    ['descripcionAtributo' => 'Escoger una de las opciones que describa el sabor del producto',
+		    'opciones' => "Acentuado, Poco acentuado,No sabe/Ninguna"]
+	    );
+        \App\Models\Atributo::updateOrCreate(
+        	['nombreAtributo' => 'tipoEmpaque'],
+            ['descripcionAtributo' => "Presentacion: 1 kilo, &half; kilo ( 1 libra) o &half; libra",
+            'opciones' => "1 Kilo,&half; Kilo (1 Libra),&half; Libra,No sabe/Ninguna"]
+        );
+        \App\Models\Atributo::updateOrCreate(
+        	['nombreAtributo' => 'trilla'],
+            ['descripcionAtributo' => 'Escoger molido o en grano',
+            'opciones' => "Molido,Grano,No sabe/Ninguna"]
+        );
+        \App\Models\Atributo::updateOrCreate(
+        	['nombreAtributo' => 'tostion'],
+            ['descripcionAtributo' => 'Escoger claro, medio u oscuro',
+            'opciones' => "Claro,Medio,Oscuro,No sabe/Ninguna"]
+        );
+	    \App\Models\Atributo::updateOrCreate(
+	    	['nombreAtributo' => 'molienda'],
+		    ['descripcionAtributo' => 'Escoger una de las opciones',
+		    'opciones' => "Fina,Media,Gruesa,No sabe/Ninguna"]
+	    );
+	    \App\Models\Atributo::updateOrCreate(
+	    	['nombreAtributo' => 'sabor'],
+		    ['descripcionAtributo' => 'Indicar el sabor del café']
+	    );
+	    \App\Models\Atributo::updateOrCreate(
+	    	['nombreAtributo' => 'saborResidual'],
+		    ['descripcionAtributo' => '']
+	    );
     }
 }

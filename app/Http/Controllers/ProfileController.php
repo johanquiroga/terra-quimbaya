@@ -91,8 +91,8 @@ class ProfileController extends Controller
      */
     public function update(Requests\UpdateProfileRequest $request, $id)
     {
-        //dd($request->all());
-        $usuario = Auth::user();
+        //dd($request->user(), $request->all());
+        $usuario = $request->user();
         $data = null;
         $buyer = false;
         switch ($usuario->tipoUsuario) {
@@ -140,22 +140,36 @@ class ProfileController extends Controller
         $usuario['password'] = $request['contraseña'];
         $usuario->save();
 
-        return redirect(route('profile::profile'))->with('message-success', 'Perfil Actualizado!');
+	    if(!$request->expectsJson()) {
+	    	return redirect(route('profile::profile'))->with('message-success', 'Perfil Actualizado!');
+	    } else {
+		    return response()->json(array_merge(['status' => 'success', 'message' => 'Perfil Actualizado!']));
+	    }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param  string  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $id=null)
     {
-    	if(Auth::user()->cannot('delete-account')) {
+    	$user = $request->user();
+    	if($user->cannot('delete-account')) {
     		abort(403,'Forbidden action');
 	    }
 
-	    $usuario = Comprador::findOrFail($request->id);
+	    //dd($id);
+
+	    if(is_null($id)) {
+    		$id = $request->id;
+	    }
+
+	    $usuario = Comprador::findOrFail($id);
+
+    	//dd($usuario);
 
 	    //$usuario->nivelEstudios()->dissociate();
 
@@ -167,10 +181,18 @@ class ProfileController extends Controller
 
 	    $usuario->save();
 
-	    Usuario::destroy(Auth::user()->id);
+	    Usuario::destroy($user->id);
 
-	    Auth::logout();
+	    if(is_null($id)) {
+	    	Auth::logout();
+	    } else {
+		    Auth::guard('api')->logout();
+	    }
 
-	    return redirect('/')->with('message-success', 'Cuenta eliminada!');
+	    if(!$request->expectsJson()) {
+	    	return redirect('/')->with('message-success', 'Cuenta eliminada!');
+	    } else {
+		    return response()->json(array_merge(['status' => 'success', 'message' => 'Cuenta eliminada!']));
+	    }
     }
 }

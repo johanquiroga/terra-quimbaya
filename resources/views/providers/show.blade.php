@@ -171,7 +171,7 @@
                                     </div>
                                     <div class="tab-pane text-center" id="productos">
                                         <div class="row">
-                                        @forelse($provider->productos as $product)
+                                        @forelse($products as $product)
                                             <div class="col-md-4">
                                                 @include('partials.show_product', ['producto' => $product])
                                             </div>
@@ -181,6 +181,7 @@
                                             </div>
                                         @endforelse
                                         </div>
+                                        {{ $products->links() }}
                                     </div>
 
                                 </div>

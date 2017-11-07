@@ -535,7 +535,7 @@
             ciudad.append("<option value='' selected> Primero selecciona tu departamento...</option>");
 
             var paisSelect = $("#pais2");
-            $.get('{{url('country')}}', function(data, status) {
+            $.get('{{route('country')}}', function(data, status) {
                 var count = Object.keys(data).length;
                 paisSelect.empty();
                 paisSelect.append("<option value=''> Selecciona tu país...</option>");
@@ -558,7 +558,7 @@
                 departamento.empty();
                 departamento.append("<option value='' selected> Primero selecciona tu país...</option>").change();
             } else {
-                $.get("{{url('departments')}}/" + country, function (data, status) {
+                $.get("{{route('departments', ':COUN')}}".replace(/:COUN/g, country), function (data, status) {
                     var count = Object.keys(data).length;
                     departamento.empty();
                     departamento.append("<option value='' selected> Selecciona tu departamento...</option>");
@@ -582,7 +582,7 @@
                 ciudad.empty();
                 ciudad.append("<option value='' selected> Primero selecciona tu departamento...</option>");
             } else {
-                $.get("{{url('cities')}}/" + departamento, function (data, status) {
+                $.get("{{route('cities', ':DEP')}}".replace(/:DEP/g, departamento), function (data, status) {
                     var count = Object.keys(data).length;
                     ciudad.empty();
                     ciudad.append("<option value='' selected> Selecciona tu ciudad...</option>");

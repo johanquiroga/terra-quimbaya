@@ -120,6 +120,7 @@ return [
     */
 
     'attributes'           => [
+    	'id'                    => 'número de documento',
         'name'                  => 'nombre',
         'username'              => 'usuario',
         'email'                 => 'correo electrónico',

@@ -217,10 +217,10 @@ class ProveedorController extends Controller
         $provider = Proveedor::findOrFail($id);
         $provider->load([
             'fotos',
-	        'productos' => function($query) {
-        	    $query->estado();
-        	    $query->with(['variedadCafe', 'fotos']);
-	        },
+	        //'productos' => function($query) {
+        	//    $query->estado();
+        	//    $query->with(['variedadCafe', 'fotos'])->paginate(2, ['*'], 'products');
+	        //},
 	        'variedadesCafe',
 	        'densidadSiembra',
 	        'edadUltimaZoca',
@@ -228,8 +228,12 @@ class ProveedorController extends Controller
 	        'ecotopo',
         ]);
 
+        $products = $provider->productos()->with(['fotos', 'variedadCafe'])->paginate(4, ['*'], 'products');
+
+        //dd($provider);
+
 	    if(!$request->expectsJson()) {
-	    	return view('providers.show', compact('provider'));
+	    	return view('providers.show', compact('provider', 'products'));
 	    } else {
 		    $provider = $provider->toArray();
 		    $provider = $this->cleanArray(array($provider), ['telefono', 'created_at', 'updated_at', 'estado',
@@ -237,7 +241,12 @@ class ProveedorController extends Controller
 			    'idNivelEstudios', 'personasDependientesFinca', 'idAdministrador', 'densidad_siembra.id',
 			    'edad_ultima_zoca.id', 'tipo_beneficio.id', 'ecotopo.id']);
 		    $provider = $provider[0];
-		    $provider["productos"] = $this->cleanArray($provider["productos"], ['estado', 'created_at', 'updated_at', 'idVariedadCafe']);
+
+		    $products = $products->toArray();
+		    $products["data"] = $this->cleanArray($products["data"], ['estado', 'created_at', 'updated_at', 'idVariedadCafe']);
+
+		    $provider["productos"] = $products;
+		    //$provider["productos"] = $this->cleanArray($provider["productos"], ['estado', 'created_at', 'updated_at', 'idVariedadCafe']);
 		    $provider["fotos"] = $this->cleanArray($provider["fotos"], ['id']);
 		    return response()->json(compact('provider'));
 	    }

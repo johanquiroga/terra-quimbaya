@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
 
 /*
 |--------------------------------------------------------------------------
@@ -62,3 +62,40 @@ Route::group(['as' => 'provider::', 'prefix' => 'provider'], function() {
 		'uses' => 'ProveedorController@show'
 	]);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Authentication routes
+|--------------------------------------------------------------------------
+|
+ */
+
+Route::post('/login', 'Api\AuthController@login');
+Route::group(['middleware' => ['auth:api']], function () {
+	Route::get('/logout', 'Api\AuthController@logout');
+});
+
+Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
+Route::post('/register', 'Auth\RegisterController@register');
+
+/*
+|--------------------------------------------------------------------------
+| Profile Routes
+|--------------------------------------------------------------------------
+|
+ */
+Route::group(['middleware' => ['auth:api', 'comprador'], 'prefix' => 'user'], function () {
+	Route::get('', 'Api\AuthController@details');
+	Route::put('/{id}', 'ProfileController@update');
+	Route::delete('/{id}', 'ProfileController@destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Miscellaneous Routes
+|--------------------------------------------------------------------------
+|
+ */
+Route::get('country', 'Auth\RegisterController@getCountry')->name('country');
+Route::get('departments/{country}', 'Auth\RegisterController@getDepartment')->name('departments');
+Route::get('cities/{department}', 'Auth\RegisterController@getCity')->name('cities');
