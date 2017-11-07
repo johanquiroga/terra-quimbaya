@@ -72,12 +72,23 @@ Route::group(['as' => 'provider::', 'prefix' => 'provider'], function() {
 
 Route::post('/login', 'Api\AuthController@login');
 Route::group(['middleware' => ['auth:api']], function () {
-	Route::get('/user', 'Api\AuthController@details');
 	Route::get('/logout', 'Api\AuthController@logout');
 });
 
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm');
 Route::post('/register', 'Auth\RegisterController@register');
+
+/*
+|--------------------------------------------------------------------------
+| Profile Routes
+|--------------------------------------------------------------------------
+|
+ */
+Route::group(['middleware' => ['auth:api', 'comprador'], 'prefix' => 'user'], function () {
+	Route::get('', 'Api\AuthController@details');
+	Route::put('/{id}', 'ProfileController@update');
+	Route::delete('/{id}', 'ProfileController@destroy');
+});
 
 /*
 |--------------------------------------------------------------------------

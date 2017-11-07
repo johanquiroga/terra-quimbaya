@@ -7,6 +7,7 @@ use App\Models\Comprador;
 use App\Models\Root;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Miscelaneous;
 
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -14,6 +15,8 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
+	use Miscelaneous;
+
 	/**
 	 * Get the login username to be used by the controller.
 	 *
@@ -80,7 +83,11 @@ class AuthController extends Controller
 				$data = Root::find($user->idCC);
 				break;
 			case 'comprador':
-				$data = Comprador::find($user->idCC);
+				$data = Comprador::find($user->idCC)->load(['direccion', 'frecuenciaCompraCafe', 'nivelEstudios', 'atributos']);
+				$data = $data->toArray();
+				$data["atributos"] = $this->cleanArray($data["atributos"], ['descripcionAtributo', 'opciones', 'pivot.idComprador', 'pivot.idAtributo']);
+				$data = $this->cleanArray(array($data), ['estado']);
+				$data = $data[0];
 				break;
 			case 'admin':
 				$data = Administrador::find($user->idCC);
