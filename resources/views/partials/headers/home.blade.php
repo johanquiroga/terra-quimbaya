@@ -12,13 +12,9 @@
                 {{--<h1 class="title">Proyecto Café</h1>--}}
                 {{--</div>--}}
                 <h1 class="title">Terra Quimbaya</h1>
-                <h4>Somos una empresa que promueve la sustentabilidad y el desarrollo de la
-                    economía local a través de la comercialización de productos de la biodiversidad de alto
-                    valor agregado.
+                <h4>Promovemos la sustentabilidad y el desarrollo de la economía local a través de la comercialización de productos de la biodiversidad de alto valor agregado.
                     <br>
-                    Con esta plataforma, biotrade store&reg;, se busca acercar a productores y compradores, permitiendo
-                    el reconocimiento de las características de cada producto especial para aquellas personas que buscan
-                    los más altos estándares de calidad.
+                    Con esta plataforma, biotrade store&reg;, se busca acercar a productores y compradores, permitiendo el reconocimiento de las características de cada producto especial para aquellas personas que buscan los más altos estándares de calidad.
                 </h4>
                 {{--<br />--}}
                 {{--<a href="#" class="btn btn-danger btn-raised btn-lg">--}}
