@@ -4,15 +4,13 @@
     @parent
 
     <!-- Twitter Card data -->
-    {{-- @TODO: change twitter info --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@YourCoffeeApp">
+    <meta name="twitter:site" content="@TerraQuimbaya">
     <meta name="twitter:title" content="{{ config('app.name') }}, biotrade store">
     <meta name="twitter:description" content="Check this awesome specialty coffee project">
-    <meta name="twitter:creator" content="@YourCoffeeApp">
+    <meta name="twitter:creator" content="@TerraQuimbaya">
     <meta name="twitter:image" content="{{ asset('img/logo.JPG') }}">
 
-    {{-- @TODO: change facebook info --}}
     <!-- You can use Open Graph tags to customize link previews.
     Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
     <meta property="og:url"           content="{{ url('/') }}" />
@@ -69,15 +67,13 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        {{-- @TODO: change facebook page address --}}
-                        <a href="https://www.facebook.com/YourCoffeeApp/" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Like us on Facebook">
+                        <a href="{{ config('app.fb') }}" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Like us on Facebook">
                             <i class="fa fa-facebook-square"></i>
                             <p class="hidden-lg hidden-md">Like us on Facebook</p>
                         </a>
                     </li>
                     <li>
-                        {{-- @TODO: change twitter page address --}}
-                        <a href="https://twitter.com/YourCoffeeApp" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Follow us on Twitter">
+                        <a href="{{ config('app.twitter') }}" target="_blank" class="btn btn-simple btn-white btn-just-icon" data-toggle="tooltip" data-placement="bottom" title="Follow us on Twitter">
                             <i class="fa fa-twitter"></i>
                             <p class="hidden-lg hidden-md">Follow us on Twitter</p>
                         </a>
@@ -438,12 +434,10 @@
                                     <li><h5 class="title">Contáctanos</h5>
                                         <ul>
                                             <li style="display: block;">
-                                                {{-- @TODO: change facebook page address --}}
-                                                <a target="_blank" href="https://www.facebook.com/YourCoffeeApp/" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Facebook"><i class="fa fa-fw fa-facebook-official"></i> {{ config('app.name') }}</a>
+                                                <a target="_blank" href="{{ config('app.fb') }}" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Facebook"><i class="fa fa-fw fa-facebook-official"></i> {{ config('app.name') }}</a>
                                             </li>
                                             <li style="display: block;">
-                                                {{-- @TODO: change twitter page address --}}
-                                                <a target="_blank" href="https://twitter.com/YourCoffeeApp" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Twitter"><i class="fa fa-fw fa-twitter"></i> {{ config('app.name') }}</a>
+                                                <a target="_blank" href="{{ config('app.twitter') }}" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Twitter"><i class="fa fa-fw fa-twitter"></i> {{ config('app.name') }}</a>
                                             </li>
                                             <li style="display: block;">
                                                 <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail {{ config('app.name') }}"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
@@ -520,7 +514,7 @@
                 enableHover: false,
                 enableTracking: true,
                 buttons: { twitter: {
-                    via: 'YourCoffeeApp',
+                    via: 'TerraQuimbaya',
                     hashtags: 'SpecialtyCoffee Coffee',
                 }},
                 click: function(api, options){

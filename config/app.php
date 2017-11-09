@@ -248,4 +248,8 @@ return [
 
 	'android' => env('APP_ANDROID', ''),
 
+    'fb' => env('FB_URL'),
+
+    'twitter' => env('TW_URL'),
+
 ];

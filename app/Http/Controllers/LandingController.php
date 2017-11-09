@@ -36,7 +36,6 @@ class LandingController extends Controller
 
 			$download->save();
 
-			/* @TODO: put apk address on env or config and update here */
 			return redirect(config('app.android'));
 		} else if ($request->platform == 'web') {
 			$download = new Download;
