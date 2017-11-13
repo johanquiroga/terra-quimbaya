@@ -87,7 +87,10 @@ Route::post('/register', 'Auth\RegisterController@register');
 Route::group(['middleware' => ['auth:api', 'comprador'], 'prefix' => 'user'], function () {
 	Route::get('', 'Api\AuthController@details');
 	Route::put('/{id}', 'ProfileController@update');
-	Route::delete('/{id}', 'ProfileController@destroy');
+	Route::delete('/{id}', [
+        'middleware' => 'delete_account',
+        'uses' => 'ProfileController@destroy'
+    ]);
 });
 
 /*

@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
 	    'comprador' => \App\Http\Middleware\Comprador::class,
 	    'admin_comprador' => \App\Http\Middleware\AdminComprador::class,
+        'delete_account' => \App\Http\Middleware\DeleteAccount::class,
     ];
 }

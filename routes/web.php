@@ -48,6 +48,7 @@ Route::group(['as' => 'profile::', 'middleware' => 'auth', 'prefix' => 'profile'
 		'uses' => 'ProfileController@update'
 	]);
 	Route::post('destroy', [
+	    'middleware' => 'delete_account',
 		'as' => 'destroy',
 		'uses' => 'ProfileController@destroy'
 	]);
