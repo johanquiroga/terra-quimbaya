@@ -50,7 +50,7 @@ class UpdateProductRequest extends FormRequest
 		    'idVariedadCafe' => 'required|exists:variedadCafe,id',
 		    'nombre' => 'required|unique:producto,nombre,'. $this->route('id') . ',idPublicacion,estado,1,idProveedor,'. Request::input('idProveedor'),
 		    'descripcion' => 'required|max:255',
-		    'cantidad' => 'required|integer|min:1',
+		    'cantidad' => 'required|integer|min:0',
 		    'precioEmpaque' => 'required|numeric|min:0',
 		    'estado' => 'sometimes|required|in:0,1',
 		    'fotos.*' => 'image'

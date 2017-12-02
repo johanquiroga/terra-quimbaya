@@ -50,7 +50,7 @@ class CreateProductRequest extends FormRequest
             'idVariedadCafe' => 'required|exists:variedadCafe,id',
 	        'nombre' => 'required|unique:producto,nombre,NULL,id,idProveedor,'. Request::input('idProveedor'),
 	        'descripcion' => 'required|max:255',
-            'cantidad' => 'required|integer|min:1',
+            'cantidad' => 'required|integer|min:0',
             'precioEmpaque' => 'required|numeric|min:0',
             'fotos' => 'required',
             'fotos.*' => 'image'

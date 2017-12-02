@@ -126,7 +126,7 @@
             <span class="input-group-addon"><i class="fa fa-calculator fa-2x"></i></span>
             <div class="form-group label-floating{{ $errors->has('cantidad') ? ' has-error' : '' }}">
                 <label class="control-label" id="cantidadLabel" for="cantidad" data-error="Incorrecto">Cantidad del producto</label>
-                <input id="cantidad" type="number" class="form-control validate" name="cantidad" value="{{ $producto->cantidad or old("cantidad") }}" required aria-describedby="cantidadLabel" min="1" onkeypress="return soloNumeros(event)">
+                <input id="cantidad" type="number" class="form-control validate" name="cantidad" value="{{ $producto->cantidad or old("cantidad") }}" required aria-describedby="cantidadLabel" min="0" onkeypress="return soloNumeros(event)">
                 {{--<input id="idTipoCafe" type="text" class="form-control validate" name="id" value="{{ $usuario->id or old("id") }}" required aria-describedby="idLabel" minlength="10" maxlength="10" onkeypress="return soloNumeros(event)">--}}
                 @if ($errors->has('cantidad'))
                     <span class="material-icons form-control-feedback">clear</span>
