@@ -41,4 +41,26 @@ class UbicacionFinca extends Model
     {
         return $this->belongsTo(Proveedor::class, 'idProveedor');
     }
+
+    /**
+     * Get the vereda from farm location.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getVeredaAttribute($value)
+    {
+        return $value ? ucwords($value) : '';
+    }
+
+    /**
+     * Get the corregimiento from farm location.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getCorregimientoAttribute($value)
+    {
+        return $value ? ucwords($value) : '';
+    }
 }
