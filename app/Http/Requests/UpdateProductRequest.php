@@ -27,7 +27,7 @@ class UpdateProductRequest extends FormRequest
 		$attrRules = array();
 		$attributes = Atributo::all(['id', 'nombreAtributo', 'opciones']);
 		foreach ($attributes as $attribute) {
-			$attrRules[$attribute->nombreAtributo] = 'required';
+			$attrRules[$attribute->nombreAtributo] = 'nullable';
 			if(!is_null($attribute->opciones)) {
 				$attrRules[$attribute->nombreAtributo] = $attrRules[$attribute->nombreAtributo] . '|in:' . $attribute->opciones;
 			} else {
