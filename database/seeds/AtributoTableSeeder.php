@@ -29,7 +29,7 @@ class AtributoTableSeeder extends Seeder
 	    \App\Models\Atributo::updateOrCreate(
 	    	['nombreAtributo' => 'dulce'],
 		    ['descripcionAtributo' => 'Escoger una de las opciones que describa el sabor del producto',
-		    'opciones' => "Acentuado, Poco acentuado,No sabe/Ninguna"]
+		    'opciones' => "Acentuado,Poco acentuado,No sabe/Ninguna"]
 	    );
         \App\Models\Atributo::updateOrCreate(
         	['nombreAtributo' => 'tipoEmpaque'],
