@@ -12,7 +12,7 @@
         {{--gtag('config', 'UA-106547709-2');--}}
     {{--</script>--}}
     <meta charset="utf-8">
-    <link rel="icon" type="image/png" href="{{ asset('img/icon.png') }} ">
+    <link rel="icon" type="image/png" href="{{ asset('img/tab_icon.png') }} ">
     <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
     <title>@yield('title', config('app.name'))</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
