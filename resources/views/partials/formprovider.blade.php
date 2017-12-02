@@ -222,7 +222,7 @@
                                         <label class="control-label" id="corregimientoLabel" for="corregimiento" data-error="Incorrecto">Corregimiento</label>
                                         <input id="corregimiento" type="text" class="form-control validate" name="corregimiento"
                                                value="{{ $usuario->ubicacionFinca->corregimiento or old("corregimiento") }}"
-                                               required aria-describedby="corregimientoLabel" maxlength="100" onkeypress="return soloLetras(event)">
+                                               aria-describedby="corregimientoLabel" maxlength="100" onkeypress="return soloLetras(event)">
                                         @if ($errors->has('corregimiento'))
                                             <span class="material-icons form-control-feedback">clear</span>
                                             <small class="text-danger"><strong>{{ $errors->first('corregimiento') }}</strong></small>
@@ -237,7 +237,7 @@
                                         <label class="control-label" id="veredaLabel" for="vereda" data-error="Incorrecto">Vereda</label>
                                         <input id="vereda" type="text" class="form-control validate" name="vereda"
                                                value="{{ $usuario->ubicacionFinca->vereda or old("vereda") }}"
-                                               required aria-describedby="veredaLabel" maxlength="100" onkeypress="return soloLetras(event)">
+                                               aria-describedby="veredaLabel" maxlength="100" onkeypress="return soloLetras(event)">
                                         @if ($errors->has('vereda'))
                                             <span class="material-icons form-control-feedback">clear</span>
                                             <small class="text-danger"><strong>{{ $errors->first('vereda') }}</strong></small>

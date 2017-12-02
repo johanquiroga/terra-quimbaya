@@ -60,7 +60,7 @@
 
                             {{--</div>--}}
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                 <h3>
                                     <small>Por,</small>
                                     <a href="{{ route('provider::show',$product->proveedor->id) }}">

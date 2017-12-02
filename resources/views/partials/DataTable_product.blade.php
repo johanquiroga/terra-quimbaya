@@ -40,7 +40,7 @@
                 attributes += '<tr role="row"><td colspan="2" align="center"><b>ATRIBUTOS</b></td></tr>';
 
                 for (var i = 0; i < d.atributos.length; i++) {
-                    attributes += '<tr role="row"><td><b>' + d.atributos[i].nombreAtributo.replace(/((?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]|[0-9]{1,})/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) + ': </b></td><td>' + d.atributos[i].valorAtributo + '</td></tr>';
+                    attributes += '<tr role="row"><td><b>' + d.atributos[i].nombreAtributo.replace(/((?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]|[0-9]{1,})/g, ' $1').replace(/^./, function(str){ return str.toUpperCase(); }) + ': </b></td><td>' + (d.atributos[i].valorAtributo ? d.atributos[i].valorAtributo : '') + '</td></tr>';
                 }
 
                 attributes +=
