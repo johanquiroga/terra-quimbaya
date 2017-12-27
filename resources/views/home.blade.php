@@ -145,10 +145,13 @@
                                     <li><h5 class="title">Contáctanos</h5>
                                         <ul>
                                             <li style="display: block;">
-                                                <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail {{ config('app.name') }}"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
+                                                <a target="_blank" href="{{ config('app.fb') }}" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Facebook"><i class="fa fa-fw fa-facebook-official"></i> {{ config('app.name') }}</a>
                                             </li>
                                             <li style="display: block;">
-                                                <a target="_blank" href="https://www.facebook.com/terra.quimbaya" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Facebook"><i class="fa fa-fw fa-facebook-official"></i> {{ config('app.name') }}</a>
+                                                <a target="_blank" href="{{ config('app.twitter') }}" data-toggle="tooltip" data-placement="right" title="{{ config('app.name') }} en Twitter"><i class="fa fa-fw fa-twitter"></i> {{ config('app.name') }}</a>
+                                            </li>
+                                            <li style="display: block;">
+                                                <a href="mailto:{{ config('mail.username') }}" data-toggle="tooltip" data-placement="right" title="E-mail {{ config('app.name') }}"><i class="fa fa-fw fa-envelope"></i> {{ config('mail.username') }}</a>
                                             </li>
                                         </ul>
                                     </li>
@@ -159,7 +162,7 @@
                 </div>
                 <hr>
                 <div class="copyright" style="display: inline-block; float: none;">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, por {{--hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para--}}<a href="{{url('/')}}">{{ config('app.name') }}</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por <a href="http://johanquiroga.me" target="_blank">Johan Quiroga</a> y <a href="http://jimyandres.me" target="_blank">Jimy Andrés</a> para <a href="{{url('/')}}">{{ config('app.name') }}</a>
                 </div>
             </div>
         </footer>

@@ -145,7 +145,7 @@
                 {{--</nav>--}}
                 <!--Copyright-->
                     <p class="copyright pull-right">
-                        &copy; <script>document.write(new Date().getFullYear())</script>, hecho por Johan Camilo Quiroga Granda y Jimy Andrés Alzate Ramírez para <a href="{{url('/')}}">{{ config('app.name') }}</a>
+                        &copy; <script>document.write(new Date().getFullYear())</script>, hecho por <a href="http://johanquiroga.me" target="_blank">Johan Quiroga</a> y <a href="http://jimyandres.me" target="_blank">Jimy Andrés</a> para <a href="{{url('/')}}">{{ config('app.name') }}</a>
                     </p>
                     <!--/.Copyright-->
                 </div>
