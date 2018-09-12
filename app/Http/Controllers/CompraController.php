@@ -63,7 +63,7 @@ class CompraController extends Controller
 		$metodo_pago = MetodoPago::findOrFail($request->metodoPago);
 		$product = Producto::estado()->where('idPublicacion', $id)->firstOrFail();
 		if($product->cantidad == 0) {
-			return redirect('/')->with('message-error', 'Lo sentimos, parece que estas intentando comprar un producto que no tenemos disponible.');
+			return redirect(route('home'))->with('message-error', 'Lo sentimos, parece que estas intentando comprar un producto que no tenemos disponible.');
 		}
 		$usuario = Comprador::findOrFail($request->user()->idCC);
 		$usuario->load('direccion');

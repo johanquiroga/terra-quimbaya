@@ -162,7 +162,7 @@
                 </div>
                 <hr>
                 <div class="copyright" style="display: inline-block; float: none;">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por <a href="http://johanquiroga.me" target="_blank">Johan Quiroga</a> y <a href="http://jimyandres.me" target="_blank">Jimy Andrés</a> para <a href="{{url('/')}}">{{ config('app.name') }}</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por <a href="http://johanquiroga.me" target="_blank">Johan Quiroga</a> y <a href="http://jimyandres.me" target="_blank">Jimy Andrés</a> para <a href="{{route('landing')}}">{{ config('app.name') }}</a>
                 </div>
             </div>
         </footer>

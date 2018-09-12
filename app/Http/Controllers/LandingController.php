@@ -23,7 +23,7 @@ class LandingController extends Controller
 			'message' => $request->message
 		]);
 
-		return redirect('/')->with('message-success', 'Gracias por tu mensaje!');
+		return redirect(route('landing'))->with('message-success', 'Gracias por tu mensaje!');
     }
 
 

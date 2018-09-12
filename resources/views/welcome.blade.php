@@ -302,46 +302,6 @@
                     </div>
                 </div>
 
-                <div class="section text-center">
-                    <h2 class="title">Este es nuestro equipo</h2>
-
-                    <div class="team">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="team-player">
-                                    <img src="{{ asset('img/quiroga.jpg') }}" alt="Thumbnail Image" class="img-raised img-circle">
-                                    <h4 class="title">Johan Camilo Quiroga<br />
-                                        <small class="text-muted">Desarrollador</small>
-                                    </h4>
-                                    <p>El desarrollo de esta plataforma representa un gran desafío que da como resultado un lugar donde comprar los mejores cafés especiales y conectar con el paisaje cultural cafetero.</p>
-                                    <a href="mailto:quirogacj@utp.edu.co" class="btn btn-simple btn-just-icon"><i class="fa fa-fw fa-envelope"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="team-player">
-                                    <img src="{{ asset('img/william.jpg') }}" alt="Thumbnail Image" class="img-raised img-circle">
-                                    <h4 class="title">William Andrés Salazar<br />
-                                        <small class="text-muted">Comercial</small>
-                                    </h4>
-                                    <p>La principal meta de esta plataforma es promover los cafés especiales del paisaje cultural cafetero a compradores de todo el mundo.</p>
-                                    <a href="mailto:w.as.g@utp.edu.co" class="btn btn-simple btn-just-icon"><i class="fa fa-fw fa-envelope"></i></a>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="team-player">
-                                    <img src="{{ asset('img/jimy.jpg') }}" alt="Thumbnail Image" class="img-raised img-circle">
-                                    <h4 class="title">Jimy Andrés Alzate<br />
-                                        <small class="text-muted">Diseñador</small>
-                                    </h4>
-                                    <p>Te presentamos una plataforma elegante y cómoda que te abrirá las puertas hacia un mundo de nuevos sabores.</p>
-                                    <a href="mailto:jimyandres@utp.edu.co" class="btn btn-simple btn-just-icon"><i class="fa fa-fw fa-envelope"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
                 <div class="section landing-section" id="registration">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
@@ -354,9 +314,9 @@
                 <div class="section landing-section" id="contact-us">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h2 class="text-center title">¡Dinos tu opinión!</h2>
+                            <h2 class="text-center title">¡Danos tu opinión!</h2>
                             <h4 class="text-center">¿Tienes alguna duda o sugerencia? O simplemente cuéntanos qué piensas acerca del proyecto!</h4>
-                            <form class="contact-form" action="{{ url('/') }}" method="POST" id="contact-form">
+                            <form class="contact-form" action="{{ url('/landing') }}" method="POST" id="contact-form">
                                 {!! csrf_field() !!}
                                 <div class="row">
                                     <div class="col-md-6">
@@ -468,7 +428,7 @@
                     </ul>
                 </nav> -->
                 <div class="copyright" style="display: inline-block; float: none;">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por <a href="http://johanquiroga.me" target="_blank">Johan Quiroga</a> y <a href="http://jimyandres.me" target="_blank">Jimy Andrés</a> para <a href="{{url('/')}}">{{ config('app.name') }}</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, hecho por <a href="http://johanquiroga.me" target="_blank">Johan Quiroga</a> y <a href="http://jimyandres.me" target="_blank">Jimy Andrés</a> para <a href="{{route('landing')}}">{{ config('app.name') }}</a>
                 </div>
             </div>
         </footer>

@@ -16,6 +16,22 @@
                     <br>
                     Con esta plataforma, biotrade store&reg;, se busca acercar a productores y compradores, permitiendo el reconocimiento de las características de cada producto especial para aquellas personas que buscan los más altos estándares de calidad.
                 </h4>
+                <h5>Ahora puedes visitarnos desde:</h5>
+                {{--<br />--}}
+                <div align="center">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="{{ route('app', ['platform' => 'android']) }}" class="btn btn-simple btn-white btn-just-icon btn-lg" data-toggle="tooltip" data-placement="top" title="Descárga la app para Android">
+                                <i class="material-icons" style="font-size: 48px;">android</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('app', ['platform' => 'web']) }}" target="_blank" class="btn btn-simple btn-white btn-just-icon btn-lg" data-toggle="tooltip" data-placement="top" title="Visita nuestra tienda en línea">
+                                <i class="material-icons" style="font-size: 48px;">computer</i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 {{--<br />--}}
                 {{--<a href="#" class="btn btn-danger btn-raised btn-lg">--}}
                 {{--<i class="fa fa-play"></i> Watch video--}}

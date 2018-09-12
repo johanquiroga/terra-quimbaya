@@ -12,10 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('home'));
 });
-
-Route::post('/', 'LandingController@store');
 
 Route::get('/app', [
 	'uses' => 'LandingController@download',
@@ -29,6 +27,10 @@ Route::get('/app', [
 |
  */
 
+Route::get('/landing', function () {
+    return view('welcome');
+})->name('landing');
+Route::post('/landing', 'LandingController@store');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search', 'HomeController@search');
 

@@ -190,7 +190,7 @@ class ProfileController extends Controller
 	    }
 
 	    if(!$request->expectsJson()) {
-	    	return redirect('/')->with('message-success', 'Cuenta eliminada!');
+	    	return redirect(route('home'))->with('message-success', 'Cuenta eliminada!');
 	    } else {
 		    return response()->json(array_merge(['status' => 'success', 'message' => 'Cuenta eliminada!']));
 	    }
