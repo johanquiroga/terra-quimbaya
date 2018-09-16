@@ -1,53 +1,34 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+## Instalación
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Para los siguientes pasos se deberá tener instalado y configurado la [EB CLI](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html) y adicionalmente configuradas las credenciales de GIT (u otro método definido por el equipo de trabajo). Para mayor información, [aquí](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up.html).
 
-## About Laravel
+1. Clonar el repositorio `git clone https://git-codecommit.us-west-2.amazonaws.com/v1/repos/TerraQuimbaya`
+2. Sobre la carpeta donde se clonó el proyecto ejecutar `composer install`
+3. Crear y configurar la base de datos que va a ser utilizada para el proyecto
+4. Crear el archivo `.env` mediante `cp .env.example .env`
+5. Actualizar las variables de entorno según las configuraciones locales que serán utilizadas en el proyecto, sobre el archivo `.env`. Tener en cuenta configurar correctamente la información referida a la Base de Datos creada en el punto 3.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as:
+    Principales configuraciones asociadas en este archivo:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    ```
+    DB_CONNECTION
+    DB_HOST
+    DB_PORT
+    DB_DATABASE (configurada en el punto 3)
+    DB_USERNAME= usuario para la conexión a la BD
+    DB_PASSWORD= contraseña para la conexión a la BD
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb combination of simplicity, elegance, and innovation give you tools you need to build any application with which you are tasked.
+    APP_IVA=0.05 (variable utilizada para el cálculo del IVA sobre los productos ofrecidos en la plataforma)
+    JWT_SECRET= Llave secreta del JSON WEB TOKEN (utilizado para la comunicación entre la API y el aplicativo móvil)
 
-## Learning Laravel
+    PROVIDER_FORM= Dirección web del formulario inscripción de Proveedores.
+    ```
 
-Laravel has the most extensive and thorough documentation and video tutorial library of any modern web application framework. The [Laravel documentation](https://laravel.com/docs) is thorough, complete, and makes it a breeze to get started learning the framework.
+6. Adicionalmente, en el archivo `.env` se deberá configurar la información respecto a los servicios de mensajería, [Pusher](https://pusher-community.github.io/real-time-laravel/getting-started/setting-env-vars.html), [PayU](http://developers.payulatam.com/es/web_checkout/sandbox.html), entre otras.
 
-If you're not in the mood to read, [Laracasts](https://laracasts.com) contains over 900 video tutorials on a range of topics including Laravel, modern PHP, unit testing, JavaScript, and more. Boost the skill level of yourself and your entire team by digging into our comprehensive video library.
+7. Sobre la carpeta del proyecto, ejecuta `php artisan migrate` y luego `php artisan db:seed`.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for helping fund on-going Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](http://patreon.com/taylorotwell):
+### Nota:
 
-- **[Vehikl](http://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Styde](https://styde.net)**
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+-  Para la publicación a producción de una nueva versión de la plataforma se debe tener instalado y configurado correctamente (con el comando `eb init`) el cliente por línea de comandos EB CLI, por medio de este se administra la instancia de Elastic Beanstalk donde se encuentra publicada la plataforma. Para realizar la publicación se deben tener todos los cambios confirmados en el repositorio (con `git commit`) y posteriormente ejecutar el comando `eb deploy`. Para mayor información, [aquí](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli-codecommit.html#eb-cli-codecommit-deploy).
